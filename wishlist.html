@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Saved Crystals | Aura & Earth</title>
+    <link rel="stylesheet" href="css/global.css">
+    <link rel="stylesheet" href="css/wishlist.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+</head>
+
+<body>
+
+    <!-- ========== NAVBAR (Identical to shop.html) ========== -->
+    <nav class="navbar" id="mainNav">
+        <a href="index.html" class="nav-logo">Aura & Earth</a>
+        <div class="nav-center">
+            <a href="index.html" class="nav-link">Home</a>
+            <div class="dropdown">
+                <a href="#" class="nav-link dropbtn">Categories <i class="fa-solid fa-chevron-down"></i></a>
+                <div class="dropdown-content">
+                    <a href="shop.html?filter=protection"><i class="fa-solid fa-shield-halved"></i> Protection</a>
+                    <a href="shop.html?filter=peace"><i class="fa-solid fa-feather-pointed"></i> Inner Peace</a>
+                    <a href="shop.html?filter=love"><i class="fa-solid fa-heart"></i> Love & Harmony</a>
+                    <a href="shop.html?filter=energy"><i class="fa-solid fa-bolt-lightning"></i> Energy</a>
+                    <a href="shop.html?filter=luck"><i class="fa-solid fa-clover"></i> Luck</a>
+                </div>
+            </div>
+            <a href="shop.html" class="nav-link">Products</a>
+            <a href="contact.html" class="nav-link">Contact</a>
+        </div>
+        <div class="nav-right">
+            <div class="search-box-container">
+                <input type="text" class="search-input" id="mainSearch" placeholder="Search crystals..."
+                    autocomplete="off">
+                <button class="search-btn"><i class="fa-solid fa-magnifying-glass"></i></button>
+                <div id="search-results-dropdown" class="search-results"></div>
+            </div>
+            <div class="nav-icons">
+                <button id="theme-toggle" class="icon-btn"><i class="fa-solid fa-moon"></i></button>
+                <a href="wishlist.html" class="icon-link">
+                    <i class="fa-solid fa-heart"></i>
+                    <span class="count">0</span>
+                </a>
+                <a href="cart-checkout.html" class="icon-link">
+                    <i class="fa-solid fa-bag-shopping"></i>
+                    <span class="count">0</span>
+                </a>
+                <button class="hamburger"><i class="fa-solid fa-bars"></i></button>
+            </div>
+        </div>
+    </nav>
+
+    <div class="mobile-menu">
+        <a href="index.html">Home</a>
+        <button class="mobile-dropbtn">Categories <i class="fa-solid fa-chevron-down"></i></button>
+        <div class="mobile-dropdown-content">
+            <a href="shop.html?filter=protection">Protection</a>
+            <a href="shop.html?filter=peace">Inner Peace</a>
+            <a href="shop.html?filter=love">Love & Harmony</a>
+            <a href="shop.html?filter=energy">Energy</a>
+            <a href="shop.html?filter=luck">Luck</a>
+        </div>
+        <a href="shop.html">Products</a>
+        <a href="contact.html">Contact</a>
+    </div>
+
+    <!-- ========== PAGE HEADER ========== -->
+    <div class="wishlist-page-header reveal">
+        <div class="wishlist-page-header-inner">
+            <div class="wishlist-header-meta">
+                <span class="wishlist-header-eyebrow">
+                    <i class="fa-solid fa-heart"></i> Your Sacred Collection
+                </span>
+                <h1 class="wishlist-page-title">Saved Crystals</h1>
+                <p class="wishlist-page-subtitle">Pieces calling out to your energy — when you're ready, they'll be
+                    here.</p>
+            </div>
+            <div class="wishlist-header-right">
+                <div class="wishlist-count-bubble" id="wishlistCountBubble">
+                    <span id="wishlistCount">0</span>
+                    <span>saved</span>
+                </div>
+                <a href="shop.html" class="wishlist-browse-link">
+                    Browse Collection <i class="fa-solid fa-arrow-right"></i>
+                </a>
+            </div>
+        </div>
+        <div class="wishlist-header-divider">
+            <div class="wishlist-divider-line"></div>
+            <i class="fa-solid fa-gem wishlist-divider-gem"></i>
+            <div class="wishlist-divider-line"></div>
+        </div>
+    </div>
+
+    <!-- ========== MAIN WISHLIST AREA ========== -->
+    <main class="wishlist-main">
+        <div class="wishlist-container">
+
+            <!-- Empty State (hidden when items exist) -->
+            <div class="wishlist-empty" id="wishlistEmpty" aria-hidden="true">
+                <div class="wishlist-empty-aura"></div>
+                <div class="wishlist-empty-icon">
+                    <i class="fa-regular fa-heart"></i>
+                </div>
+                <h2 class="wishlist-empty-title">Your aura is waiting to be adorned.</h2>
+                <p class="wishlist-empty-text">
+                    You haven't saved any crystals yet. Explore our collection and tap the heart on any piece that
+                    speaks to your soul.
+                </p>
+                <a href="shop.html" class="wishlist-explore-btn">
+                    <i class="fa-solid fa-wand-sparkles"></i>
+                    Explore the Collection
+                </a>
+                <div class="wishlist-empty-suggestions">
+                    <span>Popular intentions:</span>
+                    <a href="shop.html?filter=protection" class="wishlist-suggestion-pill">Protection</a>
+                    <a href="shop.html?filter=peace" class="wishlist-suggestion-pill">Inner Peace</a>
+                    <a href="shop.html?filter=love" class="wishlist-suggestion-pill">Love</a>
+                    <a href="shop.html?filter=energy" class="wishlist-suggestion-pill">Energy</a>
+                </div>
+            </div>
+
+            <!-- Wishlist Actions Bar (hidden when empty) -->
+            <div class="wishlist-actions-bar" id="wishlistActionsBar" aria-hidden="true">
+                <span class="wishlist-actions-label" id="wishlistActionsLabel"></span>
+                <button class="wishlist-add-all-btn" id="wishlistAddAllBtn">
+                    <i class="fa-solid fa-bag-shopping"></i>
+                    Add All to Bag
+                </button>
+                <button class="wishlist-clear-btn" id="wishlistClearBtn">
+                    <i class="fa-solid fa-trash-can"></i>
+                    Clear Wishlist
+                </button>
+            </div>
+
+            <!-- Products Grid — injected by JS -->
+            <div class="wishlist-grid" id="wishlistGrid" aria-live="polite"></div>
+
+        </div>
+    </main>
+
+    <!-- ========== FOOTER (Identical to shop.html) ========== -->
+    <footer class="main-footer" id="footer">
+        <div class="footer-grid">
+            <div class="footer-brand">
+                <h3>Aura & Earth</h3>
+                <p>Spreading positive vibrations through authentic healing crystals since 2026.</p>
+            </div>
+            <div class="footer-links">
+                <h4>Quick Links</h4>
+                <a href="index.html">Home</a>
+                <a href="shop.html">All Products</a>
+                <a href="cart-checkout.html">View Cart</a>
+            </div>
+            <div class="footer-links">
+                <h4>Support</h4>
+                <a href="policies.html#shipping">Shipping Policy</a>
+                <a href="policies.html#terms">Terms & Conditions</a>
+                <a href="contact.html">Contact Us</a>
+            </div>
+            <div class="footer-social">
+                <h4>Follow Us</h4>
+                <div class="social-icons">
+                    <a href="#"><i class="fa-brands fa-instagram"></i></a>
+                    <a href="#"><i class="fa-brands fa-facebook"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 Aura & Earth Jewelry. Premium Healing Stones.</p>
+        </div>
+    </footer>
+
+    <button id="backToTop" class="back-to-top-btn">
+        <i class="fa-solid fa-arrow-up"></i>
+    </button>
+    <a href="https://wa.me/919350614431?text=Hi%2C%20I%20have%20a%20question%20about%20Aura%20%26%20Earth!"
+        class="whatsapp-float" target="_blank" rel="noopener noreferrer" aria-label="Chat with us on WhatsApp">
+        <i class="fa-brands fa-whatsapp whatsapp-float-icon"></i>
+        <span class="whatsapp-float-label">Need help?</span>
+    </a>
+
+    <script type="module" src="js/main.js"></script> <!-- ═══ AURA PULSE — isolated, no dependency on main.js ═══ -->
+    <!-- <script type="module" src="js/navbar.js"></script> -->
+    <script>
+        (function () {
+            'use strict';
+
+            // The cart icon link in the navbar
+            const cartLink = document.querySelector('a[href="cart-checkout.html"]');
+            if (!cartLink) return;
+
+            const PULSE_CLASS = 'aura-pulse';
+            const PULSE_DURATION_MS = 1200;
+            let pulseTimer = null;
+
+            function triggerPulse() {
+                // Clear any mid-animation reset so rapid adds re-trigger cleanly
+                if (pulseTimer) {
+                    clearTimeout(pulseTimer);
+                    cartLink.classList.remove(PULSE_CLASS);
+                    // Force a reflow so removing+re-adding the class restarts the animation
+                    void cartLink.offsetWidth;
+                }
+                cartLink.classList.add(PULSE_CLASS);
+                pulseTimer = setTimeout(function () {
+                    cartLink.classList.remove(PULSE_CLASS);
+                    pulseTimer = null;
+                }, PULSE_DURATION_MS);
+            }
+
+            // Listen for any click that hits a .btn-floating-cart or .btn-wishlist
+            // element with onclick="addToCart(...)" — event delegation on document
+            document.addEventListener('click', function (e) {
+                // btn-floating-cart covers the shop/home product cards
+                if (e.target.closest('.btn-floating-cart')) {
+                    triggerPulse();
+                    return;
+                }
+                // pdpAddToCartBtn covers the product detail page CTA
+                if (e.target.closest('#pdpAddToCartBtn, #pdpMobileStickyCartBtn')) {
+                    triggerPulse();
+                    return;
+                }
+                // wishlist page "Add to Bag" covers wishlist → cart adds
+                if (e.target.closest('.wishlist-card-add-btn, .wishlist-card-quick-add')) {
+                    triggerPulse();
+                    return;
+                }
+                // Orders page reorder button
+                if (e.target.closest('.order-reorder-btn')) {
+                    triggerPulse();
+                }
+            });
+        })();
+    </script>
+    <!-- ════════════════════════════════════════════════════════ -->
+
+</body>
+
+</html>

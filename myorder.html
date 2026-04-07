@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Orders | Aura & Earth</title>
+    <link rel="stylesheet" href="css/global.css">
+    <link rel="stylesheet" href="css/orders.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <style>
+        /* ── Order skeletons ─────────────────────────── */
+        .order-skeleton {
+            background: var(--card-bg, #fff);
+            border: 1px solid var(--border, #ede8e0);
+            border-radius: 16px;
+            height: 140px;
+            margin-bottom: 18px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .order-skeleton::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(90deg, transparent 0%, rgba(255, 255, 255, 0.45) 50%, transparent 100%);
+            background-size: 200% 100%;
+            animation: skeleton-sweep 1.4s infinite;
+        }
+
+        @keyframes skeleton-sweep {
+            0% {
+                background-position: -200% 0;
+            }
+
+            100% {
+                background-position: 200% 0;
+            }
+        }
+
+        /* ── Email prompt ────────────────────────────── */
+        .orders-email-prompt {
+            background: var(--card-bg, #fff);
+            border: 1px solid var(--border, #ede8e0);
+            border-radius: 20px;
+            padding: 48px 40px;
+            text-align: center;
+            max-width: 480px;
+            margin: 40px auto;
+            box-shadow: 0 4px 24px rgba(0, 0, 0, 0.06);
+        }
+
+        .oep-icon {
+            font-size: 2.4rem;
+            color: var(--accent, #8b7355);
+            margin-bottom: 18px;
+            opacity: 0.8;
+        }
+
+        .oep-title {
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin: 0 0 10px;
+            color: var(--text-main, #2c2c2c);
+            letter-spacing: 0.01em;
+        }
+
+        .oep-desc {
+            font-size: 0.9rem;
+            color: var(--text-soft, #7a6e68);
+            margin: 0 0 28px;
+            line-height: 1.6;
+        }
+
+        .oep-form {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .oep-input {
+            flex: 1 1 220px;
+            padding: 12px 16px;
+            border: 1.5px solid var(--border, #ede8e0);
+            border-radius: 10px;
+            font-size: 0.9rem;
+            color: var(--text-main, #2c2c2c);
+            background: var(--bg, #faf8f5);
+            outline: none;
+            transition: border-color 0.2s;
+        }
+
+        .oep-input:focus {
+            border-color: var(--accent, #8b7355);
+        }
+
+        .oep-btn {
+            padding: 12px 20px;
+            background: var(--accent, #8b7355);
+            color: #fff;
+            border: none;
+            border-radius: 10px;
+            font-size: 0.88rem;
+            font-weight: 600;
+            cursor: pointer;
+            letter-spacing: 0.02em;
+            white-space: nowrap;
+            transition: background 0.2s, transform 0.15s;
+            display: inline-flex;
+            align-items: center;
+            gap: 7px;
+        }
+
+        .oep-btn:hover:not(:disabled) {
+            background: var(--accent-dark, #6e5c45);
+            transform: translateY(-1px);
+        }
+
+        .oep-btn:disabled {
+            opacity: 0.65;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .oep-hint {
+            font-size: 0.8rem;
+            margin-top: 14px;
+            min-height: 18px;
+            color: var(--text-soft, #7a6e68);
+        }
+
+        /* ── Wrong email / not found ─────────────────── */
+        .orders-wrong-email {
+            text-align: center;
+            padding: 32px 20px 16px;
+        }
+
+        .owe-text {
+            font-size: 0.92rem;
+            color: var(--text-soft, #7a6e68);
+            margin-bottom: 16px;
+        }
+
+        .owe-change-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 20px;
+            border: 1.5px solid var(--border, #ede8e0);
+            border-radius: 10px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--text-main, #2c2c2c);
+            background: transparent;
+            cursor: pointer;
+            transition: border-color 0.2s, background 0.2s;
+        }
+
+        .owe-change-btn:hover {
+            background: var(--bg-hover, #f3ede4);
+            border-color: var(--accent, #8b7355);
+        }
+
+        /* ── Switch account footer ───────────────────── */
+        .orders-switch-account {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 14px;
+            padding: 20px 0 8px;
+            flex-wrap: wrap;
+        }
+
+        .osa-email {
+            font-size: 0.82rem;
+            color: var(--text-soft, #7a6e68);
+        }
+
+        .osa-switch-btn {
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: var(--accent, #8b7355);
+            background: none;
+            border: none;
+            cursor: pointer;
+            text-decoration: underline;
+            text-underline-offset: 3px;
+            padding: 0;
+        }
+
+        .osa-switch-btn:hover {
+            color: var(--accent-dark, #6e5c45);
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- ========== NAVBAR ========== -->
+    <nav class="navbar" id="mainNav">
+        <a href="index.html" class="nav-logo">Aura & Earth</a>
+        <div class="nav-center">
+            <a href="index.html" class="nav-link">Home</a>
+            <div class="dropdown">
+                <a href="#" class="nav-link dropbtn">Categories <i class="fa-solid fa-chevron-down"></i></a>
+                <div class="dropdown-content">
+                    <a href="shop.html?filter=protection"><i class="fa-solid fa-shield-halved"></i> Protection</a>
+                    <a href="shop.html?filter=peace"><i class="fa-solid fa-feather-pointed"></i> Inner Peace</a>
+                    <a href="shop.html?filter=love"><i class="fa-solid fa-heart"></i> Love & Harmony</a>
+                    <a href="shop.html?filter=energy"><i class="fa-solid fa-bolt-lightning"></i> Energy</a>
+                    <a href="shop.html?filter=luck"><i class="fa-solid fa-clover"></i> Luck</a>
+                </div>
+            </div>
+            <a href="shop.html" class="nav-link">Products</a>
+            <a href="myorder.html" class="nav-link nav-link--active">My Orders</a>
+            <a href="contact.html" class="nav-link">Contact</a>
+        </div>
+        <div class="nav-right">
+            <div class="search-box-container">
+                <input type="text" class="search-input" id="mainSearch" placeholder="Search crystals..."
+                    autocomplete="off">
+                <button class="search-btn"><i class="fa-solid fa-magnifying-glass"></i></button>
+                <div id="search-results-dropdown" class="search-results"></div>
+            </div>
+            <div class="nav-icons">
+                <button id="theme-toggle" class="icon-btn"><i class="fa-solid fa-moon"></i></button>
+                <a href="wishlist.html" class="icon-link">
+                    <i class="fa-solid fa-heart"></i>
+                    <span class="count">0</span>
+                </a>
+                <a href="cart-checkout.html" class="icon-link">
+                    <i class="fa-solid fa-bag-shopping"></i>
+                    <span class="count">0</span>
+                </a>
+                <button class="hamburger"><i class="fa-solid fa-bars"></i></button>
+            </div>
+        </div>
+    </nav>
+
+    <div class="mobile-menu">
+        <a href="index.html">Home</a>
+        <button class="mobile-dropbtn">Categories <i class="fa-solid fa-chevron-down"></i></button>
+        <div class="mobile-dropdown-content">
+            <a href="shop.html?filter=protection">Protection</a>
+            <a href="shop.html?filter=peace">Inner Peace</a>
+            <a href="shop.html?filter=love">Love & Harmony</a>
+            <a href="shop.html?filter=energy">Energy</a>
+            <a href="shop.html?filter=luck">Luck</a>
+        </div>
+        <a href="shop.html">Products</a>
+        <a href="myorder.html">My Orders</a>
+        <a href="contact.html">Contact</a>
+    </div>
+
+    <!-- ========== PAGE HEADER ========== -->
+    <div class="orders-page-header reveal">
+        <div class="orders-page-header-inner">
+            <div class="orders-header-meta">
+                <span class="orders-header-eyebrow">
+                    <i class="fa-solid fa-box-open"></i> Your Journey
+                </span>
+                <h1 class="orders-page-title">My Orders</h1>
+                <p class="orders-page-subtitle">A record of every crystal that has found its way to you.</p>
+            </div>
+            <div class="orders-header-right">
+                <div class="orders-count-bubble" id="ordersCountBubble">
+                    <span id="ordersCount">0</span>
+                    <span>orders</span>
+                </div>
+                <a href="shop.html" class="orders-browse-link">
+                    Shop Again <i class="fa-solid fa-arrow-right"></i>
+                </a>
+            </div>
+        </div>
+        <div class="orders-header-divider">
+            <div class="orders-divider-line"></div>
+            <i class="fa-solid fa-gem orders-divider-gem"></i>
+            <div class="orders-divider-line"></div>
+        </div>
+    </div>
+
+    <!-- ========== MAIN ORDERS AREA ========== -->
+    <main class="orders-main" id="ordersMain">
+        <div class="orders-container">
+
+            <!-- Empty State -->
+            <div class="orders-empty" id="ordersEmpty" aria-hidden="true">
+                <div class="orders-empty-aura"></div>
+                <div class="orders-empty-icon">
+                    <i class="fa-regular fa-box-open"></i>
+                </div>
+                <h2 class="orders-empty-title">No orders yet.</h2>
+                <p class="orders-empty-text">
+                    You haven't placed any orders yet. When you do, they'll appear here so you can track your sacred
+                    collection's journey.
+                </p>
+                <a href="shop.html" class="orders-explore-btn">
+                    <i class="fa-solid fa-wand-sparkles"></i>
+                    Explore the Collection
+                </a>
+            </div>
+
+            <!-- Orders List — injected by JS -->
+            <div class="orders-list" id="ordersList" aria-live="polite"></div>
+
+        </div>
+    </main>
+
+    <!-- ========== FOOTER ========== -->
+    <footer class="main-footer" id="footer">
+        <div class="footer-grid">
+            <div class="footer-brand">
+                <h3>Aura & Earth</h3>
+                <p>Spreading positive vibrations through authentic healing crystals since 2026.</p>
+            </div>
+            <div class="footer-links">
+                <h4>Quick Links</h4>
+                <a href="index.html">Home</a>
+                <a href="shop.html">All Products</a>
+                <a href="cart-checkout.html">View Cart</a>
+            </div>
+            <div class="footer-links">
+                <h4>Support</h4>
+                <a href="policies.html#shipping">Shipping Policy</a>
+                <a href="policies.html#terms">Terms & Conditions</a>
+                <a href="contact.html">Contact Us</a>
+            </div>
+            <div class="footer-social">
+                <h4>Follow Us</h4>
+                <div class="social-icons">
+                    <a href="#"><i class="fa-brands fa-instagram"></i></a>
+                    <a href="#"><i class="fa-brands fa-facebook"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 Aura & Earth Jewelry. Premium Healing Stones.</p>
+        </div>
+    </footer>
+
+    <button id="backToTop" class="back-to-top-btn">
+        <i class="fa-solid fa-arrow-up"></i>
+    </button>
+    <a href="https://wa.me/919350614431?text=Hi%2C%20I%20have%20a%20question%20about%20Aura%20%26%20Earth!"
+        class="whatsapp-float" target="_blank" rel="noopener noreferrer" aria-label="Chat with us on WhatsApp">
+        <i class="fa-brands fa-whatsapp whatsapp-float-icon"></i>
+        <span class="whatsapp-float-label">Need help?</span>
+    </a>
+
+    <script type="module" src="js/main.js"></script>
+    <!-- <script type="module" src="js/navbar.js"></script> -->
+
+</body>
+
+</html>

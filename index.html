@@ -1,0 +1,760 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aura & Earth | Healing Jewelry</title>
+    <!-- ADD right after the <title> tag: -->
+    <meta name="description"
+        content="Ethically sourced crystal healing bracelets curated for protection, love, energy & inner peace. Shop the Aura & Earth collection.">
+    <link rel="stylesheet" href="css/global.css">
+    <link rel="stylesheet" href="css/index.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+</head>
+
+<body>
+
+    <nav class="navbar" id="mainNav">
+        <a href="index.html" class="nav-logo">Aura & Earth</a>
+
+        <div class="nav-center">
+            <a href="index.html" class="nav-link">Home</a>
+            <div class="dropdown">
+                <a href="#" class="nav-link dropbtn">Categories <i class="fa-solid fa-chevron-down"></i></a>
+                <div class="dropdown-content">
+                    <a href="shop.html?filter=protection"><i class="fa-solid fa-shield-halved"></i> Protection</a>
+                    <a href="shop.html?filter=peace"><i class="fa-solid fa-feather-pointed"></i> Inner Peace</a>
+                    <a href="shop.html?filter=love"><i class="fa-solid fa-heart"></i> Love & Harmony</a>
+                    <a href="shop.html?filter=energy"><i class="fa-solid fa-bolt-lightning"></i> Energy</a>
+                    <a href="shop.html?filter=luck"><i class="fa-solid fa-clover"></i> Luck</a>
+                </div>
+            </div>
+            <a href="shop.html" class="nav-link">Products</a>
+            <a href="myorder.html" class="nav-link">My Orders</a>
+            <a href="contact.html" class="nav-link">Contact</a>
+        </div>
+
+        <div class="nav-right">
+            <div class="search-box-container">
+                <input type="text" class="search-input" id="mainSearch" placeholder="Search crystals..."
+                    autocomplete="off">
+                <button class="search-btn">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                </button>
+                <div id="search-results-dropdown" class="search-results"></div>
+            </div>
+
+            <div class="nav-icons">
+                <button id="theme-toggle" class="icon-btn"><i class="fa-solid fa-moon"></i></button>
+                <a href="wishlist.html" class="icon-link">
+                    <i class="fa-regular fa-heart"></i>
+                    <span class="count">0</span>
+                </a>
+                <a href="cart-checkout.html" class="icon-link">
+                    <i class="fa-solid fa-bag-shopping"></i>
+                    <span class="count">0</span>
+                </a>
+                <button class="hamburger"><i class="fa-solid fa-bars"></i></button>
+            </div>
+        </div>
+    </nav>
+
+    <div class="mobile-menu">
+        <a href="index.html">Home</a>
+        <button class="mobile-dropbtn">Categories <i class="fa-solid fa-chevron-down"></i></button>
+        <div class="mobile-dropdown-content">
+            <a href="shop.html?filter=protection">Protection</a>
+            <a href="shop.html?filter=peace">Inner Peace</a>
+            <a href="shop.html?filter=love">Love & Harmony</a>
+            <a href="shop.html?filter=energy">Energy</a>
+            <a href="shop.html?filter=luck">Luck</a>
+        </div>
+        <a href="shop.html">Products</a>
+        <a href="myorder.html">My Orders</a>
+        <a href="contact.html">Contact</a>
+    </div>
+
+    <!-- ═══════════════════════════════════════════════════════
+         HERO SECTION
+         ═══════════════════════════════════════════════════════ -->
+    <header class="hero-header reveal">
+        <!-- ═══ FLOATING ORBS — decorative background layer ═══ -->
+        <div class="hero-orbs" aria-hidden="true">
+            <div class="hero-orb hero-orb-1" data-depth="0.25"></div>
+            <div class="hero-orb hero-orb-2" data-depth="0.45"></div>
+            <div class="hero-orb hero-orb-3" data-depth="0.65"></div>
+        </div>
+        <!-- ════════════════════════════════════════════════════ -->
+        <div class="hero-container">
+
+            <!-- Text Side -->
+            <div class="hero-text-side">
+                <div id="hero-text-wrapper" class="hero-text-wrapper">
+                    <!-- FIX: Added text-animate class so JS hide/show transitions work -->
+                    <span class="hero-badge text-animate" id="slide-badge">Aura & Earth Exclusive</span>
+                    <h1 class="hero-title text-animate" id="slide-title">
+                        Elevate Your <br><span class="italic-text">Vibration</span>
+                    </h1>
+                    <p class="hero-description text-animate" id="slide-desc">
+                        Discover ethically sourced crystals curated for the modern soul.
+                    </p>
+                </div>
+
+                <div class="hero-actions">
+                    <a href="shop.html" class="btn-liquid">Shop Collection</a>
+                    <!-- FIX: id="featured" anchor so the Explore More button scrolls correctly -->
+                    <a href="#featured" class="btn-glass">Explore More</a>
+                </div>
+            </div>
+
+            <!-- Visual Side (slider viewport — overflow:hidden set in CSS) -->
+            <div class="hero-visual-side">
+                <div class="slider-track" id="heroSlider">
+                    <div class="slide"><img src="images/img1.jpg" alt="Crystal bracelet — slide 1"></div>
+                    <div class="slide"><img src="images/img2.webp" alt="Crystal bracelet — slide 2" loading="lazy">
+                    </div>
+                    <div class="slide"><img src="images/img3.jpg" alt="Crystal bracelet — slide 3" loading="lazy"></div>
+                </div>
+            </div>
+
+        </div>
+    </header>
+
+    <!-- ═══════════════════════════════════════════════════════
+         RITUAL SECTION
+         ═══════════════════════════════════════════════════════ -->
+    <section class="ritual-section">
+        <div class="container">
+
+            <div class="section-header-luxe">
+                <span class="luxe-subtitle">Unlock your potential</span>
+                <h2 class="luxe-title">The Crystal Ritual</h2>
+            </div>
+
+            <div class="ritual-grid">
+
+                <div class="ritual-step">
+                    <div class="step-icon-box">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
+                            stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M12 2L14.5 9.5L22 12L14.5 14.5L12 22L9.5 14.5L2 12L9.5 9.5L12 2Z"></path>
+                            <path d="M18 18L19.5 22.5L21 21L18 18Z"></path>
+                            <path d="M6 6L4.5 1.5L3 3L6 6Z"></path>
+                        </svg>
+                    </div>
+                    <h3>1. Cleanse</h3>
+                    <p>Upon receiving your bracelet, cleanse it with sage smoke or moonlight to clear any stagnant
+                        energy and reset its natural vibration for a fresh start.</p>
+                </div>
+
+                <div class="ritual-step">
+                    <div class="step-icon-box">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
+                            stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M12 2.5C12 2.5 7 8 7 13C7 17 12 22 12 22C12 22 17 17 17 13C17 8 12 2.5 12 2.5Z">
+                            </path>
+                            <path d="M7 13C7 13 2 14 2 17C2 20 7 22 7 22"></path>
+                            <path d="M17 13C17 13 22 14 22 17C22 20 17 22 17 22"></path>
+                        </svg>
+                    </div>
+                    <h3>2. Set Intention</h3>
+                    <p>Hold the crystals in your hands, close your eyes, and visualize your desire. Whisper your
+                        affirmation to program the stone with your specific energy.</p>
+                </div>
+
+                <div class="ritual-step">
+                    <div class="step-icon-box">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
+                            stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M6 4L18 4L22 9L12 20L2 9L6 4Z"></path>
+                            <path d="M2 9L12 15L22 9"></path>
+                            <path d="M12 15L12 20"></path>
+                            <path d="M6 4L12 15L18 4"></path>
+                        </svg>
+                    </div>
+                    <h3>3. Receive</h3>
+                    <p>Wear your bracelet daily on your left wrist to receive its healing energy, or on your right wrist
+                        to project that energy outward into the world.</p>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════════════════
+         FEATURED PRODUCTS SECTION
+         id="featured" is the scroll target for the hero button
+         FIX: Removed all hardcoded static product cards — JS
+         dynamically renders the 8 latest from Firestore.
+         ═══════════════════════════════════════════════════════ -->
+    <section class="bestsellers-section" id="featured">
+        <div class="container">
+
+            <div class="sexy-header">
+                <span class="sub-text">Exclusive Selection</span>
+                <h2 class="main-title">The Collection</h2>
+                <div class="decorative-line">
+                    <span class="diamond">❖</span>
+                </div>
+            </div>
+
+            <!-- JS populates this grid with the 8 latest products -->
+            <div class="product-grid" id="featuredGrid"></div>
+            <div class="view-all-container">
+                <!-- FIX: Was href="#" — now points to shop.html -->
+                <a href="shop.html" class="link-view-all">View All Products &rarr;</a>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════════════════
+         SHOP BY INTENTION
+         ═══════════════════════════════════════════════════════ -->
+    <section class="intentions-section">
+        <div class="container">
+
+            <div class="section-title">
+                <span class="sub-title">Curated For You</span>
+                <h2 class="premium-title">Shop by Intention</h2>
+                <div class="line-break"></div>
+            </div>
+
+            <div class="intentions-grid">
+
+                <a href="shop.html?filter=protection" class="intent-card">
+                    <div class="icon-box"><i class="fa-solid fa-shield-halved"></i></div>
+                    <span>Protection</span>
+                </a>
+
+                <a href="shop.html?filter=love" class="intent-card">
+                    <div class="icon-box"><i class="fa-solid fa-heart"></i></div>
+                    <span>Love & Harmony</span>
+                </a>
+
+                <a href="shop.html?filter=luck" class="intent-card">
+                    <div class="icon-box"><i class="fa-solid fa-coins"></i></div>
+                    <span>Wealth & Luck</span>
+                </a>
+
+
+                <a href="shop.html?filter=peace" class="intent-card">
+                    <div class="icon-box"><i class="fa-solid fa-feather"></i></div>
+                    <span>Inner Peace</span>
+                </a>
+
+                <a href="shop.html?filter=energy" class="intent-card">
+                    <div class="icon-box"><i class="fa-solid fa-bolt"></i></div>
+                    <span>Energy & Focus</span>
+                </a>
+
+                <a href="shop.html?filter=peace" class="intent-card">
+                    <div class="icon-box"><i class="fa-solid fa-scale-balanced"></i></div>
+                    <span>Balance</span>
+                </a>
+            </div>
+        </div>
+    </section>
+    <!-- ═══════════════════════════════════════════════════════
+         FIND YOUR CRYSTAL — Interactive Quiz Section
+         ═══════════════════════════════════════════════════════ -->
+    <section class="quiz-section" id="crystalQuiz" aria-label="Find your crystal quiz">
+        <div class="quiz-inner">
+
+            <!-- Starfield (reuses moon-star pattern, pure CSS) -->
+            <div class="quiz-stars" aria-hidden="true">
+                <span class="quiz-star"></span><span class="quiz-star"></span>
+                <span class="quiz-star"></span><span class="quiz-star"></span>
+                <span class="quiz-star"></span><span class="quiz-star"></span>
+                <span class="quiz-star"></span><span class="quiz-star"></span>
+            </div>
+
+            <!-- Entry state — visible by default -->
+            <div class="quiz-entry" id="quizEntry">
+                <span class="quiz-eyebrow">✦ Personalised for your energy</span>
+                <h2 class="quiz-headline">Not sure which crystal<br> you need?</h2>
+                <p class="quiz-subline">Answer 2 quick questions. We'll find your perfect match from our live
+                    collection.</p>
+                <button class="quiz-start-btn" id="quizStartBtn" type="button">
+                    <i class="fa-solid fa-wand-sparkles"></i> Take the Crystal Quiz
+                </button>
+            </div>
+
+            <!-- Quiz flow — hidden until started -->
+            <div class="quiz-flow" id="quizFlow" hidden>
+
+                <!-- Step 1 -->
+                <div class="quiz-step" id="quizStep1">
+                    <p class="quiz-step-label">Step 1 of 2</p>
+                    <h3 class="quiz-question">What are you manifesting right now?</h3>
+                    <div class="quiz-options" role="group" aria-label="Manifestation goals">
+                        <button class="quiz-opt" data-step="1" data-value="luck" type="button">
+                            <span class="quiz-opt-icon">💰</span>
+                            <span class="quiz-opt-label">Wealth &amp; Abundance</span>
+                        </button>
+                        <button class="quiz-opt" data-step="1" data-value="love" type="button">
+                            <span class="quiz-opt-icon">💖</span>
+                            <span class="quiz-opt-label">Love &amp; Harmony</span>
+                        </button>
+                        <button class="quiz-opt" data-step="1" data-value="peace" type="button">
+                            <span class="quiz-opt-icon">🌿</span>
+                            <span class="quiz-opt-label">Mental Peace</span>
+                        </button>
+                        <button class="quiz-opt" data-step="1" data-value="energy" type="button">
+                            <span class="quiz-opt-icon">⚡</span>
+                            <span class="quiz-opt-label">Energy &amp; Focus</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Step 2 -->
+                <div class="quiz-step" id="quizStep2" hidden>
+                    <p class="quiz-step-label">Step 2 of 2</p>
+                    <h3 class="quiz-question">What does your aura need most?</h3>
+                    <div class="quiz-options" role="group" aria-label="Aura needs">
+                        <button class="quiz-opt" data-step="2" data-value="shield" type="button">
+                            <span class="quiz-opt-icon">🛡️</span>
+                            <span class="quiz-opt-label">Protection from negativity</span>
+                        </button>
+                        <button class="quiz-opt" data-step="2" data-value="clarity" type="button">
+                            <span class="quiz-opt-icon">🔮</span>
+                            <span class="quiz-opt-label">Clarity &amp; intuition</span>
+                        </button>
+                        <button class="quiz-opt" data-step="2" data-value="healing" type="button">
+                            <span class="quiz-opt-icon">🌸</span>
+                            <span class="quiz-opt-label">Emotional healing</span>
+                        </button>
+                        <button class="quiz-opt" data-step="2" data-value="grounding" type="button">
+                            <span class="quiz-opt-icon">🌍</span>
+                            <span class="quiz-opt-label">Grounding &amp; stability</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Result state -->
+                <div class="quiz-step" id="quizResult" hidden>
+                    <p class="quiz-step-label quiz-result-eyebrow">✦ Your Crystal Match</p>
+                    <div class="quiz-result-card" id="quizResultCard">
+                        <!-- Injected by JS -->
+                    </div>
+                    <button class="quiz-restart-btn" id="quizRestartBtn" type="button">
+                        <i class="fa-solid fa-rotate-left"></i> Retake Quiz
+                    </button>
+                </div>
+
+            </div><!-- /.quiz-flow -->
+
+        </div>
+    </section>
+    <!-- ═══════════════════════════════════════════════════════
+     PHASE 7 — BUILD YOUR OWN AURA KIT (Bundle Builder)
+     ═══════════════════════════════════════════════════════ -->
+    <section class="aura-kit-section" id="auraKitBuilder" aria-label="Build your custom Aura Kit">
+        <div class="aura-kit-inner">
+
+            <!-- Background shimmer particles -->
+            <div class="aura-kit-particles" aria-hidden="true">
+                <span></span><span></span><span></span>
+                <span></span><span></span><span></span>
+            </div>
+
+            <!-- Header -->
+            <div class="aura-kit-header">
+                <span class="aura-kit-eyebrow">✦ Phase 7 — Exclusive</span>
+                <h2 class="aura-kit-title">Build Your <em>Aura Kit</em></h2>
+                <p class="aura-kit-subtitle">Handpick 3 crystals. Receive 15% off your sacred bundle.</p>
+            </div>
+
+            <!-- Slot tray -->
+            <div class="aura-kit-slots" id="auraKitSlots" aria-label="Selected crystals">
+                <div class="aura-kit-slot" data-slot="0" aria-label="Crystal slot 1">
+                    <div class="aura-kit-slot-inner">
+                        <span class="aura-kit-slot-icon">✦</span>
+                        <span class="aura-kit-slot-label">Crystal 1</span>
+                    </div>
+                    <button class="aura-kit-slot-remove" data-slot="0" aria-label="Remove crystal 1" hidden>
+                        <i class="fa-solid fa-xmark"></i>
+                    </button>
+                </div>
+                <div class="aura-kit-slot-divider" aria-hidden="true">+</div>
+                <div class="aura-kit-slot" data-slot="1" aria-label="Crystal slot 2">
+                    <div class="aura-kit-slot-inner">
+                        <span class="aura-kit-slot-icon">✦</span>
+                        <span class="aura-kit-slot-label">Crystal 2</span>
+                    </div>
+                    <button class="aura-kit-slot-remove" data-slot="1" aria-label="Remove crystal 2" hidden>
+                        <i class="fa-solid fa-xmark"></i>
+                    </button>
+                </div>
+                <div class="aura-kit-slot-divider" aria-hidden="true">+</div>
+                <div class="aura-kit-slot" data-slot="2" aria-label="Crystal slot 3">
+                    <div class="aura-kit-slot-inner">
+                        <span class="aura-kit-slot-icon">✦</span>
+                        <span class="aura-kit-slot-label">Crystal 3</span>
+                    </div>
+                    <button class="aura-kit-slot-remove" data-slot="2" aria-label="Remove crystal 3" hidden>
+                        <i class="fa-solid fa-xmark"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Pricing display -->
+            <div class="aura-kit-pricing" id="auraKitPricing" aria-live="polite">
+                <span class="aura-kit-pricing-label">Select 3 crystals to unlock 15% off</span>
+            </div>
+
+            <!-- Scrollable crystal picker -->
+            <div class="aura-kit-picker-wrap">
+                <p class="aura-kit-picker-label">Choose from our collection</p>
+                <div class="aura-kit-picker" id="auraKitPicker" role="list">
+                    <!-- Injected by JS -->
+                    <div class="aura-kit-picker-skeleton"></div>
+                    <div class="aura-kit-picker-skeleton"></div>
+                    <div class="aura-kit-picker-skeleton"></div>
+                    <div class="aura-kit-picker-skeleton"></div>
+                    <div class="aura-kit-picker-skeleton"></div>
+                </div>
+            </div>
+
+            <!-- CTA -->
+            <div class="aura-kit-cta">
+                <button class="aura-kit-add-btn" id="auraKitAddBtn" disabled aria-disabled="true">
+                    <i class="fa-solid fa-bag-shopping"></i>
+                    <span>Add Kit to Bag — 15% Off</span>
+                </button>
+                <button class="aura-kit-expand-btn" id="auraKitExpandBtn" type="button">
+                    <i class="fa-solid fa-plus"></i> Add More Crystals
+                </button>
+                <p class="aura-kit-cta-hint" id="auraKitHint">
+                    <span id="auraKitCount">0</span> / 3 crystals selected
+                </p>
+            </div>
+
+        </div>
+    </section>
+    <!-- ═══════════════════════════════════════════════════════
+         MOON PHASE & CRYSTAL CLEANSE — Celestial Guide
+         ═══════════════════════════════════════════════════════ -->
+    <section class="moon-phase-section" aria-label="Today's moon phase and crystal cleansing guide">
+        <div class="moon-phase-inner">
+
+            <!-- Starfield decoration (pure CSS, aria-hidden) -->
+            <div class="moon-stars" aria-hidden="true">
+                <span class="moon-star"></span>
+                <span class="moon-star"></span>
+                <span class="moon-star"></span>
+                <span class="moon-star"></span>
+                <span class="moon-star"></span>
+                <span class="moon-star"></span>
+                <span class="moon-star"></span>
+                <span class="moon-star"></span>
+                <span class="moon-star"></span>
+                <span class="moon-star"></span>
+                <span class="moon-star"></span>
+                <span class="moon-star"></span>
+                <span class="moon-star"></span>
+                <span class="moon-star"></span>
+                <span class="moon-star"></span>
+                <span class="moon-star"></span>
+                <span class="moon-star"></span>
+                <span class="moon-star"></span>
+                <span class="moon-star"></span>
+                <span class="moon-star"></span>
+            </div>
+
+            <!-- Eyebrow -->
+            <p class="moon-eyebrow">Celestial Guide</p>
+            <h2 class="moon-section-title">Today's Moon Phase</h2>
+
+            <!-- Moon visual + phase name -->
+            <div class="moon-display" aria-live="polite">
+
+                <!-- CSS-only moon disc — shape & glow driven by JS class + var -->
+                <div class="moon-visual" aria-hidden="true"></div>
+
+                <!-- Symbol (emoji, large) -->
+                <div class="moon-symbol" id="moonPhaseSymbol" aria-hidden="true">🌕</div>
+
+                <!-- Phase name -->
+                <h3 class="moon-phase-name" id="moonPhaseName">Loading…</h3>
+
+                <!-- Lunar age counter -->
+                <p class="moon-age" id="moonPhaseAge"></p>
+
+            </div>
+
+            <!-- Divider -->
+            <div class="moon-divider" aria-hidden="true"></div>
+
+            <!-- Cleansing advice -->
+            <div class="moon-advice-wrap">
+                <p class="moon-advice-label">✦ Crystal Ritual for Tonight</p>
+                <p class="moon-advice-text" id="moonPhaseAdvice">
+                    Calculating lunar energy…
+                </p>
+            </div>
+
+        </div>
+    </section>
+    <!-- ═══════════════════════════════════════════════════════
+     DESTINY SYNC — Phase 8 Astrology Matcher
+     ═══════════════════════════════════════════════════════ -->
+    <section class="destiny-sync-section" id="destinysync" aria-label="Destiny Sync Crystal Matcher">
+
+        <!-- Starfield -->
+        <div class="ds-stars" aria-hidden="true">
+            <span></span><span></span><span></span><span></span><span></span>
+            <span></span><span></span><span></span><span></span><span></span>
+            <span></span><span></span><span></span><span></span><span></span>
+            <span></span><span></span><span></span><span></span><span></span>
+            <span></span><span></span><span></span><span></span><span></span>
+        </div>
+
+        <div class="ds-container">
+
+            <div class="ds-eyebrow">
+                <span class="ds-orb" aria-hidden="true"></span>
+                <span>Premium Concierge — Phase 8</span>
+                <span class="ds-orb" aria-hidden="true"></span>
+            </div>
+            <h2 class="ds-title">Destiny Sync</h2>
+            <p class="ds-subtitle">Receive a custom Aura Stack curated by our healers, aligned to your birth chart.</p>
+
+            <!-- ── THE FORM ── -->
+            <div class="ds-card" id="dsSyncCard">
+
+                <form class="ds-form" id="dsSyncForm" novalidate>
+
+                    <div class="ds-field-row">
+                        <div class="ds-field">
+                            <label for="dsName">Full Name</label>
+                            <input type="text" id="dsName" placeholder="Your full name" required autocomplete="name">
+                        </div>
+                        <div class="ds-field">
+                            <label for="dsDOB">Date of Birth</label>
+                            <input type="date" id="dsDOB" required>
+                        </div>
+                    </div>
+
+                    <div class="ds-field-row">
+                        <div class="ds-field">
+                            <label for="dsTOB">Time of Birth <span class="ds-optional">(approx. is fine)</span></label>
+                            <input type="time" id="dsTOB" placeholder="HH:MM">
+                        </div>
+                        <div class="ds-field">
+                            <label for="dsPOB">Place of Birth</label>
+                            <input type="text" id="dsPOB" placeholder="City, Country" required autocomplete="off">
+                        </div>
+                    </div>
+
+                    <label class="ds-whatsapp-check">
+                        <input type="checkbox" id="dsWhatsapp" checked>
+                        <span class="ds-checkmark" aria-hidden="true"></span>
+                        <span>I agree to receive my Aura Stack recommendations via <strong>WhatsApp</strong></span>
+                    </label>
+
+                    <button type="submit" class="ds-submit-btn" id="dsSubmitBtn">
+                        <i class="fa-solid fa-wand-magic-sparkles"></i>
+                        Discover My Crystals
+                    </button>
+
+                </form>
+
+                <!-- ── LOADING STATE ── -->
+                <div class="ds-loading" id="dsLoading" hidden>
+                    <div class="ds-moon-spinner" aria-hidden="true">
+                        <div class="ds-moon-ring"></div>
+                        <div class="ds-moon-core">🌙</div>
+                    </div>
+                    <p class="ds-loading-text">Reading your cosmic blueprint…</p>
+                    <p class="ds-loading-sub">Aligning the stars to your energy signature</p>
+                </div>
+
+                <!-- ── SUCCESS STATE ── -->
+                <div class="ds-success" id="dsSuccess" hidden>
+                    <div class="ds-success-glow" aria-hidden="true"></div>
+                    <div class="ds-success-icon">✨</div>
+                    <h3 class="ds-success-title">The stars have aligned.</h3>
+                    <p class="ds-success-msg">Our expert healers are analyzing your chart and will <strong>WhatsApp your
+                            custom Aura Stack within 24 hours.</strong></p>
+                    <p class="ds-success-note">Check your WhatsApp — keep an eye out for a message from us 🌙</p>
+                    <button class="ds-reset-btn" id="dsResetBtn">Submit another reading</button>
+                </div>
+
+            </div>
+
+        </div>
+    </section>
+    <button id="backToTop" class="back-to-top-btn">
+        <i class="fa-solid fa-arrow-up"></i>
+    </button>
+
+    <footer class="main-footer" id="footer">
+        <div class="footer-grid">
+            <div class="footer-brand">
+                <h3>Aura & Earth</h3>
+                <p>Spreading positive vibrations through authentic healing crystals since 2026.</p>
+            </div>
+            <div class="footer-links">
+                <h4>Quick Links</h4>
+                <a href="index.html">Home</a>
+                <a href="shop.html">All Products</a>
+                <a href="cart-checkout.html">View Cart</a>
+            </div>
+            <div class="footer-links">
+                <h4>Support</h4>
+                <a href="policies.html#shipping">Shipping Policy</a>
+                <a href="policies.html#terms">Terms & Conditions</a>
+                <a href="contact.html">Contact Us</a>
+            </div>
+            <div class="footer-social">
+                <h4>Follow Us</h4>
+                <div class="social-icons">
+                    <a href="#"><i class="fa-brands fa-instagram"></i></a>
+                    <a href="#"><i class="fa-brands fa-facebook"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 Aura & Earth Jewelry. Premium Healing Stones.</p>
+        </div>
+    </footer>
+
+    <a href="https://wa.me/919350614431?text=Hi%2C%20I%20have%20a%20question%20about%20Aura%20%26%20Earth!"
+        class="whatsapp-float" target="_blank" rel="noopener noreferrer" aria-label="Chat with us on WhatsApp">
+        <i class="fa-brands fa-whatsapp whatsapp-float-icon"></i>
+        <span class="whatsapp-float-label">Need help?</span>
+    </a>
+    <script type="module" src="js/main.js"></script>
+    <!-- ═══ ORBS PARALLAX — isolated, no dependency on main.js ═══ -->
+    <script>
+        (function () {
+            'use strict';
+
+            // Only run on the home page where .hero-orbs exists
+            const container = document.querySelector('.hero-orbs');
+            if (!container) return;
+
+            // Honour reduced-motion preference
+            if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+            const orbs = Array.from(container.querySelectorAll('.hero-orb[data-depth]'));
+            if (!orbs.length) return;
+
+            // Cache each orb's depth multiplier once (avoids repeated getAttribute calls)
+            const depths = orbs.map(orb => parseFloat(orb.getAttribute('data-depth')) || 0.3);
+
+            // The parallax effect tracks cursor position relative to the
+            // hero-header centre. Max travel is ±MAX_PX pixels.
+            const MAX_PX = 38;
+
+            let rafId = null;
+            let targetX = 0;
+            let targetY = 0;
+
+            function onMouseMove(e) {
+                const rect = container.closest('.hero-header').getBoundingClientRect();
+                // Normalise: -1 to +1 across the hero width/height
+                const nx = (e.clientX - rect.left) / rect.width - 0.5;
+                const ny = (e.clientY - rect.top) / rect.height - 0.5;
+                targetX = nx * MAX_PX * 2;
+                targetY = ny * MAX_PX * 2;
+            }
+
+            function applyPositions() {
+                orbs.forEach((orb, i) => {
+                    const depth = depths[i];
+                    const tx = (targetX * depth).toFixed(2);
+                    const ty = (targetY * depth).toFixed(2);
+                    orb.style.setProperty('--tx', tx + 'px');
+                    orb.style.setProperty('--ty', ty + 'px');
+                });
+                rafId = null;
+            }
+
+            document.addEventListener('mousemove', function (e) {
+                onMouseMove(e);
+                // Throttle to one rAF per frame
+                if (!rafId) rafId = requestAnimationFrame(applyPositions);
+            });
+
+            // Reset smoothly when cursor leaves the window
+            document.addEventListener('mouseleave', function () {
+                targetX = 0;
+                targetY = 0;
+                if (!rafId) rafId = requestAnimationFrame(applyPositions);
+            });
+        })();
+        (function () {
+            'use strict';
+
+            const form = document.getElementById('dsSyncForm');
+            const loadEl = document.getElementById('dsLoading');
+            const successEl = document.getElementById('dsSuccess');
+            const resetBtn = document.getElementById('dsResetBtn');
+            if (!form) return;
+
+            const LOADING_MESSAGES = [
+                'Reading your cosmic blueprint…',
+                'Mapping your birth chart constellations…',
+                'Aligning crystals to your aura…'
+            ];
+            let msgInterval = null;
+
+            form.addEventListener('submit', function (e) {
+                e.preventDefault();
+
+                // Basic validation
+                const name = document.getElementById('dsName').value.trim();
+                const dob = document.getElementById('dsDOB').value;
+                const pob = document.getElementById('dsPOB').value.trim();
+                if (!name || !dob || !pob) {
+                    // Shake invalid fields
+                    [['dsName', name], ['dsDOB', dob], ['dsPOB', pob]].forEach(([id, val]) => {
+                        if (!val) {
+                            const el = document.getElementById(id);
+                            el.style.borderColor = 'rgba(255,90,90,0.6)';
+                            el.style.animation = 'dsShake 0.35s ease';
+                            setTimeout(() => { el.style.borderColor = ''; el.style.animation = ''; }, 400);
+                        }
+                    });
+                    return;
+                }
+
+                // Show loading
+                form.hidden = true;
+                loadEl.hidden = false;
+
+                // Cycle loading messages
+                let msgIdx = 0;
+                const loadText = loadEl.querySelector('.ds-loading-text');
+                msgInterval = setInterval(() => {
+                    msgIdx = (msgIdx + 1) % LOADING_MESSAGES.length;
+                    loadText.style.opacity = '0';
+                    setTimeout(() => {
+                        loadText.textContent = LOADING_MESSAGES[msgIdx];
+                        loadText.style.opacity = '1';
+                    }, 280);
+                }, 1100);
+
+                // After 3s show success
+                setTimeout(() => {
+                    clearInterval(msgInterval);
+                    loadEl.hidden = true;
+                    successEl.hidden = false;
+                }, 3000);
+            });
+
+            if (resetBtn) {
+                resetBtn.addEventListener('click', function () {
+                    successEl.hidden = true;
+                    form.reset();
+                    form.hidden = false;
+                });
+            }
+        })();
+    </script>
+</body>
+
+</html>

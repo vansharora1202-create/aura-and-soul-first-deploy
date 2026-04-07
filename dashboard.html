@@ -1,0 +1,1522 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta name="robots" content="noindex, nofollow">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!-- Security -->
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard | Aura & Earth Admin</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=DM+Sans:wght@300;400;500;600&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.3/dist/chart.umd.min.js"></script>
+    <link rel="stylesheet" href="css/dashboard.css">
+</head>
+
+<body>
+
+    <div class="sidebar-backdrop" id="sidebarBackdrop"></div>
+
+    <button class="hamburger" id="hamburgerBtn" aria-label="Toggle menu">
+        <span></span><span></span><span></span>
+    </button>
+
+    <!-- ══════════════ SIDEBAR ══════════════ -->
+    <aside class="sidebar" id="sidebar">
+
+        <div class="sidebar-brand">
+            <div class="brand-mark">✦</div>
+            <div class="brand-text">
+                <h2>Aura &amp; Earth</h2>
+                <span>Admin Console</span>
+            </div>
+        </div>
+
+        <div class="sidebar-stats">
+            <div class="stat-chip">
+                <span class="stat-chip-label"><i class="fa-solid fa-gem"></i> Products</span>
+                <span class="stat-chip-value" id="sidebarProductCount">—</span>
+            </div>
+            <div class="stat-chip">
+                <span class="stat-chip-label"><i class="fa-solid fa-layer-group"></i> Categories</span>
+                <span class="stat-chip-value" id="sidebarCatCount">—</span>
+            </div>
+        </div>
+
+        <nav class="sidebar-nav">
+            <div class="nav-section-label">Manage</div>
+
+            <button class="nav-item active" data-tab="overview">
+                <i class="fa-solid fa-chart-pie"></i>
+                <span>Dashboard</span>
+                <span class="nav-dot"></span>
+            </button>
+            <button class="nav-item" data-tab="products">
+                <i class="fa-solid fa-gem"></i>
+                <span>Products</span>
+            </button>
+            <button class="nav-item" data-tab="coupons">
+                <i class="fa-solid fa-ticket"></i>
+                <span>Coupons</span>
+            </button>
+            <button class="nav-item" data-tab="orders">
+                <i class="fa-solid fa-box"></i>
+                <span>Orders</span>
+                <span class="nav-badge" id="pendingOrdersBadge" style="display:none;">0</span>
+            </button>
+            <button class="nav-item" data-tab="sales">
+                <i class="fa-solid fa-fire-flame-curved"></i>
+                <span>Flash Sales</span>
+            </button>
+            <button class="nav-item" data-tab="inventory">
+                <i class="fa-solid fa-boxes-stacked"></i>
+                <span>Inventory Hub</span>
+                <span class="nav-badge" id="waitlistBadge" style="display:none;">0</span>
+            </button>
+
+            <div class="nav-section-label">Homepage</div>
+            <button class="nav-item" data-tab="stack">
+                <i class="fa-solid fa-layer-group"></i>
+                <span>Stack Builder</span>
+            </button>
+            <button class="nav-item" data-tab="analytics">
+                <i class="fa-solid fa-chart-line"></i>
+                <span>Analytics</span>
+            </button>
+            <button class="nav-item" data-tab="reviews">
+                <i class="fa-solid fa-star-half-stroke"></i>
+                <span>Reviews</span>
+                <span class="nav-badge" id="pendingReviewsBadge" style="display:none;">0</span>
+            </button>
+            <button class="nav-item" data-tab="messages">
+                <i class="fa-solid fa-envelope"></i>
+                <span>Messages</span>
+                <span class="nav-badge" id="unreadMessagesBadge" style="display:none;">0</span>
+            </button>
+            <!-- INSERT THIS BEFORE the "System" nav-section-label -->
+            <button class="nav-item" data-tab="categories">
+                <i class="fa-solid fa-tags"></i>
+                <span>Nav Categories</span>
+            </button>
+            <div class="nav-section-label">System</div>
+            <button class="nav-item" data-tab="settings">
+                <i class="fa-solid fa-gear"></i>
+                <span>Settings</span>
+            </button>
+            <a class="nav-item" href="index.html" target="_blank">
+                <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                <span>View Store</span>
+            </a>
+        </nav>
+
+        <div class="sidebar-footer">
+            <div class="user-chip">
+                <div class="user-avatar" id="userAvatar">A</div>
+                <div class="user-info">
+                    <div class="user-email" id="userEmail">—</div>
+                    <div class="user-role">Administrator</div>
+                </div>
+            </div>
+            <button class="btn-logout" id="logoutBtn">
+                <i class="fa-solid fa-arrow-right-from-bracket"></i>
+                <span>Sign Out</span>
+            </button>
+        </div>
+    </aside>
+
+    <!-- ══════════════ MAIN WRAP ══════════════ -->
+    <div class="main-wrap">
+
+        <header class="topbar">
+            <div class="topbar-left">
+                <h3 class="topbar-title" id="viewTitle">Dashboard</h3>
+                <span class="topbar-badge" id="topbarBadge">Overview</span>
+            </div>
+            <div class="topbar-right">
+                <div class="search-wrap">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                    <input type="search" id="searchInput" placeholder="Search products…" autocomplete="new-password"
+                        autocomplete="off" name="search_q" readonly onfocus="this.removeAttribute('readonly')"
+                        spellcheck="false" data-form-type="other" data-lpignore="true" data-1p-ignore="true"
+                        aria-label="Search products">
+                </div>
+                <button class="topbar-action-btn" id="topbarAddBtn">
+                    <i class="fa-solid fa-plus"></i>
+                    <span>Add Product</span>
+                </button>
+            </div>
+        </header>
+
+        <!-- ── VIEW: OVERVIEW ── -->
+        <section class="view active" id="viewOverview">
+            <div class="page-intro">
+                <p class="page-greeting">Good day ✦</p>
+                <h2 class="page-heading">Store Overview</h2>
+            </div>
+
+            <!-- Low Stock Alert Banner — hidden by default; shown by checkLowStock() -->
+            <!-- FIX: dismiss now uses sessionStorage so it persists across re-renders -->
+            <div id="lowStockBanner" hidden>
+                <div class="ls-icon"><i class="fa-solid fa-triangle-exclamation"></i></div>
+                <div class="ls-body">
+                    <p class="ls-title">Low Stock Alert</p>
+                    <div id="lowStockList"></div>
+                </div>
+                <button class="ls-dismiss" id="lowStockDismiss" title="Dismiss until next page load">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+
+            <div class="stats-row">
+
+                <!-- Card 1: Total Revenue -->
+                <div class="stat-card stat-card--revenue">
+                    <div class="stat-card-body">
+                        <p class="stat-card-label">Total Revenue</p>
+                        <div class="stat-value stat-card-value" id="statRevenue">₹0</div>
+                        <p class="stat-card-sub">All confirmed orders</p>
+                    </div>
+                    <div class="stat-card-icon sage">
+                        <i class="fa-solid fa-indian-rupee-sign"></i>
+                    </div>
+                </div>
+
+                <!-- Card 2: Total Orders -->
+                <div class="stat-card stat-card--orders">
+                    <div class="stat-card-body">
+                        <p class="stat-card-label">Total Orders</p>
+                        <div class="stat-value stat-card-value" id="statOrderCount">0</div>
+                        <p class="stat-card-sub">Lifetime order count</p>
+                    </div>
+                    <div class="stat-card-icon gold">
+                        <i class="fa-solid fa-bag-shopping"></i>
+                    </div>
+                </div>
+
+                <!-- Card 3: Action Required -->
+                <div class="stat-card stat-card--action">
+                    <div class="stat-card-body">
+                        <p class="stat-card-label">Action Required</p>
+                        <div class="stat-value stat-card-value" id="statActionNeeded">0</div>
+                        <p class="stat-card-sub">Awaiting payment verify</p>
+                    </div>
+                    <div class="stat-card-icon rose">
+                        <i class="fa-solid fa-triangle-exclamation"></i>
+                    </div>
+                </div>
+
+                <!-- Card 4: Average Order Value -->
+                <div class="stat-card stat-card--aov">
+                    <div class="stat-card-body">
+                        <p class="stat-card-label">Avg. Order Value</p>
+                        <div class="stat-value stat-card-value" id="statAov">₹0</div>
+                        <p class="stat-card-sub">Revenue ÷ orders</p>
+                    </div>
+                    <div class="stat-card-icon amber">
+                        <i class="fa-solid fa-chart-line"></i>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="section-header">
+                <h3>Recent Products</h3>
+                <button class="btn-ghost" id="recentViewAllBtn">
+                    View All <i class="fa-solid fa-arrow-right"></i>
+                </button>
+            </div>
+            <div class="table-wrap">
+                <table class="product-table">
+                    <thead>
+                        <tr>
+                            <th>Image</th>
+                            <th>Name</th>
+                            <th>Category</th>
+                            <th>Price</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="recentTableBody">
+                        <tr class="table-status-row">
+                            <td colspan="5">
+                                <div class="shimmer" style="height:14px;width:200px;margin:0 auto;"></div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+        <section class="view" id="viewAnalytics">
+
+            <div class="page-intro">
+                <p class="page-greeting">Follow the money ✦</p>
+                <h2 class="page-heading">Analytics &amp; Sales</h2>
+            </div>
+
+            <!-- Period Toggle -->
+            <div class="section-header" style="margin-bottom: 1.5rem;">
+                <h3>Sales Performance</h3>
+                <div class="analytics-period-toggle">
+                    <button class="period-btn active" data-period="7">Last 7 Days</button>
+                    <button class="period-btn" data-period="30">Last 30 Days</button>
+                </div>
+            </div>
+
+            <!-- Sales Summary KPI Strip -->
+            <div class="analytics-kpi-strip">
+                <div class="kpi-card">
+                    <p class="kpi-label">Period Revenue</p>
+                    <div class="kpi-value" id="kpiPeriodRevenue">₹0</div>
+                </div>
+                <div class="kpi-card">
+                    <p class="kpi-label">Orders in Period</p>
+                    <div class="kpi-value" id="kpiPeriodOrders">0</div>
+                </div>
+                <div class="kpi-card">
+                    <p class="kpi-label">Avg. Order Value</p>
+                    <div class="kpi-value" id="kpiPeriodAov">₹0</div>
+                </div>
+                <div class="kpi-card">
+                    <p class="kpi-label">Top Day Revenue</p>
+                    <div class="kpi-value" id="kpiPeakDay">₹0</div>
+                </div>
+            </div>
+
+            <!-- Sales Chart -->
+            <div class="analytics-chart-card">
+                <div class="analytics-chart-header">
+                    <h4 class="analytics-chart-title">Daily Revenue</h4>
+                    <span class="analytics-chart-sub" id="analyticsChartSub">Last 7 days</span>
+                </div>
+                <div class="analytics-chart-wrap">
+                    <canvas id="salesChart"></canvas>
+                </div>
+            </div>
+
+            <!-- Bottom Grid: Top Items + Category Breakdown -->
+            <div class="analytics-bottom-grid">
+
+                <!-- Top Selling Items -->
+                <div class="analytics-panel">
+                    <div class="analytics-panel-header">
+                        <h4><i class="fa-solid fa-trophy"></i> Top Selling Items</h4>
+                        <span class="topbar-badge" id="topItemsCount">0 items</span>
+                    </div>
+                    <div id="topSellingList" class="top-selling-list">
+                        <div class="analytics-empty">
+                            <i class="fa-solid fa-chart-bar"></i>
+                            <p>Loading data…</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Revenue by Category -->
+                <div class="analytics-panel">
+                    <div class="analytics-panel-header">
+                        <h4><i class="fa-solid fa-layer-group"></i> Revenue by Category</h4>
+                    </div>
+                    <div class="analytics-chart-wrap analytics-chart-wrap--donut">
+                        <canvas id="categoryChart"></canvas>
+                    </div>
+                </div>
+
+            </div>
+
+        </section>
+
+        <section class="view" id="viewReviews">
+
+            <div class="page-intro">
+                <p class="page-greeting">Quality control ✦</p>
+                <h2 class="page-heading">Reviews &amp; Ratings</h2>
+            </div>
+
+            <!-- Sub-tab switcher -->
+            <div class="sub-tabs" id="reviewsSubTabs">
+                <button class="sub-tab active" data-reviewtab="pending">
+                    <i class="fa-solid fa-clock"></i> Pending
+                    <span class="nav-badge" id="pendingReviewsTabBadge"
+                        style="display:inline-flex;margin-left:6px;">0</span>
+                </button>
+                <button class="sub-tab" data-reviewtab="approved">
+                    <i class="fa-solid fa-circle-check"></i> Approved
+                </button>
+            </div>
+
+            <!-- Pending Reviews Panel -->
+            <div class="reviews-panel active" id="reviewsPanelPending">
+                <div class="section-header">
+                    <h3>Pending Reviews <span class="topbar-badge" id="pendingReviewCount"
+                            style="margin-left:8px;">0</span></h3>
+                    <button class="btn-ghost" id="refreshReviewsBtn">
+                        <i class="fa-solid fa-arrows-rotate"></i> Refresh
+                    </button>
+                </div>
+
+                <div class="table-wrap">
+                    <table class="product-table reviews-table">
+                        <thead>
+                            <tr>
+                                <th>Rating</th>
+                                <th>Reviewer</th>
+                                <th>Product</th>
+                                <th>Review</th>
+                                <th>Submitted</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="pendingReviewsBody">
+                            <tr class="table-status-row">
+                                <td colspan="6">Loading pending reviews…</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Approved Reviews Panel -->
+            <div class="reviews-panel" id="reviewsPanelApproved">
+                <div class="section-header">
+                    <h3>Approved Reviews <span class="topbar-badge" id="approvedReviewCount"
+                            style="margin-left:8px;">0</span></h3>
+                    <button class="btn-ghost" id="refreshApprovedReviewsBtn">
+                        <i class="fa-solid fa-arrows-rotate"></i> Refresh
+                    </button>
+                </div>
+
+                <div class="table-wrap">
+                    <table class="product-table reviews-table">
+                        <thead>
+                            <tr>
+                                <th>Rating</th>
+                                <th>Reviewer</th>
+                                <th>Product</th>
+                                <th>Review</th>
+                                <th>Submitted</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="approvedReviewsBody">
+                            <tr class="table-status-row">
+                                <td colspan="6">No approved reviews yet.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+        </section>
+
+        <!-- ── VIEW: PRODUCTS ── -->
+        <section class="view" id="viewProducts">
+
+            <div class="sub-tabs" id="productSubTabs">
+                <button class="sub-tab active" data-subtab="list">
+                    <i class="fa-solid fa-list"></i> All Products
+                </button>
+                <button class="sub-tab" data-subtab="add">
+                    <i class="fa-solid fa-circle-plus"></i> Add / Edit
+                </button>
+            </div>
+
+            <div class="sub-panel active" id="subPanelList">
+                <div class="section-header">
+                    <h3>All Products <span id="productCount" class="topbar-badge" style="margin-left:8px;">0</span></h3>
+                    <button class="btn-primary" id="productListAddBtn">
+                        <i class="fa-solid fa-plus"></i> Add New
+                    </button>
+                </div>
+                <div class="table-wrap">
+                    <table class="product-table">
+                        <thead>
+                            <tr>
+                                <th>Image</th>
+                                <th>Name</th>
+                                <th>Category</th>
+                                <th>Stone</th>
+                                <th>Price</th>
+                                <th>Sale Price</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="productTableBody">
+                            <tr class="table-status-row">
+                                <td colspan="7">Loading inventory…</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="sub-panel" id="subPanelAdd">
+                <div class="form-card">
+                    <div class="form-card-header">
+                        <h3 id="formHeading">Add New Product</h3>
+                        <p id="formSubheading">Fill in the details below. All fields are required.</p>
+                    </div>
+
+                    <form id="productForm" novalidate>
+                        <input type="hidden" id="editId">
+
+                        <div class="form-row two-col">
+                            <div class="field-group">
+                                <label for="fName">Product Name</label>
+                                <input type="text" id="fName" placeholder="e.g. Tiger's Eye Protection" required>
+                            </div>
+                            <div class="field-group">
+                                <label for="fPrice">Price (₹)</label>
+                                <input type="number" id="fPrice" placeholder="999" min="1" required>
+                            </div>
+                        </div>
+
+                        <div class="form-row two-col">
+                            <div class="field-group">
+                                <label for="fCategory">Category</label>
+                                <select id="fCategory" required>
+                                    <option value="" disabled selected>Select category</option>
+                                    <option value="protection">Protection</option>
+                                    <option value="peace">Inner Peace</option>
+                                    <option value="love">Love &amp; Harmony</option>
+                                    <option value="energy">Energy</option>
+                                    <option value="luck">Luck</option>
+                                    <option value="crystal">Crystal</option>
+                                    <option value="zodiac">Zodiac</option>
+                                </select>
+                            </div>
+                            <div class="field-group">
+                                <label for="fStone">Stone <span class="label-hint">(no spaces)</span></label>
+                                <input type="text" id="fStone" placeholder="e.g. tigereye" required>
+                            </div>
+                        </div>
+
+                        <div class="field-group">
+                            <label for="fDescription">Description</label>
+                            <textarea id="fDescription" rows="3"
+                                placeholder="1–2 sentences about the crystal's energy and properties."
+                                required></textarea>
+                        </div>
+
+                        <div class="form-row two-col">
+                            <div class="field-group">
+                                <label for="fSalePrice">
+                                    Sale Price (₹) <span class="label-hint optional-label">Optional</span>
+                                </label>
+                                <input type="number" id="fSalePrice" placeholder="Leave blank for no sale" min="1">
+                            </div>
+                            <div class="field-group">
+                                <label for="fSaleDiscount">
+                                    OR Discount % <span class="label-hint optional-label">Optional — overrides sale
+                                        price</span>
+                                </label>
+                                <input type="number" id="fSaleDiscount" placeholder="e.g. 20 for 20% off" min="1"
+                                    max="99">
+                            </div>
+                        </div>
+                        <p class="form-hint-row">
+                            <i class="fa-solid fa-circle-info"></i>
+                            If you enter a Discount %, the Sale Price will be auto-calculated and saved. Leave both
+                            blank to remove any active sale.
+                        </p>
+
+                        <!-- Stock Quantity — single full-width field; FIX: removed empty placeholder col -->
+                        <div class="field-group">
+                            <label for="fStock">
+                                Stock Quantity <span class="label-hint optional-label">Units available</span>
+                            </label>
+                            <input type="number" id="fStock" placeholder="e.g. 50" min="0" style="max-width:240px;">
+                        </div>
+
+                        <div class="field-group">
+                            <label>Product Images
+                                <span class="label-hint">(up to 4 · first image = main display image)</span>
+                            </label>
+                            <div class="upload-grid" id="uploadGrid"></div>
+                            <div id="uploadProgress" class="progress-bar" hidden>
+                                <div id="uploadProgressFill" class="progress-fill"></div>
+                            </div>
+                        </div>
+
+                        <div class="form-actions">
+                            <button type="button" id="cancelEditBtn" class="btn-ghost" hidden>
+                                <i class="fa-solid fa-xmark"></i> Cancel
+                            </button>
+                            <button type="submit" id="submitBtn" class="btn-primary">
+                                <span id="submitBtnText">Save Product</span>
+                                <i class="fa-solid fa-floppy-disk"></i>
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </section>
+
+        <!-- ── VIEW: COUPONS ── -->
+        <section class="view" id="viewCoupons">
+            <div class="page-intro">
+                <p class="page-greeting">Promotions ✦</p>
+                <h2 class="page-heading">Coupon Manager</h2>
+            </div>
+
+            <div class="two-panel-layout">
+                <!-- Add Coupon Form -->
+                <div class="form-card form-card--compact">
+                    <div class="form-card-header">
+                        <h3 id="couponFormHeading">Create Coupon</h3>
+                        <p id="couponFormSubheading">Add a new promotional code.</p>
+                    </div>
+                    <form id="couponForm" novalidate>
+                        <input type="hidden" id="couponEditId">
+                        <div class="field-group">
+                            <label for="cCode">Coupon Code</label>
+                            <input type="text" id="cCode" placeholder="e.g. SAVE20" required
+                                style="text-transform:uppercase;">
+                        </div>
+                        <div class="field-group">
+                            <label for="cDiscount">Discount Percentage (%)</label>
+                            <input type="number" id="cDiscount" placeholder="e.g. 20" min="1" max="100" required>
+                        </div>
+                        <div class="field-group">
+                            <label for="cDescription">Description <span
+                                    class="label-hint optional-label">Optional</span></label>
+                            <input type="text" id="cDescription" placeholder="e.g. Summer Sale 2024">
+                        </div>
+                        <div class="form-actions">
+                            <button type="button" id="cancelCouponEditBtn" class="btn-ghost" hidden>
+                                <i class="fa-solid fa-xmark"></i> Cancel
+                            </button>
+                            <button type="submit" id="couponSubmitBtn" class="btn-primary">
+                                <span id="couponSubmitBtnText">Create Coupon</span>
+                                <i class="fa-solid fa-ticket"></i>
+                            </button>
+                        </div>
+                    </form>
+                </div>
+
+                <!-- Coupons Table -->
+                <div class="table-panel">
+                    <div class="section-header">
+                        <h3>Active Coupons <span id="couponCount" class="topbar-badge" style="margin-left:8px;">0</span>
+                        </h3>
+                    </div>
+                    <div class="table-wrap">
+                        <table class="product-table">
+                            <thead>
+                                <tr>
+                                    <th>Code</th>
+                                    <th>Discount</th>
+                                    <th>Description</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="couponTableBody">
+                                <tr class="table-status-row">
+                                    <td colspan="4">Loading coupons…</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ── VIEW: ORDERS ── -->
+        <section class="view" id="viewOrders">
+            <div class="page-intro-row">
+                <div class="page-intro">
+                    <p class="page-greeting">Fulfilment ✦</p>
+                    <h2 class="page-heading">Order Management</h2>
+                </div>
+                <button class="btn-export-csv" id="exportCsvBtn">
+                    <i class="fa-solid fa-download"></i> Export CSV
+                </button>
+                <button class="btn-vip" id="openVipBtn">
+                    <i class="fa-solid fa-crown"></i> View VIPs
+                </button>
+            </div>
+
+            <div class="orders-filter-bar">
+                <button class="filter-chip active" data-status-filter="all">All</button>
+                <button class="filter-chip filter-chip--urgent" data-status-filter="Payment Verification Pending">
+                    <i class="fa-solid fa-circle-exclamation"></i> Verify Payment
+                </button>
+                <button class="filter-chip" data-status-filter="Pending">Pending</button>
+                <button class="filter-chip" data-status-filter="Shipped">Shipped</button>
+                <button class="filter-chip" data-status-filter="Delivered">Delivered</button>
+                <button class="filter-chip" data-status-filter="Cancelled">Cancelled</button>
+            </div>
+
+            <div class="table-wrap orders-table-wrap">
+                <table class="product-table orders-table">
+                    <thead>
+                        <tr>
+                            <th>Order ID</th>
+                            <th>Customer</th>
+                            <th>Items</th>
+                            <th>Total</th>
+                            <th>Date</th>
+                            <th>UTR / Ref</th>
+                            <th>Status</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="ordersTableBody">
+                        <tr class="table-status-row">
+                            <td colspan="8">Loading orders…</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- ── VIEW: FLASH SALES ── -->
+        <section class="view" id="viewSales">
+            <div class="page-intro">
+                <p class="page-greeting">Promotions ✦</p>
+                <h2 class="page-heading">Flash Sale &amp; Discounts</h2>
+            </div>
+
+            <div class="sales-grid">
+
+                <!-- Category Sale -->
+                <div class="form-card form-card--sale">
+                    <div class="form-card-header">
+                        <div class="sale-icon-wrap"><i class="fa-solid fa-layer-group"></i></div>
+                        <div>
+                            <h3>Category Sale</h3>
+                            <p>Apply a flat % discount to every product in a category at once.</p>
+                        </div>
+                    </div>
+                    <form id="categorySaleForm" novalidate>
+                        <div class="field-group">
+                            <label for="saleCategory">Select Category</label>
+                            <select id="saleCategory" required>
+                                <option value="" disabled selected>Choose a category</option>
+                                <option value="protection">Protection</option>
+                                <option value="peace">Inner Peace</option>
+                                <option value="love">Love &amp; Harmony</option>
+                                <option value="energy">Energy</option>
+                                <option value="luck">Luck</option>
+                                <option value="crystal">Crystal</option>
+                                <option value="zodiac">Zodiac</option>
+                            </select>
+                        </div>
+                        <div class="field-group">
+                            <label for="saleDiscountPct">Discount Percentage (%)</label>
+                            <input type="number" id="saleDiscountPct" placeholder="e.g. 15 for 15% off" min="1" max="99"
+                                required>
+                        </div>
+                        <p class="form-hint-row">
+                            <i class="fa-solid fa-circle-info"></i>
+                            This will batch-update the <code>salePrice</code> field on all products in the selected
+                            category. Original prices are preserved.
+                        </p>
+                        <div class="form-actions">
+                            <button type="submit" id="applyCategorySaleBtn" class="btn-sale">
+                                <span id="categorySaleBtnText">Apply to Category</span>
+                                <i class="fa-solid fa-fire-flame-curved"></i>
+                            </button>
+                        </div>
+                    </form>
+                </div>
+
+                <!-- Remove Category Sale -->
+                <div class="form-card form-card--sale form-card--clear">
+                    <div class="form-card-header">
+                        <div class="sale-icon-wrap clear"><i class="fa-solid fa-circle-xmark"></i></div>
+                        <div>
+                            <h3>Remove Category Sale</h3>
+                            <p>Clear all active sale prices for an entire category.</p>
+                        </div>
+                    </div>
+                    <form id="removeCategorySaleForm" novalidate>
+                        <div class="field-group">
+                            <label for="clearSaleCategory">Select Category</label>
+                            <select id="clearSaleCategory" required>
+                                <option value="" disabled selected>Choose a category</option>
+                                <option value="protection">Protection</option>
+                                <option value="peace">Inner Peace</option>
+                                <option value="love">Love &amp; Harmony</option>
+                                <option value="energy">Energy</option>
+                                <option value="luck">Luck</option>
+                                <option value="crystal">Crystal</option>
+                                <option value="zodiac">Zodiac</option>
+                            </select>
+                        </div>
+                        <p class="form-hint-row">
+                            <i class="fa-solid fa-circle-info"></i>
+                            This will remove the <code>salePrice</code> field from all products in the selected
+                            category, restoring normal pricing.
+                        </p>
+                        <div class="form-actions">
+                            <button type="submit" id="removeCategorySaleBtn" class="btn-ghost btn-ghost--danger">
+                                <span>Remove Sale Prices</span>
+                                <i class="fa-solid fa-trash"></i>
+                            </button>
+                        </div>
+                    </form>
+                </div>
+
+                <!-- Currently On Sale -->
+                <div class="sale-products-panel">
+                    <div class="section-header">
+                        <h3>Products Currently On Sale <span id="onSaleCount" class="topbar-badge"
+                                style="margin-left:8px;">0</span></h3>
+                        <button class="btn-ghost" id="refreshSaleListBtn">
+                            <i class="fa-solid fa-rotate"></i> Refresh
+                        </button>
+                    </div>
+                    <div class="table-wrap">
+                        <table class="product-table">
+                            <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Category</th>
+                                    <th>Original Price</th>
+                                    <th>Sale Price</th>
+                                    <th>Discount</th>
+                                    <th>Remove Sale</th>
+                                </tr>
+                            </thead>
+                            <tbody id="saleProductsTableBody">
+                                <tr class="table-status-row">
+                                    <td colspan="6">Loading…</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ── VIEW: SETTINGS ── -->
+        <section class="view" id="viewSettings">
+            <div class="page-intro">
+                <p class="page-greeting">Configure ✦</p>
+                <h2 class="page-heading">Settings</h2>
+            </div>
+
+            <div class="settings-grid settings-grid--functional">
+
+                <!-- Card 1: Store Config -->
+                <div class="settings-card settings-card--form">
+                    <div class="settings-card-header">
+                        <div class="settings-card-icon sage"><i class="fa-solid fa-store"></i></div>
+                        <div>
+                            <h4>Store Configuration</h4>
+                            <p>Public-facing store identity and contact info</p>
+                        </div>
+                    </div>
+                    <div class="settings-fields">
+                        <div class="field-group">
+                            <label for="cfg-store-name">Store Name</label>
+                            <input type="text" id="cfg-store-name" placeholder="Aura &amp; Earth">
+                        </div>
+                        <div class="field-group">
+                            <label for="cfg-support-email">Support Email</label>
+                            <input type="email" id="cfg-support-email" placeholder="hello@auraandearth.com">
+                        </div>
+                        <div class="field-group">
+                            <label for="cfg-support-phone">Support Phone</label>
+                            <input type="tel" id="cfg-support-phone" placeholder="+91 98765 43210">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 2: API & Payments -->
+                <div class="settings-card settings-card--form">
+                    <div class="settings-card-header">
+                        <div class="settings-card-icon gold"><i class="fa-solid fa-credit-card"></i></div>
+                        <div>
+                            <h4>API &amp; Payments</h4>
+                            <p>Payment gateway credentials — stored locally only</p>
+                        </div>
+                    </div>
+                    <div class="settings-fields">
+                        <div class="field-group">
+                            <label for="cfg-gateway-key">
+                                Gateway Key <span class="label-hint">(Razorpay / Stripe)</span>
+                            </label>
+                            <div class="input-secret-wrap">
+                                <input type="password" id="cfg-gateway-key" placeholder="rzp_live_••••••••••••">
+                                <button type="button" class="btn-reveal" data-target="cfg-gateway-key"
+                                    title="Show / Hide">
+                                    <i class="fa-solid fa-eye"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="field-group">
+                            <label for="cfg-gateway-secret">Gateway Secret</label>
+                            <div class="input-secret-wrap">
+                                <input type="password" id="cfg-gateway-secret" placeholder="••••••••••••••••••••••">
+                                <button type="button" class="btn-reveal" data-target="cfg-gateway-secret"
+                                    title="Show / Hide">
+                                    <i class="fa-solid fa-eye"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <p class="settings-local-note">
+                            <i class="fa-solid fa-lock"></i>
+                            Saved in browser localStorage only — never sent to any server.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Card 3: Master Toggles -->
+                <div class="settings-card settings-card--form">
+                    <div class="settings-card-header">
+                        <div class="settings-card-icon rose"><i class="fa-solid fa-sliders"></i></div>
+                        <div>
+                            <h4>Master Toggles</h4>
+                            <p>Site-wide switches — saved as local config flags</p>
+                        </div>
+                    </div>
+                    <div class="settings-fields">
+                        <div class="settings-toggle-row">
+                            <div class="settings-toggle-info">
+                                <span class="settings-toggle-label">Maintenance Mode</span>
+                                <span class="settings-toggle-sub">Shows a maintenance page to all visitors</span>
+                            </div>
+                            <label class="toggle-switch">
+                                <input type="checkbox" id="cfg-maintenance-mode">
+                                <span class="toggle-track">
+                                    <span class="toggle-thumb"></span>
+                                </span>
+                            </label>
+                        </div>
+                        <div class="settings-toggle-row">
+                            <div class="settings-toggle-info">
+                                <span class="settings-toggle-label">Sitewide Sale</span>
+                                <span class="settings-toggle-sub">Activates the global sale banner on the
+                                    storefront</span>
+                            </div>
+                            <label class="toggle-switch">
+                                <input type="checkbox" id="cfg-sitewide-sale">
+                                <span class="toggle-track">
+                                    <span class="toggle-thumb"></span>
+                                </span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 4: Shipping Rules -->
+                <div class="settings-card settings-card--form">
+                    <div class="settings-card-header">
+                        <div class="settings-card-icon amber"><i class="fa-solid fa-truck"></i></div>
+                        <div>
+                            <h4>Shipping Rules</h4>
+                            <p>Configure delivery fee and free-shipping threshold</p>
+                        </div>
+                    </div>
+                    <div class="settings-fields">
+                        <div class="field-group">
+                            <label for="cfg-free-shipping">Free Shipping Threshold (₹)</label>
+                            <input type="number" id="cfg-free-shipping" placeholder="999" min="0">
+                        </div>
+                        <div class="field-group">
+                            <label for="cfg-delivery-fee">Flat Delivery Fee (₹)</label>
+                            <input type="number" id="cfg-delivery-fee" placeholder="79" min="0">
+                        </div>
+                    </div>
+                </div>
+
+            </div><!-- /.settings-grid -->
+
+            <!-- Save Settings CTA -->
+            <div class="settings-save-row">
+                <button class="btn-save-settings" id="saveSettingsBtn">
+                    <i class="fa-solid fa-floppy-disk"></i>
+                    Save Settings
+                </button>
+                <span class="settings-save-hint">Changes are saved to browser localStorage and applied
+                    immediately.</span>
+            </div>
+        </section>
+
+        <!-- ── VIEW: STACK BUILDER ── -->
+        <section class="view" id="viewStack">
+            <div class="page-intro">
+                <p class="page-greeting">Homepage ✦</p>
+                <h2 class="page-heading">Stack Builder</h2>
+            </div>
+
+            <div class="sb-panel-header">
+                <p class="sb-panel-desc">
+                    Toggle which products appear in the
+                    <strong>Build Your Stack</strong> section on the homepage.
+                    Maximum <strong>4</strong> products can be active at once.
+                </p>
+                <span class="sb-active-count-wrap">
+                    <span class="sb-active-dot"></span>
+                    <span id="sbActiveCount">0</span> of 4 active
+                </span>
+            </div>
+
+            <!-- Product cards injected by renderStackBuilderPanel() -->
+            <div class="sb-grid" id="sbGrid">
+                <div class="sb-skeleton"></div>
+                <div class="sb-skeleton"></div>
+                <div class="sb-skeleton"></div>
+                <div class="sb-skeleton"></div>
+                <div class="sb-skeleton"></div>
+                <div class="sb-skeleton"></div>
+            </div>
+
+            <!-- ── Bundle Discount Setting — lives here so all stack controls are in one place ── -->
+            <div class="settings-card settings-card--form" style="margin-top:32px;">
+                <div class="settings-card-header">
+                    <div class="settings-card-icon sage"><i class="fa-solid fa-tag"></i></div>
+                    <div>
+                        <h4>Stack Bundle Discount</h4>
+                        <p>Percentage discount applied automatically when a customer adds a Custom Stack to their bag
+                        </p>
+                    </div>
+                </div>
+                <div class="settings-fields">
+                    <div class="field-group">
+                        <label for="cfg-stack-discount">
+                            Bundle Discount (%)
+                            <span class="label-hint optional-label">0 = no discount</span>
+                        </label>
+                        <input type="number" id="cfg-stack-discount" placeholder="e.g. 10 for 10% off the full stack"
+                            min="0" max="99" style="max-width:240px;">
+                    </div>
+                    <p class="form-hint-row">
+                        <i class="fa-solid fa-circle-info"></i>
+                        The discount is applied to the combined price of all bracelets in the stack and shown
+                        to the customer as a crossed-out original price with the discounted total in the cart.
+                    </p>
+                    <div class="form-actions" style="margin-top:16px;">
+                        <button type="button" id="saveStackDiscountBtn" class="btn-primary">
+                            <span>Save Discount</span>
+                            <i class="fa-solid fa-floppy-disk"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+        </section>
+        <!-- ── VIEW: NAVBAR CATEGORIES ── -->
+        <section class="view" id="viewCategories">
+
+            <div class="page-intro">
+                <p class="page-greeting">Navigation ✦</p>
+                <h2 class="page-heading">Navbar Categories</h2>
+            </div>
+
+            <div class="section-header">
+                <h3>Active Categories <span id="catCount" class="topbar-badge" style="margin-left:8px;">0</span></h3>
+                <button class="btn-primary" id="openAddCatModalBtn">
+                    <i class="fa-solid fa-plus"></i> Add Category
+                </button>
+            </div>
+
+            <div class="table-wrap">
+                <table class="product-table">
+                    <thead>
+                        <tr>
+                            <th>Order</th>
+                            <th>Name</th>
+                            <th>Link (slug)</th>
+                            <th>Reorder</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="catTableBody">
+                        <tr class="table-status-row">
+                            <td colspan="5">Loading categories…</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+        </section>
+        <!-- ── VIEW: MESSAGES ── -->
+        <section class="view" id="viewMessages">
+            <div class="page-intro">
+                <p class="page-greeting">Customer Enquiries ✦</p>
+                <h2 class="page-heading">Messages</h2>
+            </div>
+
+            <div class="section-header">
+                <h3>
+                    Contact Form Submissions
+                    <span id="messagesCount" class="topbar-badge" style="margin-left:8px;">0</span>
+                </h3>
+                <button class="btn-ghost" id="refreshMessagesBtn">
+                    <i class="fa-solid fa-rotate"></i> Refresh
+                </button>
+            </div>
+
+            <div class="table-wrap">
+                <table class="product-table messages-table">
+                    <thead>
+                        <tr>
+                            <th>Status</th>
+                            <th>From</th>
+                            <th>Phone</th>
+                            <th>Subject</th>
+                            <th>Message</th>
+                            <th>Date</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="messagesTableBody">
+                        <tr class="table-status-row">
+                            <td colspan="7">Loading messages…</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+        <section class="view" id="viewInventory">
+
+            <div class="page-intro">
+                <p class="page-greeting">Command your stock ✦</p>
+                <h2 class="page-heading">Inventory Hub</h2>
+            </div>
+
+            <!-- ── Sub-tabs ──────────────────────────────── -->
+            <div class="sub-tabs" id="inventorySubTabs">
+                <button class="sub-tab active" data-invtab="stock">
+                    <i class="fa-solid fa-sliders"></i> Stock &amp; Upsell Manager
+                </button>
+                <button class="sub-tab" data-invtab="waitlist">
+                    <i class="fa-solid fa-clock-rotate-left"></i> Waitlist / Demand
+                    <span class="nav-badge" id="waitlistTabBadge"
+                        style="display:inline-flex;margin-left:6px;position:static;transform:none;">0</span>
+                </button>
+            </div>
+
+            <!-- ════════════════════════════════════════════
+         PANEL 1 — Stock & Upsell Manager
+         ════════════════════════════════════════════ -->
+            <div class="inv-panel active" id="invPanelStock">
+
+                <div class="section-header">
+                    <h3>
+                        Stock &amp; Upsell Manager
+                        <span class="topbar-badge" id="stockProductCount" style="margin-left:8px;">0 products</span>
+                    </h3>
+                    <div style="display:flex;gap:8px;align-items:center;">
+                        <div class="search-wrap" style="width:220px;">
+                            <i class="fa-solid fa-magnifying-glass"></i>
+                            <input type="search" id="inventorySearchInput" placeholder="Filter products…"
+                                autocomplete="off" spellcheck="false">
+                        </div>
+                        <button class="btn-ghost" id="refreshStockBtn">
+                            <i class="fa-solid fa-arrows-rotate"></i> Refresh
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Low-stock summary strip -->
+                <div id="invLowStockStrip" class="inv-low-stock-strip" hidden>
+                    <i class="fa-solid fa-triangle-exclamation"></i>
+                    <span id="invLowStockMsg">0 products low or out of stock</span>
+                    <button class="inv-strip-filter-btn" id="invShowLowStockBtn">Show only →</button>
+                    <button class="inv-strip-clear-btn" id="invClearLowStockBtn">
+                        <i class="fa-solid fa-xmark"></i>
+                    </button>
+                </div>
+
+                <div class="table-wrap">
+                    <table class="product-table inv-stock-table">
+                        <thead>
+                            <tr>
+                                <th style="width:52px;">Image</th>
+                                <th>Product</th>
+                                <th>Category</th>
+                                <th style="width:110px;">Price</th>
+                                <th style="width:160px;">Stock Qty</th>
+                                <th>Linked Product <span class="inv-th-hint">(upsell)</span></th>
+                                <th style="width:90px;">Save</th>
+                            </tr>
+                        </thead>
+                        <tbody id="invStockTableBody">
+                            <tr class="table-status-row">
+                                <td colspan="7">
+                                    <div class="shimmer" style="height:13px;width:200px;margin:0 auto;"></div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- Bulk save notice -->
+                <div class="inv-bulk-bar" id="invBulkBar" hidden>
+                    <i class="fa-solid fa-circle-info"></i>
+                    <span id="invBulkCount">0 unsaved changes</span>
+                    <button class="btn-primary inv-bulk-save-btn" id="invBulkSaveBtn">
+                        <i class="fa-solid fa-floppy-disk"></i> Save All Changes
+                    </button>
+                    <button class="btn-ghost" id="invBulkDiscardBtn">Discard</button>
+                </div>
+
+            </div><!-- /#invPanelStock -->
+
+
+            <!-- ════════════════════════════════════════════
+         PANEL 2 — Waitlist / Demand Tracker
+         ════════════════════════════════════════════ -->
+            <div class="inv-panel" id="invPanelWaitlist">
+
+                <div class="section-header">
+                    <h3>
+                        Waitlist / Demand Tracker
+                        <span class="topbar-badge" id="waitlistProductCount" style="margin-left:8px;">0 products</span>
+                    </h3>
+                    <button class="btn-ghost" id="refreshWaitlistBtn">
+                        <i class="fa-solid fa-arrows-rotate"></i> Refresh
+                    </button>
+                </div>
+
+                <!-- Demand summary strip -->
+                <div class="inv-demand-strip">
+                    <div class="inv-demand-kpi">
+                        <span class="inv-demand-kpi-val" id="wlTotalEntries">0</span>
+                        <span class="inv-demand-kpi-label">Total waitlist entries</span>
+                    </div>
+                    <div class="inv-demand-kpi">
+                        <span class="inv-demand-kpi-val" id="wlTotalProducts">0</span>
+                        <span class="inv-demand-kpi-label">Products demanded</span>
+                    </div>
+                    <div class="inv-demand-kpi">
+                        <span class="inv-demand-kpi-val" id="wlTopProduct">—</span>
+                        <span class="inv-demand-kpi-label">Hottest item</span>
+                    </div>
+                </div>
+
+                <!-- Demand cards grid -->
+                <div id="waitlistGrid" class="waitlist-grid">
+                    <div class="analytics-empty" style="grid-column:1/-1;">
+                        <i class="fa-solid fa-hourglass-half"></i>
+                        <p>Loading waitlist data…</p>
+                    </div>
+                </div>
+
+                <!-- Expandable raw entries table -->
+                <div id="waitlistRawWrap" hidden>
+                    <div class="section-header" style="margin-top:1.5rem;">
+                        <h3 id="waitlistRawTitle">Entries for —</h3>
+                        <button class="btn-ghost" id="closeWaitlistRawBtn">
+                            <i class="fa-solid fa-xmark"></i> Close
+                        </button>
+                    </div>
+                    <div class="table-wrap">
+                        <table class="product-table">
+                            <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>Email / Phone</th>
+                                    <th>Submitted</th>
+                                </tr>
+                            </thead>
+                            <tbody id="waitlistRawBody">
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+            </div><!-- /#invPanelWaitlist -->
+
+        </section><!-- /#viewInventory -->
+
+    </div><!-- /.main-wrap -->
+
+    <!-- ══════════════ MODALS ══════════════ -->
+    <div id="deleteModal" class="modal-overlay">
+        <div class="modal-card">
+            <div class="modal-icon danger"><i class="fa-solid fa-triangle-exclamation"></i></div>
+            <h3>Delete Product?</h3>
+            <p id="deleteModalName" class="modal-prod-name"></p>
+            <p>This permanently removes the product and all its images. This cannot be undone.</p>
+            <div class="modal-actions">
+                <button id="cancelDeleteBtn" class="btn-ghost">Cancel</button>
+                <button id="confirmDeleteBtn" class="btn-danger">
+                    <i class="fa-solid fa-trash"></i> Delete
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <div id="deleteCouponModal" class="modal-overlay">
+        <div class="modal-card">
+            <div class="modal-icon danger"><i class="fa-solid fa-triangle-exclamation"></i></div>
+            <h3>Delete Coupon?</h3>
+            <p id="deleteCouponModalCode" class="modal-prod-name"></p>
+            <p>This permanently removes the coupon code. It can no longer be redeemed.</p>
+            <div class="modal-actions">
+                <button id="cancelDeleteCouponBtn" class="btn-ghost">Cancel</button>
+                <button id="confirmDeleteCouponBtn" class="btn-danger">
+                    <i class="fa-solid fa-trash"></i> Delete
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ══════════════ VIP CUSTOMER MODAL ══════════════ -->
+    <div id="vipModal" class="modal-overlay">
+        <div class="modal-card modal-card--vip">
+
+            <div class="vip-modal-header">
+                <div class="vip-modal-title-group">
+                    <div class="vip-crown-icon"><i class="fa-solid fa-crown"></i></div>
+                    <div>
+                        <h3 class="vip-modal-title">VIP Customers</h3>
+                        <p class="vip-modal-sub">Top 10 by lifetime spend</p>
+                    </div>
+                </div>
+                <button class="vip-modal-close" id="closeVipBtn" aria-label="Close">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+
+            <div class="vip-table-wrap">
+                <table class="vip-table">
+                    <thead>
+                        <tr>
+                            <th>Rank</th>
+                            <th>Customer</th>
+                            <th>Phone</th>
+                            <th>Orders</th>
+                            <th>Total Spent</th>
+                        </tr>
+                    </thead>
+                    <tbody id="vipTableBody">
+                        <!-- populated by openVipModal() -->
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
+    </div>
+    <!-- ══════════════ ADD / EDIT CATEGORY MODAL ══════════════ -->
+    <div id="catModal" class="modal-overlay">
+        <div class="modal-card" style="max-width:460px;">
+            <div class="modal-icon success"><i class="fa-solid fa-tags"></i></div>
+            <h3 id="catModalTitle">Add Category</h3>
+            <div class="field-group" style="text-align:left;margin-top:1rem;">
+                <label for="catNameInput">Display Name</label>
+                <input type="text" id="catNameInput" placeholder="e.g. Inner Peace" style="width:100%;margin-top:6px;">
+            </div>
+            <div class="field-group" style="text-align:left;margin-top:0.75rem;">
+                <label for="catSlugInput">Link / Slug <span class="label-hint">(e.g.
+                        shop.html?filter=peace)</span></label>
+                <input type="text" id="catSlugInput" placeholder="shop.html?filter=peace"
+                    style="width:100%;margin-top:6px;">
+            </div>
+            <input type="hidden" id="catEditDocId">
+            <input type="hidden" id="catIconInput" value="">
+
+            <!-- ── VISUAL ICON PICKER ── -->
+            <div class="field-group" style="text-align:left;margin-top:0.75rem;">
+                <label>Icon <span class="label-hint">(click to select)</span></label>
+                <div class="icon-picker-grid" id="iconPickerGrid">
+                    <button type="button" class="icon-picker-btn" data-icon="fa-moon" title="Moon"><i
+                            class="fa-solid fa-moon"></i></button>
+                    <button type="button" class="icon-picker-btn" data-icon="fa-star" title="Star"><i
+                            class="fa-solid fa-star"></i></button>
+                    <button type="button" class="icon-picker-btn" data-icon="fa-sun" title="Sun"><i
+                            class="fa-solid fa-sun"></i></button>
+                    <button type="button" class="icon-picker-btn" data-icon="fa-heart" title="Heart"><i
+                            class="fa-solid fa-heart"></i></button>
+                    <button type="button" class="icon-picker-btn" data-icon="fa-sparkles" title="Sparkle"><i
+                            class="fa-solid fa-sparkles"></i></button>
+                    <button type="button" class="icon-picker-btn" data-icon="fa-infinity" title="Infinity"><i
+                            class="fa-solid fa-infinity"></i></button>
+                    <button type="button" class="icon-picker-btn" data-icon="fa-leaf" title="Leaf"><i
+                            class="fa-solid fa-leaf"></i></button>
+                    <button type="button" class="icon-picker-btn" data-icon="fa-gem" title="Gem"><i
+                            class="fa-solid fa-gem"></i></button>
+                    <button type="button" class="icon-picker-btn" data-icon="fa-feather" title="Feather"><i
+                            class="fa-solid fa-feather"></i></button>
+                    <button type="button" class="icon-picker-btn" data-icon="fa-bolt" title="Energy"><i
+                            class="fa-solid fa-bolt"></i></button>
+                    <button type="button" class="icon-picker-btn" data-icon="fa-shield-halved" title="Protection"><i
+                            class="fa-solid fa-shield-halved"></i></button>
+                    <button type="button" class="icon-picker-btn" data-icon="fa-clover" title="Luck"><i
+                            class="fa-solid fa-clover"></i></button>
+                    <button type="button" class="icon-picker-btn" data-icon="fa-fire-flame-curved" title="Fire"><i
+                            class="fa-solid fa-fire-flame-curved"></i></button>
+                    <button type="button" class="icon-picker-btn" data-icon="fa-wind" title="Wind"><i
+                            class="fa-solid fa-wind"></i></button>
+                    <button type="button" class="icon-picker-btn" data-icon="fa-eye" title="Third Eye"><i
+                            class="fa-solid fa-eye"></i></button>
+                </div>
+            </div>
+
+            <div class="modal-actions" style="margin-top:1.5rem;">
+                <button id="cancelCatModalBtn" class="btn-ghost">Cancel</button>
+                <button id="saveCatBtn" class="btn-primary">
+                    <i class="fa-solid fa-floppy-disk"></i> Save Category
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ══════════════ DELETE CATEGORY MODAL ══════════════ -->
+    <div id="deleteCatModal" class="modal-overlay">
+        <div class="modal-card">
+            <div class="modal-icon danger"><i class="fa-solid fa-triangle-exclamation"></i></div>
+            <h3>Delete Category?</h3>
+            <p id="deleteCatModalName" class="modal-prod-name"></p>
+            <p>This will remove it from the navbar immediately. This cannot be undone.</p>
+            <div class="modal-actions">
+                <button id="cancelDeleteCatBtn" class="btn-ghost">Cancel</button>
+                <button id="confirmDeleteCatBtn" class="btn-danger">
+                    <i class="fa-solid fa-trash"></i> Delete
+                </button>
+            </div>
+        </div>
+    </div>
+    <div id="toast-wrap"></div>
+    <div id="deleteReviewModal" class="modal-overlay">
+        <div class="modal-card">
+            <div class="modal-icon danger"><i class="fa-solid fa-triangle-exclamation"></i></div>
+            <h3>Delete Review?</h3>
+            <p id="deleteReviewModalMeta" class="modal-prod-name"></p>
+            <p>This permanently removes the review. This action cannot be undone.</p>
+            <div class="modal-actions">
+                <button id="cancelDeleteReviewBtn" class="btn-ghost">Cancel</button>
+                <button id="confirmDeleteReviewBtn" class="btn-danger">
+                    <i class="fa-solid fa-trash"></i> Delete
+                </button>
+            </div>
+        </div>
+    </div>
+    <!-- ══════════════ GLOBAL SEARCH MODAL (Ctrl+K) ══════════════ -->
+    <div id="searchModal" class="search-modal-overlay" aria-modal="true" role="dialog" aria-label="Global search">
+        <div class="search-modal-card">
+            <div class="search-modal-input-wrap">
+                <i class="fa-solid fa-magnifying-glass search-modal-icon"></i>
+                <input type="text" id="searchModalInput" class="search-modal-input"
+                    placeholder="Search orders, products…" autocomplete="off" spellcheck="false" />
+                <kbd class="search-modal-esc">Esc</kbd>
+            </div>
+            <div id="searchModalResults" class="search-modal-results">
+                <p class="search-modal-empty">Start typing to search orders and products.</p>
+            </div>
+            <div class="search-modal-footer">
+                <span><kbd>↑</kbd><kbd>↓</kbd> navigate</span>
+                <span><kbd>↵</kbd> jump to</span>
+                <span><kbd>Esc</kbd> close</span>
+            </div>
+        </div>
+    </div>
+    <!-- ══════════════ INVOICE TEMPLATE (hidden, print-only) ══════════════ -->
+    <div id="invoice-printable" aria-hidden="true">
+
+        <!-- Header -->
+        <div class="inv-header">
+            <div class="inv-brand">
+                <div class="inv-brand-mark">✦</div>
+                <div>
+                    <h1 class="inv-brand-name">Aura &amp; Earth</h1>
+                    <p class="inv-brand-tagline">Ethically sourced crystals &amp; healing jewellery</p>
+                </div>
+            </div>
+            <div class="inv-meta">
+                <h2 class="inv-title">Invoice / Packing Slip</h2>
+                <table class="inv-meta-table">
+                    <tr>
+                        <td>Order ID</td>
+                        <td id="inv-order-id">—</td>
+                    </tr>
+                    <tr>
+                        <td>Date</td>
+                        <td id="inv-date">—</td>
+                    </tr>
+                    <tr>
+                        <td>Status</td>
+                        <td id="inv-status">—</td>
+                    </tr>
+                    <tr>
+                        <td>Payment</td>
+                        <td id="inv-payment">—</td>
+                    </tr>
+                    <tr>
+                        <td>UTR / Ref</td>
+                        <td id="inv-utr">—</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+
+        <hr class="inv-divider">
+
+        <!-- Customer details -->
+        <div class="inv-section">
+            <h3 class="inv-section-title">Ship To</h3>
+            <p class="inv-cust-name" id="inv-cust-name">—</p>
+            <p id="inv-cust-email">—</p>
+            <p id="inv-cust-phone">—</p>
+            <p id="inv-cust-addr">—</p>
+        </div>
+
+        <hr class="inv-divider">
+
+        <!-- Items table -->
+        <div class="inv-section">
+            <h3 class="inv-section-title">Items Ordered</h3>
+            <table class="inv-items-table">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Product</th>
+                        <th style="text-align:center;">Qty</th>
+                        <th style="text-align:right;">Unit Price</th>
+                        <th style="text-align:right;">Line Total</th>
+                    </tr>
+                </thead>
+                <tbody id="inv-items-body">
+                    <!-- populated by printInvoice() -->
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Totals -->
+        <div class="inv-totals">
+            <table class="inv-totals-table">
+                <tr>
+                    <td>Subtotal</td>
+                    <td id="inv-subtotal">—</td>
+                </tr>
+                <tr>
+                    <td>Coupon (<span id="inv-coupon">—</span>)</td>
+                    <td id="inv-discount">—</td>
+                </tr>
+                <tr>
+                    <td>Shipping</td>
+                    <td id="inv-shipping">—</td>
+                </tr>
+                <tr class="inv-total-row">
+                    <td>Total Paid</td>
+                    <td id="inv-total">—</td>
+                </tr>
+            </table>
+        </div>
+
+        <!-- Notes -->
+        <div class="inv-section inv-notes-section">
+            <h3 class="inv-section-title">Order Notes</h3>
+            <p id="inv-notes">—</p>
+        </div>
+
+        <!-- Footer -->
+        <div class="inv-footer">
+            <p>Thank you for your order ✦ For support, contact us on WhatsApp or reply to your order email.</p>
+            <p class="inv-footer-brand">Aura &amp; Earth — auraandearth.com</p>
+        </div>
+
+    </div><!-- /#invoice-printable -->
+
+    <script type="module" src="js/dashboard.js"></script>
+</body>
+
+</html>

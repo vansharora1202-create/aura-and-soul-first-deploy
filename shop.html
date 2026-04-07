@@ -1,0 +1,549 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shop All Crystals | Aura & Earth</title>
+    <link rel="stylesheet" href="css/global.css">
+    <link rel="stylesheet" href="css/index.css">
+    <link rel="stylesheet" href="css/shop.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+</head>
+
+<body>
+
+    <!-- ========== NAVBAR ========== -->
+    <nav class="navbar" id="mainNav">
+        <a href="index.html" class="nav-logo">Aura & Earth</a>
+        <div class="nav-center">
+            <a href="index.html" class="nav-link">Home</a>
+            <div class="dropdown">
+                <a href="#" class="nav-link dropbtn">Categories <i class="fa-solid fa-chevron-down"></i></a>
+                <div class="dropdown-content">
+                    <a href="shop.html?filter=protection"><i class="fa-solid fa-shield-halved"></i> Protection</a>
+                    <a href="shop.html?filter=peace"><i class="fa-solid fa-feather-pointed"></i> Inner Peace</a>
+                    <a href="shop.html?filter=love"><i class="fa-solid fa-heart"></i> Love & Harmony</a>
+                    <a href="shop.html?filter=energy"><i class="fa-solid fa-bolt-lightning"></i> Energy</a>
+                    <a href="shop.html?filter=luck"><i class="fa-solid fa-clover"></i> Luck</a>
+                </div>
+            </div>
+            <a href="shop.html" class="nav-link active">Products</a>
+            <a href="contact.html" class="nav-link">Contact</a>
+        </div>
+        <div class="nav-right">
+            <div class="search-box-container">
+                <input type="text" class="search-input" id="mainSearch" placeholder="Search crystals..."
+                    autocomplete="off">
+                <button class="search-btn"><i class="fa-solid fa-magnifying-glass"></i></button>
+                <div id="search-results-dropdown" class="search-results"></div>
+            </div>
+            <div class="nav-icons">
+                <button id="theme-toggle" class="icon-btn"><i class="fa-solid fa-moon"></i></button>
+                <a href="wishlist.html" class="icon-link">
+                    <i class="fa-regular fa-heart"></i>
+                    <span class="count">0</span>
+                </a>
+                <a href="cart-checkout.html" class="icon-link">
+                    <i class="fa-solid fa-bag-shopping"></i>
+                    <span class="count">0</span>
+                </a>
+                <button class="hamburger"><i class="fa-solid fa-bars"></i></button>
+            </div>
+        </div>
+    </nav>
+
+    <div class="mobile-menu">
+        <a href="index.html">Home</a>
+        <button class="mobile-dropbtn">Categories <i class="fa-solid fa-chevron-down"></i></button>
+        <div class="mobile-dropdown-content">
+            <a href="shop.html?filter=protection">Protection</a>
+            <a href="shop.html?filter=peace">Inner Peace</a>
+            <a href="shop.html?filter=love">Love & Harmony</a>
+            <a href="shop.html?filter=energy">Energy</a>
+            <a href="shop.html?filter=luck">Luck</a>
+        </div>
+        <a href="shop.html">Products</a>
+        <a href="contact.html">Contact</a>
+    </div>
+
+    <!-- ========== SHOP SECTION ========== -->
+    <section class="shop-section">
+        <div class="shop-container">
+
+            <!-- ============================================================
+     MYSTICAL PARALLAX PORTAL HERO
+     First child of .shop-container, before .shop-meta
+     ============================================================ -->
+            <section class="immersive-banner" id="immersiveBanner" aria-label="Shop collection hero">
+
+                <!-- Background image layer — swap the URL for your own photo -->
+                <div class="ib-bg"
+                    style="background-image: url('https://images.unsplash.com/photo-1518640467707-6811f4a6ab73?w=1600&q=85&fm=webp&fit=crop&crop=center');"
+                    aria-hidden="true"></div>
+
+                <!-- Dark gradient overlay -->
+                <div class="ib-overlay" aria-hidden="true"></div>
+
+                <!-- Subtle grain texture overlay for luxury depth -->
+                <div class="ib-grain" aria-hidden="true"></div>
+
+                <!-- Centred text content -->
+                <div class="ib-content">
+                    <p class="ib-eyebrow">✦ &nbsp; Aura &amp; Earth &nbsp; ✦</p>
+                    <h1 class="ib-headline">Our Collection</h1>
+                    <p class="ib-subline">Every stone carries a frequency. Find yours.</p>
+                </div>
+
+                <!-- Bouncing down-arrow — scroll indicator -->
+                <a href="#productsGrid" class="ib-scroll-arrow" aria-label="Scroll to products">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                        stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" width="28" height="28"
+                        aria-hidden="true">
+                        <polyline points="6 9 12 15 18 9"></polyline>
+                    </svg>
+                </a>
+
+            </section>
+            <!-- ============================================================ -->
+
+            <!-- Meta Bar: product count + view toggle -->
+            <div class="shop-meta">
+                <div class="active-filter-area">
+                    <span class="total-products">
+                        Showing <span id="showingStart">1</span>–<span id="showingEnd">12</span>
+                        of <span id="totalProducts">0</span> crystals
+                    </span>
+                    <span id="activeFilterBadge" class="active-filter-badge" style="display:none;">
+                        Filtered: <span id="activeFilterText"></span>
+                        <button class="clear-filter-btn" aria-label="Clear filter">×</button>
+                    </span>
+                </div>
+                <div class="view-toggle">
+                    <button class="view-btn active" data-view="grid" aria-label="Grid view">
+                        <i class="fa-solid fa-th-large"></i> Grid
+                    </button>
+                    <button class="view-btn" data-view="list" aria-label="List view">
+                        <i class="fa-solid fa-list"></i> List
+                    </button>
+                </div>
+            </div>
+
+            <!-- Filter trigger + Sort dropdown -->
+            <div class="shop-filters">
+                <div class="filter-group scrollable">
+                    <button id="openDrawerBtn" class="drawer-open-btn" aria-expanded="false"
+                        aria-controls="filterDrawer">
+                        <i class="fa-solid fa-sliders"></i> Filters
+                    </button>
+                </div>
+                <div class="sort-group">
+                    <div class="custom-dropdown">
+                        <div class="dropdown-selected" id="dropdownSelected">
+                            Sort by: Featured <i class="fa-solid fa-chevron-down"></i>
+                        </div>
+                        <ul class="dropdown-list" id="dropdownList">
+                            <li data-value="default">Sort by: Featured</li>
+                            <li data-value="price-low">Price: Low to High</li>
+                            <li data-value="price-high">Price: High to Low</li>
+                            <li data-value="name-a">Name: A to Z</li>
+                            <li data-value="name-z">Name: Z to A</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ─────────────────────────────────────────────────────
+                 PRODUCTS GRID
+                 Skeleton cards shown while Firestore loads.
+                 updateShopView() in main.js replaces them with real
+                 product cards after initProductData() resolves.
+            ───────────────────────────────────────────────────────── -->
+            <div id="productsGrid" class="products-grid" aria-live="polite" aria-busy="true">
+                <div class="product-card skeleton-card" aria-hidden="true">
+                    <div class="skeleton-img skeleton-pulse"></div>
+                    <div class="skeleton-body">
+                        <div class="skeleton-line skeleton-pulse" style="width:62%;"></div>
+                        <div class="skeleton-line skeleton-pulse" style="width:38%;"></div>
+                    </div>
+                </div>
+                <div class="product-card skeleton-card" aria-hidden="true">
+                    <div class="skeleton-img skeleton-pulse"></div>
+                    <div class="skeleton-body">
+                        <div class="skeleton-line skeleton-pulse" style="width:55%;"></div>
+                        <div class="skeleton-line skeleton-pulse" style="width:42%;"></div>
+                    </div>
+                </div>
+                <div class="product-card skeleton-card" aria-hidden="true">
+                    <div class="skeleton-img skeleton-pulse"></div>
+                    <div class="skeleton-body">
+                        <div class="skeleton-line skeleton-pulse" style="width:70%;"></div>
+                        <div class="skeleton-line skeleton-pulse" style="width:35%;"></div>
+                    </div>
+                </div>
+                <div class="product-card skeleton-card" aria-hidden="true">
+                    <div class="skeleton-img skeleton-pulse"></div>
+                    <div class="skeleton-body">
+                        <div class="skeleton-line skeleton-pulse" style="width:50%;"></div>
+                        <div class="skeleton-line skeleton-pulse" style="width:45%;"></div>
+                    </div>
+                </div>
+                <div class="product-card skeleton-card" aria-hidden="true">
+                    <div class="skeleton-img skeleton-pulse"></div>
+                    <div class="skeleton-body">
+                        <div class="skeleton-line skeleton-pulse" style="width:65%;"></div>
+                        <div class="skeleton-line skeleton-pulse" style="width:30%;"></div>
+                    </div>
+                </div>
+                <div class="product-card skeleton-card" aria-hidden="true">
+                    <div class="skeleton-img skeleton-pulse"></div>
+                    <div class="skeleton-body">
+                        <div class="skeleton-line skeleton-pulse" style="width:58%;"></div>
+                        <div class="skeleton-line skeleton-pulse" style="width:40%;"></div>
+                    </div>
+                </div>
+                <div class="product-card skeleton-card" aria-hidden="true">
+                    <div class="skeleton-img skeleton-pulse"></div>
+                    <div class="skeleton-body">
+                        <div class="skeleton-line skeleton-pulse" style="width:72%;"></div>
+                        <div class="skeleton-line skeleton-pulse" style="width:33%;"></div>
+                    </div>
+                </div>
+                <div class="product-card skeleton-card" aria-hidden="true">
+                    <div class="skeleton-img skeleton-pulse"></div>
+                    <div class="skeleton-body">
+                        <div class="skeleton-line skeleton-pulse" style="width:48%;"></div>
+                        <div class="skeleton-line skeleton-pulse" style="width:38%;"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ─────────────────────────────────────────────────────
+                 NO RESULTS — hidden by default.
+                 updateShopView() shows this when filters produce 0 results.
+            ───────────────────────────────────────────────────────── -->
+            <div id="noResults" class="shop-no-results" style="display:none;" aria-live="polite">
+                <div class="shop-no-results-glyph">✦</div>
+                <h3>No crystals found</h3>
+                <p>Try adjusting your filters or clearing your search.</p>
+                <button class="shop-reset-btn" id="noResultsResetBtn">
+                    <i class="fa-solid fa-rotate-left"></i> Reset All Filters
+                </button>
+            </div>
+
+            <!-- ─────────────────────────────────────────────────────
+                 PAGINATION — empty by default.
+                 updateShopView() injects page buttons when >12 products.
+            ───────────────────────────────────────────────────────── -->
+            <nav id="pagination" class="shop-pagination" aria-label="Product pages"></nav>
+
+        </div><!-- /.shop-container -->
+    </section>
+
+    <!-- Back to top -->
+    <button id="backToTop" class="back-to-top-btn" aria-label="Scroll to top">
+        <i class="fa-solid fa-arrow-up"></i>
+    </button>
+
+    <!-- ========== FOOTER ========== -->
+    <footer class="main-footer" id="footer">
+        <div class="footer-grid">
+            <div class="footer-brand">
+                <h3>Aura & Earth</h3>
+                <p>Spreading positive vibrations through authentic healing crystals since 2026.</p>
+            </div>
+            <div class="footer-links">
+                <h4>Quick Links</h4>
+                <a href="index.html">Home</a>
+                <a href="shop.html">All Products</a>
+                <a href="cart-checkout.html">View Cart</a>
+            </div>
+            <div class="footer-links">
+                <h4>Support</h4>
+                <a href="policies.html#shipping">Shipping Policy</a>
+                <a href="policies.html#terms">Terms & Conditions</a>
+                <a href="contact.html">Contact Us</a>
+            </div>
+            <div class="footer-social">
+                <h4>Follow Us</h4>
+                <div class="social-icons">
+                    <a href="https://www.instagram.com/auraandearth" target="_blank" rel="noopener noreferrer"
+                        aria-label="Follow Aura & Earth on Instagram"><i class="fa-brands fa-instagram"></i></a>
+                    <a href="https://www.facebook.com/auraandearth" target="_blank" rel="noopener noreferrer"
+                        aria-label="Follow Aura & Earth on Facebook"><i class="fa-brands fa-facebook"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 Aura & Earth Jewelry. Premium Healing Stones.</p>
+        </div>
+    </footer>
+
+    <a href="https://wa.me/919350614431?text=Hi%2C%20I%20have%20a%20question%20about%20Aura%20%26%20Earth!"
+        class="whatsapp-float" target="_blank" rel="noopener noreferrer" aria-label="Chat with us on WhatsApp">
+        <i class="fa-brands fa-whatsapp whatsapp-float-icon"></i>
+        <span class="whatsapp-float-label">Need help?</span>
+    </a>
+
+    <!-- ========== FILTER DRAWER ========== -->
+    <div id="drawerOverlay" class="drawer-overlay" aria-hidden="true"></div>
+
+    <aside id="filterDrawer" class="filter-drawer" role="dialog" aria-modal="true" aria-label="Advanced product filters"
+        aria-hidden="true">
+
+        <div class="drawer-header">
+            <div class="drawer-title-wrap">
+                <span class="drawer-icon">✦</span>
+                <h2 class="drawer-title">Refine</h2>
+            </div>
+            <button id="drawerClose" class="drawer-close" aria-label="Close filters">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+        </div>
+
+        <div class="drawer-body" id="drawerBody">
+
+            <!-- By Intent -->
+            <div class="drawer-section">
+                <h3 class="drawer-section-title"><i class="fa-solid fa-wand-sparkles"></i> By Intent</h3>
+                <div class="drawer-chips" role="group" aria-label="Filter by intent">
+                    <button class="drawer-chip" data-drawer-filter="intent" data-value="protection"
+                        aria-pressed="false"><span class="chip-icon">🛡️</span> Protection</button>
+                    <button class="drawer-chip" data-drawer-filter="intent" data-value="peace"
+                        aria-pressed="false"><span class="chip-icon">🌿</span> Anxiety &amp; Peace</button>
+                    <button class="drawer-chip" data-drawer-filter="intent" data-value="love" aria-pressed="false"><span
+                            class="chip-icon">💖</span> Love &amp; Harmony</button>
+                    <button class="drawer-chip" data-drawer-filter="intent" data-value="energy"
+                        aria-pressed="false"><span class="chip-icon">⚡</span> Energy &amp; Focus</button>
+                    <button class="drawer-chip" data-drawer-filter="intent" data-value="luck" aria-pressed="false"><span
+                            class="chip-icon">🍀</span> Luck &amp; Abundance</button>
+                </div>
+            </div>
+
+            <div class="drawer-divider"></div>
+
+            <!-- By Crystal -->
+            <div class="drawer-section">
+                <h3 class="drawer-section-title"><i class="fa-solid fa-gem"></i> By Crystal</h3>
+                <div class="drawer-chips" role="group" aria-label="Filter by crystal type">
+                    <button class="drawer-chip" data-drawer-filter="stone" data-value="amethyst"
+                        aria-pressed="false"><span class="chip-swatch" style="background:#9b59b6;"></span>
+                        Amethyst</button>
+                    <button class="drawer-chip" data-drawer-filter="stone" data-value="rose quartz"
+                        aria-pressed="false"><span class="chip-swatch" style="background:#f1a8bf;"></span> Rose
+                        Quartz</button>
+                    <button class="drawer-chip" data-drawer-filter="stone" data-value="black tourmaline"
+                        aria-pressed="false"><span class="chip-swatch" style="background:#2c2c2c;"></span> Black
+                        Tourmaline</button>
+                    <button class="drawer-chip" data-drawer-filter="stone" data-value="citrine"
+                        aria-pressed="false"><span class="chip-swatch" style="background:#f4b942;"></span>
+                        Citrine</button>
+                    <button class="drawer-chip" data-drawer-filter="stone" data-value="lapis lazuli"
+                        aria-pressed="false"><span class="chip-swatch" style="background:#1a3b6e;"></span> Lapis
+                        Lazuli</button>
+                    <button class="drawer-chip" data-drawer-filter="stone" data-value="clear quartz"
+                        aria-pressed="false"><span class="chip-swatch"
+                            style="background:linear-gradient(135deg,#e8f4f8,#c5dde8);"></span> Clear Quartz</button>
+                    <button class="drawer-chip" data-drawer-filter="stone" data-value="obsidian"
+                        aria-pressed="false"><span class="chip-swatch" style="background:#1a1a1a;"></span>
+                        Obsidian</button>
+                    <button class="drawer-chip" data-drawer-filter="stone" data-value="green aventurine"
+                        aria-pressed="false"><span class="chip-swatch" style="background:#5cb85c;"></span> Green
+                        Aventurine</button>
+                </div>
+            </div>
+
+            <div class="drawer-divider"></div>
+
+            <!-- Price Range -->
+            <div class="drawer-section">
+                <h3 class="drawer-section-title"><i class="fa-solid fa-tag"></i> Price Range</h3>
+                <div class="drawer-price-wrap">
+                    <div class="price-range-track">
+                        <input type="range" id="drawerPriceMin" class="drawer-range" min="0" max="5000" step="100"
+                            value="0" aria-label="Minimum price">
+                        <input type="range" id="drawerPriceMax" class="drawer-range" min="0" max="5000" step="100"
+                            value="5000" aria-label="Maximum price">
+                    </div>
+                    <div class="price-labels">
+                        <span class="price-label">₹<span id="drawerPriceMinLabel">0</span></span>
+                        <span class="price-label">₹<span id="drawerPriceMaxLabel">5,000</span></span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Active summary -->
+            <div id="drawerSelectionSummary" class="drawer-summary" style="display:none;">
+                <span class="summary-label">Active filters:</span>
+                <span id="drawerSummaryText" class="summary-text"></span>
+            </div>
+
+        </div><!-- /drawer-body -->
+
+        <div class="drawer-footer">
+            <button id="drawerClear" class="drawer-btn-clear">
+                <i class="fa-solid fa-rotate-left"></i> Clear All
+            </button>
+            <button id="drawerApply" class="drawer-btn-apply">
+                Apply Filters <span id="drawerMatchCount" class="match-count">—</span>
+            </button>
+        </div>
+
+    </aside>
+    <!-- ============================================================
+     THE AURA CIRCLE — VIP Loyalty Drawer
+     Paste just before </body> in shop.html AND product-detail.html
+     ============================================================ 
+
+    /* Floating Trigger Button /*
+    <button class="aura-circle-trigger" id="auraTrigger" aria-label="Open Aura Circle VIP Loyalty">
+        <span class="aura-circle-trigger__icon">✦</span>
+        <span class="aura-circle-trigger__label">VIP</span>
+    </button>
+
+    /*Backdrop/*
+    <div class="aura-circle-backdrop" id="auraBackdrop"></div>
+
+    /*Side Drawer/*
+    <aside class="aura-circle-drawer" id="auraDrawer" aria-hidden="true" role="dialog"
+        aria-label="Aura Circle VIP Loyalty Program">
+
+        /*Header/*
+        <div class="acd-header">
+            <div class="acd-header__title-group">
+                <span class="acd-header__eyebrow">Your Journey</span>
+                <h2 class="acd-header__title">The Aura Circle</h2>
+            </div>
+            <button class="acd-close" id="auraClose" aria-label="Close drawer">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+        </div>
+
+        /*Current Tier Badge/*
+        <div class="acd-tier">
+            <div class="acd-tier__icon">🔮</div>
+            <div class="acd-tier__info">
+                <span class="acd-tier__label">Current Level</span>
+                <span class="acd-tier__name">The Seeker</span>
+            </div>
+            <div class="acd-tier__pts">
+                <span class="acd-tier__pts-num" id="auraPoints">340</span>
+                <span class="acd-tier__pts-unit">pts</span>
+            </div>
+        </div>
+
+        /* Progress to Next Tier/*
+        <div class="acd-progress">
+            <div class="acd-progress__labels">
+                <span>The Seeker</span>
+                <span class="acd-progress__next">The Alchemist ✦</span>
+            </div>
+            <div class="acd-progress__track">
+                <div class="acd-progress__fill" id="auraProgressFill" style="width: 0%"></div>
+            </div>
+            <p class="acd-progress__caption" id="auraProgressCaption">160 pts to unlock The Alchemist</p>
+        </div>
+
+        /* Divider/*
+        <div class="acd-divider">
+            <span>Earn Points</span>
+        </div>
+
+        /* Actions List
+        <ul class="acd-actions" id="auraActionsList">
+            <li class="acd-action" data-pts="50" data-id="ig-follow">
+                <div class="acd-action__icon-wrap">
+                    <i class="fa-brands fa-instagram"></i>
+                </div>
+                <div class="acd-action__body">
+                    <span class="acd-action__name">Follow us on Instagram</span>
+                    <span class="acd-action__desc">Join our crystal community</span>
+                </div>
+                <button class="acd-action__btn" aria-label="Earn 50 points for following on Instagram">
+                    +50 pts
+                </button>
+            </li>
+
+            <li class="acd-action" data-pts="200" data-id="refer-friend">
+                <div class="acd-action__icon-wrap">
+                    <i class="fa-solid fa-user-plus"></i>
+                </div>
+                <div class="acd-action__body">
+                    <span class="acd-action__name">Refer a Friend</span>
+                    <span class="acd-action__desc">Share your aura, earn rewards</span>
+                </div>
+                <button class="acd-action__btn" aria-label="Earn 200 points for referring a friend">
+                    +200 pts
+                </button>
+            </li>
+
+            <li class="acd-action" data-pts="75" data-id="write-review">
+                <div class="acd-action__icon-wrap">
+                    <i class="fa-solid fa-star"></i>
+                </div>
+                <div class="acd-action__body">
+                    <span class="acd-action__name">Write a Review</span>
+                    <span class="acd-action__desc">Share your crystal journey</span>
+                </div>
+                <button class="acd-action__btn" aria-label="Earn 75 points for writing a review">
+                    +75 pts
+                </button>
+            </li>
+
+            <li class="acd-action" data-pts="100" data-id="birthday">
+                <div class="acd-action__icon-wrap">
+                    <i class="fa-solid fa-cake-candles"></i>
+                </div>
+                <div class="acd-action__body">
+                    <span class="acd-action__name">Add Your Birthday</span>
+                    <span class="acd-action__desc">Receive a lunar-cycle gift</span>
+                </div>
+                <button class="acd-action__btn" aria-label="Earn 100 points for adding your birthday">
+                    +100 pts
+                </button>
+            </li>
+        </ul>
+
+         Tier Benefits Teaser 
+        <div class="acd-unlock-teaser">
+            <p class="acd-unlock-teaser__text">
+                ✦ Unlock <strong>The Alchemist</strong> for free shipping, early access & a crystal mystery gift.
+            </p>
+        </div>
+
+    </aside> -->
+    <!-- ============================================================ -->
+    <!-- ============================================================
+     LIVE ENERGY PULSE — Social Proof Toast Container
+     Paste just before <script type="module" src="js/main.js">
+     ============================================================ -->
+    <div id="energyPulseMount" aria-live="polite" aria-atomic="true"></div>
+    <!-- ============================================================ -->
+    <script type="module" src="js/main.js"></script>
+
+    <!-- Aura Pulse — cart icon animation, no main.js dependency -->
+    <script>
+        (function () {
+            'use strict';
+            const cartLink = document.querySelector('a[href="cart-checkout.html"]');
+            if (!cartLink) return;
+            const PULSE_CLASS = 'aura-pulse';
+            const PULSE_DURATION_MS = 1200;
+            let pulseTimer = null;
+            function triggerPulse() {
+                if (pulseTimer) { clearTimeout(pulseTimer); cartLink.classList.remove(PULSE_CLASS); void cartLink.offsetWidth; }
+                cartLink.classList.add(PULSE_CLASS);
+                pulseTimer = setTimeout(function () { cartLink.classList.remove(PULSE_CLASS); pulseTimer = null; }, PULSE_DURATION_MS);
+            }
+            document.addEventListener('click', function (e) {
+                if (e.target.closest('.btn-floating-cart, .shop-card-bag-btn')) { triggerPulse(); return; }
+                if (e.target.closest('#pdpAddToCartBtn, #pdpMobileStickyCartBtn')) { triggerPulse(); return; }
+                if (e.target.closest('.wishlist-card-add-btn, .wishlist-card-quick-add')) { triggerPulse(); return; }
+                if (e.target.closest('.order-reorder-btn')) { triggerPulse(); }
+            });
+        })();
+    </script>
+
+</body>
+
+</html>

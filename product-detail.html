@@ -1,0 +1,1174 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tiger's Eye Protection Bracelet | Aura & Earth</title>
+    <link rel="stylesheet" href="css/global.css">
+    <link rel="stylesheet" href="css/pdp.css">
+    <!-- Flash Sale: inline overrides so salePrice styles work even if pdp.css isn't updated yet -->
+    <style>
+        /* PDP sale price styles */
+        .pdp-sale-badge {
+            display: inline-block;
+            background: #e74c3c;
+            color: #fff;
+            font-size: 0.65rem;
+            font-weight: 700;
+            letter-spacing: 0.08em;
+            padding: 3px 9px;
+            border-radius: 4px;
+            text-transform: uppercase;
+            vertical-align: middle;
+            margin-right: 6px;
+        }
+
+        .pdp-price-sale {
+            color: #e74c3c !important;
+            font-weight: 800;
+        }
+
+        .pdp-price-row .price-save-badge {
+            display: inline-block;
+            background: #fff3cd;
+            color: #b45309;
+            font-size: 0.75rem;
+            font-weight: 700;
+            padding: 2px 8px;
+            border-radius: 4px;
+            border: 1px solid #fde68a;
+            vertical-align: middle;
+            margin-left: 4px;
+        }
+
+        /* Cart sale price styles */
+        .cart-sale-badge {
+            position: absolute;
+            top: 8px;
+            left: 8px;
+            background: #e74c3c;
+            color: #fff;
+            font-size: 0.6rem;
+            font-weight: 700;
+            letter-spacing: 0.07em;
+            padding: 2px 7px;
+            border-radius: 3px;
+            text-transform: uppercase;
+            z-index: 2;
+        }
+
+        .cart-item-img-wrap {
+            position: relative;
+        }
+
+        .cart-price-orig {
+            text-decoration: line-through;
+            color: #aaa;
+            font-size: 0.85em;
+            margin-right: 3px;
+        }
+
+        .cart-price-sale {
+            color: #e74c3c;
+            font-weight: 700;
+        }
+    </style>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+</head>
+
+<body>
+
+    <!-- ========== NAVBAR (Copied from shop.html) ========== -->
+    <nav class="navbar" id="mainNav">
+        <a href="index.html" class="nav-logo">Aura & Earth</a>
+        <div class="nav-center">
+            <a href="index.html" class="nav-link">Home</a>
+            <div class="dropdown">
+                <a href="#" class="nav-link dropbtn" role="button" aria-haspopup="true" aria-expanded="false"
+                    onclick="return false;">Categories <i class="fa-solid fa-chevron-down"></i></a>
+                <div class="dropdown-content">
+                    <a href="shop.html?filter=protection"><i class="fa-solid fa-shield-halved"></i> Protection</a>
+                    <a href="shop.html?filter=peace"><i class="fa-solid fa-feather-pointed"></i> Inner Peace</a>
+                    <a href="shop.html?filter=love"><i class="fa-solid fa-heart"></i> Love & Harmony</a>
+                    <a href="shop.html?filter=energy"><i class="fa-solid fa-bolt-lightning"></i> Energy</a>
+                    <a href="shop.html?filter=luck"><i class="fa-solid fa-clover"></i> Luck</a>
+                </div>
+            </div>
+            <a href="shop.html" class="nav-link active">Products</a>
+            <a href="contact.html" class="nav-link">Contact</a>
+        </div>
+        <div class="nav-right">
+            <div class="search-box-container">
+                <input type="text" class="search-input" id="mainSearch" placeholder="Search crystals..."
+                    autocomplete="off">
+                <button class="search-btn"><i class="fa-solid fa-magnifying-glass"></i></button>
+                <div id="search-results-dropdown" class="search-results"></div>
+            </div>
+            <div class="nav-icons">
+                <button id="theme-toggle" class="icon-btn"><i class="fa-solid fa-moon"></i></button>
+                <a href="wishlist.html" class="icon-link">
+                    <i class="fa-regular fa-heart"></i>
+                    <span class="count">0</span>
+                </a>
+                <a href="cart-checkout.html" class="icon-link">
+                    <i class="fa-solid fa-bag-shopping"></i>
+                    <span class="count">0</span>
+                </a>
+                <button class="hamburger"><i class="fa-solid fa-bars"></i></button>
+            </div>
+        </div>
+    </nav>
+
+    <div class="mobile-menu">
+        <a href="index.html">Home</a>
+        <button class="mobile-dropbtn">Categories <i class="fa-solid fa-chevron-down"></i></button>
+        <div class="mobile-dropdown-content">
+            <a href="shop.html?filter=protection">Protection</a>
+            <a href="shop.html?filter=peace">Inner Peace</a>
+            <a href="shop.html?filter=love">Love & Harmony</a>
+            <a href="shop.html?filter=energy">Energy</a>
+            <a href="shop.html?filter=luck">Luck</a>
+        </div>
+        <a href="shop.html">Products</a>
+        <a href="contact.html">Contact</a>
+    </div>
+
+    <!-- ========== BREADCRUMB ========== -->
+    <div class="pdp-breadcrumb-wrap">
+        <div class="pdp-breadcrumb">
+            <a href="index.html">Home</a>
+            <i class="fa-solid fa-chevron-right"></i>
+            <a href="shop.html">Shop</a>
+            <i class="fa-solid fa-chevron-right"></i>
+            <a href="shop.html?filter=protection" id="pdpBreadcrumbCategory">Protection</a>
+            <i class="fa-solid fa-chevron-right"></i>
+            <span id="pdpBreadcrumbName">Loading…</span>
+        </div>
+    </div>
+
+    <!-- ========== HERO: GALLERY + DETAILS ========== -->
+    <section class="pdp-hero-section">
+        <div class="pdp-hero-container">
+
+            <!-- LEFT: Gallery -->
+            <div class="pdp-gallery">
+                <div class="pdp-gallery-main-wrap">
+                    <div class="pdp-gallery-badge" id="pdpGalleryBadge">Protection</div>
+                    <div class="pdp-img-skeleton" id="pdpImgSkeleton"></div>
+                    <img src="" alt="Product – main view" class="pdp-gallery-main-img" id="pdpMainImage"
+                        style="opacity:0;">
+                    <button class="pdp-gallery-zoom-btn" id="pdpZoomBtn" aria-label="Zoom Image">
+                        <i class="fa-solid fa-magnifying-glass-plus"></i>
+                    </button>
+                </div>
+                <div class="pdp-gallery-thumbs" id="pdpThumbs">
+                    <!-- Thumb items injected by JS -->
+                </div>
+            </div>
+
+            <!-- RIGHT: Details -->
+            <div class="pdp-details">
+                <div class="pdp-details-inner">
+
+                    <!-- Category Tag -->
+                    <span class="pdp-tag" id="pdpTag">Protection</span>
+
+                    <!-- Title & Rating -->
+                    <h1 class="pdp-title" id="pdpTitle">Loading...</h1>
+                    <div class="pdp-rating-row">
+                        <div class="pdp-stars">
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star-half-stroke"></i>
+                        </div>
+                        <span class="pdp-rating-text">4.8 <span>(124 reviews)</span></span>
+                        <span class="pdp-sold-badge">847 Sold</span>
+                    </div>
+
+                    <!-- Price -->
+                    <div class="pdp-price-row">
+                        <span class="pdp-price-orig" id="pdpPriceOrig"></span>
+                        <span class="pdp-price-current" id="pdpPrice">₹999</span>
+                        <span class="pdp-price-tag">incl. of all taxes</span>
+                    </div>
+
+                    <div class="pdp-divider"></div>
+
+                    <!-- Description -->
+                    <p class="pdp-description" id="pdpDescription">
+                        Ethically sourced and charged with positive intentions. This beautiful crystal is handpicked to
+                        elevate your vibration and restore harmony to your aura. Each piece is unique, carrying its own
+                        natural energy signature.
+                    </p>
+                    <!-- Charm Type Selector -->
+                    <div class="pdp-selector-block">
+                        <div class="pdp-selector-label">
+                            Charm Type: <strong id="pdpSelectedStone">Hamsa Hand</strong>
+                        </div>
+                        <div class="pdp-stone-swatches" id="pdpStoneSwatches">
+                            <button class="pdp-swatch-btn pdp-charm-btn active" data-stone="Hamsa Hand"
+                                aria-label="Hamsa Hand charm">
+                                <span class="pdp-swatch-icon">🪬</span>
+                                <span class="pdp-swatch-tooltip">Hamsa Hand</span>
+                            </button>
+                            <button class="pdp-swatch-btn pdp-charm-btn" data-stone="Buddha Face"
+                                aria-label="Buddha Face charm">
+                                <span class="pdp-swatch-icon">☸️</span>
+                                <span class="pdp-swatch-tooltip">Buddha Face</span>
+                            </button>
+                            <button class="pdp-swatch-btn pdp-charm-btn" data-stone="None" aria-label="No charm">
+                                <span class="pdp-swatch-icon" style="font-size:1rem;color:#ccc;">✕</span>
+                                <span class="pdp-swatch-tooltip">No Charm</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Size Selector -->
+                    <div class="pdp-selector-block">
+                        <div class="pdp-selector-label">
+                            Wrist Size: <strong id="pdpSelectedSize">Medium (17cm)</strong>
+                            <button class="pdp-size-guide-btn" id="pdpSizeGuideBtn">Size Guide <i
+                                    class="fa-solid fa-ruler-horizontal"></i></button>
+                        </div>
+                        <div class="pdp-size-buttons" id="pdpSizeBtns">
+                            <button class="pdp-size-btn" data-size="XS (14cm)">XS</button>
+                            <button class="pdp-size-btn" data-size="Small (15.5cm)">S</button>
+                            <button class="pdp-size-btn active" data-size="Medium (17cm)">M</button>
+                            <button class="pdp-size-btn" data-size="Large (18.5cm)">L</button>
+                            <button class="pdp-size-btn" data-size="XL (20cm)">XL</button>
+                        </div>
+                    </div>
+
+                    <!-- Quantity -->
+                    <div class="pdp-selector-block">
+                        <div class="pdp-selector-label">Quantity:</div>
+                        <div class="pdp-qty-row">
+                            <div class="pdp-qty-control">
+                                <button class="pdp-qty-btn" id="pdpQtyMinus" aria-label="Decrease quantity">
+                                    <i class="fa-solid fa-minus"></i>
+                                </button>
+                                <span class="pdp-qty-value" id="pdpQtyValue">1</span>
+                                <button class="pdp-qty-btn" id="pdpQtyPlus" aria-label="Increase quantity">
+                                    <i class="fa-solid fa-plus"></i>
+                                </button>
+                            </div>
+                            <span class="pdp-stock-info"><i class="fa-solid fa-circle-check"></i> In Stock — Ships in
+                                24hrs</span>
+                        </div>
+                    </div>
+
+                    <!-- CTA Buttons -->
+                    <div class="pdp-cta-group">
+                        <button class="pdp-add-to-cart-btn" id="pdpAddToCartBtn">
+                            <i class="fa-solid fa-bag-shopping"></i>
+                            Add to Bag
+                        </button>
+                        <button class="pdp-wishlist-btn" id="pdpWishlistBtn" aria-label="Add to Wishlist">
+                            <i class="fa-regular fa-heart" id="pdpHeartIcon"></i>
+                        </button>
+                    </div>
+                    <button class="pdp-buy-now-btn" id="pdpBuyNowBtn">
+                        Buy It Now
+                    </button>
+                    <!-- ========== GIFT MODE TOGGLE ========== -->
+                    <div class="pdp-gift-mode" id="pdpGiftMode">
+                        <button class="pdp-gift-toggle" id="pdpGiftToggle" aria-expanded="false"
+                            aria-controls="pdpGiftPanel" type="button">
+                            <span class="pdp-gift-toggle-left">
+                                <span class="pdp-gift-icon">🎁</span>
+                                <span class="pdp-gift-label">Buying as a gift?</span>
+                            </span>
+                            <span class="pdp-gift-toggle-pill" id="pdpGiftPill">Add Gift Options</span>
+                        </button>
+                        <div class="pdp-gift-panel" id="pdpGiftPanel" aria-hidden="true">
+                            <div class="pdp-gift-panel-inner">
+                                <div class="pdp-gift-field">
+                                    <label class="pdp-gift-field-label" for="pdpGiftNote">
+                                        <i class="fa-solid fa-feather"></i> Handwritten Note
+                                    </label>
+                                    <textarea id="pdpGiftNote" class="pdp-gift-textarea"
+                                        placeholder="Write a personal message… it will be handwritten on premium card stock and placed inside the box."
+                                        maxlength="200" rows="3"></textarea>
+                                    <span class="pdp-gift-char-count">
+                                        <span id="pdpGiftCharLeft">200</span> characters remaining
+                                    </span>
+                                </div>
+                                <label class="pdp-gift-checkbox-row" for="pdpVelvetPkg">
+                                    <span class="pdp-gift-check-wrap">
+                                        <input type="checkbox" id="pdpVelvetPkg" class="pdp-gift-checkbox">
+                                        <span class="pdp-gift-checkmark">
+                                            <i class="fa-solid fa-check"></i>
+                                        </span>
+                                    </span>
+                                    <span class="pdp-gift-check-info">
+                                        <span class="pdp-gift-check-title">Premium Velvet Packaging</span>
+                                        <span class="pdp-gift-check-desc">Luxurious velvet pouch + ribbon-tied gift
+                                            box</span>
+                                    </span>
+                                    <span class="pdp-gift-check-price">+₹150</span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- /.pdp-gift-mode -->
+
+                    <!-- Trust Badges -->
+                    <div class="pdp-trust-strip">
+                        <div class="pdp-trust-item">
+                            <i class="fa-solid fa-shield-halved"></i>
+                            <span>Secure Payment</span>
+                        </div>
+                        <div class="pdp-trust-item">
+                            <i class="fa-solid fa-rotate-left"></i>
+                            <span>3-5 Day Returns</span>
+                        </div>
+                        <div class="pdp-trust-item">
+                            <i class="fa-solid fa-truck-fast"></i>
+                            <span>Free Shipping ₹2999+</span>
+                        </div>
+                        <div class="pdp-trust-item">
+                            <i class="fa-solid fa-leaf"></i>
+                            <span>Ethically Sourced</span>
+                        </div>
+                    </div>
+
+                    <!-- Share -->
+                    <div class="pdp-share-row">
+                        <span class="pdp-share-label">Share this crystal:</span>
+                        <button class="pdp-share-btn" aria-label="Share on Instagram"><i
+                                class="fa-brands fa-instagram"></i></button>
+                        <button class="pdp-share-btn" aria-label="Share on WhatsApp"><i
+                                class="fa-brands fa-whatsapp"></i></button>
+                        <button class="pdp-share-btn" aria-label="Copy Link"><i class="fa-solid fa-link"></i></button>
+                    </div>
+
+                    <!-- ── Inline Accordions ── -->
+                    <div class="pdp-accordions">
+
+                        <div class="pdp-accordion">
+                            <button class="pdp-accordion-trigger" aria-expanded="false">
+                                <span class="pdp-accordion-icon"><i class="fa-solid fa-truck-fast"></i></span>
+                                <span class="pdp-accordion-title">Shipping & Returns</span>
+                                <i class="fa-solid fa-chevron-down pdp-accordion-chevron"></i>
+                            </button>
+                            <div class="pdp-accordion-body" role="region" hidden>
+                                <ul class="pdp-accordion-list">
+                                    <li><i class="fa-solid fa-circle-check"></i> Free shipping on orders above ₹2,999
+                                    </li>
+                                    <li><i class="fa-solid fa-circle-check"></i> Standard delivery: 4–7 business days
+                                    </li>
+                                    <li><i class="fa-solid fa-circle-check"></i> Express delivery available at checkout
+                                    </li>
+                                    <li><i class="fa-solid fa-circle-check"></i> Hassle-free 3-5 day returns on unworn
+                                        pieces</li>
+                                    <li><i class="fa-solid fa-circle-check"></i> Every order ships in our signature gift
+                                        box</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="pdp-accordion">
+                            <button class="pdp-accordion-trigger" aria-expanded="false">
+                                <span class="pdp-accordion-icon"><i class="fa-solid fa-moon"></i></span>
+                                <span class="pdp-accordion-title">Cleansing Ritual</span>
+                                <i class="fa-solid fa-chevron-down pdp-accordion-chevron"></i>
+                            </button>
+                            <div class="pdp-accordion-body" role="region" hidden>
+                                <ol class="pdp-accordion-ritual">
+                                    <li>
+                                        <strong>Cleanse</strong>
+                                        Pass your bracelet through sage smoke or leave it under moonlight overnight to
+                                        clear residual energy.
+                                    </li>
+                                    <li>
+                                        <strong>Set Intention</strong>
+                                        Hold the bracelet in both palms, close your eyes, and speak your intention
+                                        clearly into the stone.
+                                    </li>
+                                    <li>
+                                        <strong>Wear</strong>
+                                        Place on your left wrist to receive its energy, or your right wrist to radiate
+                                        it outward.
+                                    </li>
+                                    <li>
+                                        <strong>Recharge Monthly</strong>
+                                        Cleanse and reset under a full moon each month to keep its vibration at peak
+                                        potency.
+                                    </li>
+                                </ol>
+                            </div>
+                        </div>
+
+                        <div class="pdp-accordion">
+                            <button class="pdp-accordion-trigger" aria-expanded="false">
+                                <span class="pdp-accordion-icon"><i class="fa-solid fa-gem"></i></span>
+                                <span class="pdp-accordion-title">Authenticity Guarantee</span>
+                                <i class="fa-solid fa-chevron-down pdp-accordion-chevron"></i>
+                            </button>
+                            <div class="pdp-accordion-body" role="region" hidden>
+                                <ul class="pdp-accordion-list">
+                                    <li><i class="fa-solid fa-circle-check"></i> 100% natural, ethically mined crystals
+                                    </li>
+                                    <li><i class="fa-solid fa-circle-check"></i> Each piece individually inspected
+                                        before shipping</li>
+                                    <li><i class="fa-solid fa-circle-check"></i> Charged under Himalayan moonlight
+                                        before dispatch</li>
+                                    <li><i class="fa-solid fa-circle-check"></i> Certificate of authenticity included
+                                        with every order</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                    </div><!-- /.pdp-accordions -->
+
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- ========== SIZE GUIDE MODAL ========== -->
+    <div class="pdp-modal-overlay" id="sizeGuideModal" aria-hidden="true">
+        <div class="pdp-modal">
+            <div class="pdp-modal-header">
+                <h3 class="pdp-modal-title">Wrist Size Guide</h3>
+                <button class="pdp-modal-close" id="sizeGuideClose" aria-label="Close modal"><i
+                        class="fa-solid fa-xmark"></i></button>
+            </div>
+            <div class="pdp-modal-body">
+                <p class="pdp-modal-note">Measure your wrist with a soft tape just below the wrist bone. Select a size
+                    1–2cm larger for a comfortable fit.</p>
+                <table class="pdp-size-table">
+                    <thead>
+                        <tr>
+                            <th>Size</th>
+                            <th>Wrist (cm)</th>
+                            <th>Bracelet (cm)</th>
+                            <th>Fit</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>XS</td>
+                            <td>12–13 cm</td>
+                            <td>14 cm</td>
+                            <td>Snug</td>
+                        </tr>
+                        <tr>
+                            <td>S</td>
+                            <td>13.5–14.5 cm</td>
+                            <td>15.5 cm</td>
+                            <td>Regular</td>
+                        </tr>
+                        <tr class="pdp-size-table-highlight">
+                            <td>M</td>
+                            <td>15–16.5 cm</td>
+                            <td>17 cm</td>
+                            <td>Most Popular</td>
+                        </tr>
+                        <tr>
+                            <td>L</td>
+                            <td>17–18 cm</td>
+                            <td>18.5 cm</td>
+                            <td>Relaxed</td>
+                        </tr>
+                        <tr>
+                            <td>XL</td>
+                            <td>18.5–19.5 cm</td>
+                            <td>20 cm</td>
+                            <td>Loose</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <!-- ========== IMAGE ZOOM LIGHTBOX ========== -->
+    <div class="pdp-lightbox" id="pdpLightbox" aria-hidden="true">
+        <button class="pdp-lightbox-close" id="pdpLightboxClose" aria-label="Close zoom"><i
+                class="fa-solid fa-xmark"></i></button>
+        <img src="" alt="Zoomed product image" class="pdp-lightbox-img" id="pdpLightboxImg">
+    </div>
+
+    <!-- ========== CRYSTAL STORY / DIVIDER ========== -->
+    <div class="pdp-divider-section">
+        <div class="pdp-divider-line"></div>
+        <div class="pdp-divider-symbol"><i class="fa-solid fa-gem"></i></div>
+        <div class="pdp-divider-line"></div>
+    </div>
+
+    <!-- ========== CRYSTAL DETAILS TABS ========== -->
+    <section class="pdp-tabs-section">
+        <div class="pdp-tabs-container">
+            <div class="pdp-tabs-nav" role="tablist">
+                <button class="pdp-tab-btn active" data-tab="pdpTabDetails" role="tab" aria-selected="true">Crystal
+                    Details</button>
+                <button class="pdp-tab-btn" data-tab="pdpTabCare" role="tab" aria-selected="false">Care &
+                    Cleansing</button>
+                <button class="pdp-tab-btn" data-tab="pdpTabShipping" role="tab" aria-selected="false">Shipping &
+                    Returns</button>
+            </div>
+
+            <div class="pdp-tab-panel active" id="pdpTabDetails" role="tabpanel">
+                <div class="pdp-details-grid">
+                    <div class="pdp-detail-item">
+                        <div class="pdp-detail-icon"><i class="fa-solid fa-mountain-sun"></i></div>
+                        <div>
+                            <h4>Origin</h4>
+                            <p>South Africa & India</p>
+                        </div>
+                    </div>
+                    <div class="pdp-detail-item">
+                        <div class="pdp-detail-icon"><i class="fa-solid fa-gem"></i></div>
+                        <div>
+                            <h4>Stone Type</h4>
+                            <p>Semi-Precious, Chatoyant</p>
+                        </div>
+                    </div>
+                    <div class="pdp-detail-item">
+                        <div class="pdp-detail-icon"><i class="fa-solid fa-ruler-combined"></i></div>
+                        <div>
+                            <h4>Bead Size</h4>
+                            <p>8mm Round Beads</p>
+                        </div>
+                    </div>
+                    <div class="pdp-detail-item">
+                        <div class="pdp-detail-icon"><i class="fa-solid fa-circle-radiation"></i></div>
+                        <div>
+                            <h4>Chakra</h4>
+                            <p>Solar Plexus, Root</p>
+                        </div>
+                    </div>
+                    <div class="pdp-detail-item">
+                        <div class="pdp-detail-icon"><i class="fa-solid fa-wand-sparkles"></i></div>
+                        <div>
+                            <h4>Intention</h4>
+                            <p>Protection, Courage, Confidence</p>
+                        </div>
+                    </div>
+                    <div class="pdp-detail-item">
+                        <div class="pdp-detail-icon"><i class="fa-solid fa-certificate"></i></div>
+                        <div>
+                            <h4>Certification</h4>
+                            <p>100% Natural, Lab Certified</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pdp-tab-panel" id="pdpTabCare" role="tabpanel" aria-hidden="true">
+                <div class="pdp-care-grid">
+                    <div class="pdp-care-card">
+                        <i class="fa-solid fa-moon"></i>
+                        <h4>Moonlight Charge</h4>
+                        <p>Place under the full moon overnight to recharge its natural energy and restore its vibration.
+                        </p>
+                    </div>
+                    <div class="pdp-care-card">
+                        <i class="fa-solid fa-wind"></i>
+                        <h4>Sage Cleansing</h4>
+                        <p>Pass through sage smoke for 30 seconds to cleanse absorbed negative energies from your
+                            bracelet.</p>
+                    </div>
+                    <div class="pdp-care-card">
+                        <i class="fa-solid fa-droplet-slash"></i>
+                        <h4>Avoid Water</h4>
+                        <p>Remove before showering, swimming, or dishwashing. Water may affect the elastic cord and
+                            stone polish.</p>
+                    </div>
+                    <div class="pdp-care-card">
+                        <i class="fa-solid fa-spray-can-sparkles"></i>
+                        <h4>Chemical Free</h4>
+                        <p>Keep away from perfumes, lotions, and cleaning chemicals to maintain the stone's natural
+                            luster.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pdp-tab-panel" id="pdpTabShipping" role="tabpanel" aria-hidden="true">
+                <div class="pdp-shipping-list">
+                    <div class="pdp-shipping-item">
+                        <i class="fa-solid fa-truck-fast"></i>
+                        <div>
+                            <h4>Standard Delivery</h4>
+                            <p>5–7 business days · ₹79 (Free on orders over ₹2,999)</p>
+                        </div>
+                    </div>
+                    <div class="pdp-shipping-item">
+                        <i class="fa-solid fa-bolt-lightning"></i>
+                        <div>
+                            <h4>Express Delivery</h4>
+                            <p>2–3 business days · ₹149</p>
+                        </div>
+                    </div>
+                    <div class="pdp-shipping-item">
+                        <i class="fa-solid fa-rotate-left"></i>
+                        <div>
+                            <h4>3-5 Day Returns</h4>
+                            <p>Hassle-free returns for any reason. Item must be in original, unworn condition.</p>
+                        </div>
+                    </div>
+                    <div class="pdp-shipping-item">
+                        <i class="fa-solid fa-box-open"></i>
+                        <div>
+                            <h4>Luxury Packaging</h4>
+                            <p>Every order ships in our signature gift box — perfect for gifting or your own ritual.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- ========== CRYSTAL CLEANSING GUIDE ========== -->
+    <section class="pdp-cleansing-section" id="pdpCleansingGuide">
+        <div class="pdp-cleansing-container">
+            <div class="pdp-cleansing-header">
+                <span class="pdp-cleansing-eyebrow">✦ Crystal Care</span>
+                <h2 class="pdp-cleansing-title">How to Cleanse &amp; Charge</h2>
+                <p class="pdp-cleansing-subtitle">Keep your crystal's vibration at peak potency</p>
+            </div>
+            <div class="pdp-cleansing-grid">
+                <div class="pdp-cleanse-card">
+                    <div class="pdp-cleanse-icon-wrap">
+                        <i class="fa-solid fa-moon"></i>
+                    </div>
+                    <h4>Full Moon Bath</h4>
+                    <p>Place outside or on a windowsill under the full moon overnight. Resets the stone's frequency
+                        completely.</p>
+                    <span class="pdp-cleanse-freq">Monthly</span>
+                </div>
+                <div class="pdp-cleanse-card">
+                    <div class="pdp-cleanse-icon-wrap">
+                        <i class="fa-solid fa-wind"></i>
+                    </div>
+                    <h4>Sage Smoke</h4>
+                    <p>Pass through white sage or palo santo smoke for 30 seconds. Clears absorbed negative energies
+                        immediately.</p>
+                    <span class="pdp-cleanse-freq">Weekly</span>
+                </div>
+                <div class="pdp-cleanse-card pdp-cleanse-card--warning">
+                    <div class="pdp-cleanse-icon-wrap">
+                        <i class="fa-solid fa-droplet-slash"></i>
+                    </div>
+                    <h4>Avoid Water</h4>
+                    <p>Remove before bathing, swimming or washing hands. Water weakens the elastic cord and dulls the
+                        stone's surface polish.</p>
+                    <span class="pdp-cleanse-freq">Always</span>
+                </div>
+                <div class="pdp-cleanse-card pdp-cleanse-card--warning">
+                    <div class="pdp-cleanse-icon-wrap">
+                        <i class="fa-solid fa-spray-can-sparkles"></i>
+                    </div>
+                    <h4>Chemical Free</h4>
+                    <p>Keep away from perfumes, lotions, and cleaners. Apply all products before putting on your
+                        bracelet.</p>
+                    <span class="pdp-cleanse-freq">Always</span>
+                </div>
+                <div class="pdp-cleanse-card">
+                    <div class="pdp-cleanse-icon-wrap">
+                        <i class="fa-solid fa-sun"></i>
+                    </div>
+                    <h4>Sunlight Boost</h4>
+                    <p>1–2 hours of morning sunlight amplifies grounding stones. Avoid prolonged sun for
+                        colour-sensitive crystals like Amethyst.</p>
+                    <span class="pdp-cleanse-freq">Monthly</span>
+                </div>
+                <div class="pdp-cleanse-card">
+                    <div class="pdp-cleanse-icon-wrap">
+                        <i class="fa-solid fa-box"></i>
+                    </div>
+                    <h4>Mindful Storage</h4>
+                    <p>Store in the velvet pouch provided, away from direct heat and other jewellery that can scratch
+                        the stone.</p>
+                    <span class="pdp-cleanse-freq">Daily</span>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- ========== PERFECT PAIRINGS — Frequently Bought Together ========== -->
+    <!-- Hidden by default; JS reveals it only when linkedProductId exists -->
+    <section class="pairings-section" id="pairingsSection" hidden>
+        <div class="pairings-container">
+
+            <div class="pairings-header">
+                <span class="pairings-eyebrow">✦ Frequently Bought Together</span>
+                <h2 class="pairings-title">Perfect Pairings</h2>
+                <p class="pairings-subtitle">These crystals share a complementary energy and are often worn together.
+                </p>
+            </div>
+
+            <!-- Injected by JS when linkedProductId resolves -->
+            <div class="pairings-cards" id="pairingsCards">
+                <!-- Current product card (left) -->
+                <div class="pairing-card pairing-card--main" id="pairingMain">
+                    <!-- Populated by JS -->
+                </div>
+
+                <!-- Plus connector -->
+                <div class="pairings-plus" aria-hidden="true">
+                    <i class="fa-solid fa-plus"></i>
+                </div>
+
+                <!-- Linked product card (right) -->
+                <div class="pairing-card pairing-card--linked" id="pairingLinked">
+                    <!-- Populated by JS -->
+                </div>
+            </div>
+
+            <!-- CTA — add both -->
+            <div class="pairings-cta-wrap">
+                <div class="pairings-price-summary" id="pairingsPriceSummary">
+                    <!-- Populated by JS -->
+                </div>
+                <button class="pairings-add-btn" id="pairingsAddBothBtn" type="button">
+                    <i class="fa-solid fa-bag-shopping"></i>
+                    Add Both to Cart &mdash; <span id="pairingsDiscountLabel">5% Off!</span>
+                </button>
+            </div>
+
+        </div>
+    </section>
+    <!-- ========== HOW TO WEAR ========== -->
+    <section class="pdp-steps-section">
+        <div class="pdp-steps-container">
+            <h2 class="pdp-section-title">Activate Your Crystal</h2>
+            <p class="pdp-section-subtitle">Three simple steps to align your bracelet's energy with your intentions</p>
+            <div class="pdp-steps-grid">
+                <div class="pdp-step-card">
+                    <div class="pdp-step-num">01</div>
+                    <h3>Cleanse & Clear</h3>
+                    <p>Before wearing for the first time, cleanse your bracelet through sage smoke or moonlight to
+                        remove any residual energies.</p>
+                </div>
+                <div class="pdp-step-card">
+                    <div class="pdp-step-num">02</div>
+                    <h3>Set Your Intention</h3>
+                    <p>Hold the bracelet in both hands, close your eyes, and speak your intention aloud or silently into
+                        the crystal.</p>
+                </div>
+                <div class="pdp-step-card">
+                    <div class="pdp-step-num">03</div>
+                    <h3>Wear with Awareness</h3>
+                    <p>Place on your left wrist to receive energy, or right wrist to project it into the world. Trust
+                        the process.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== REVIEWS SECTION ========== -->
+    <section class="pdp-reviews-section">
+        <div class="pdp-reviews-container">
+            <div class="pdp-reviews-header reveal">
+                <div>
+                    <h2 class="pdp-section-title">Soul Stories</h2>
+                    <p class="pdp-section-subtitle">What our community is saying</p>
+                </div>
+                <button class="pdp-write-review-btn" id="pdpWriteReviewBtn">
+                    <i class="fa-solid fa-pen-to-square"></i> Write a Review
+                </button>
+            </div>
+
+            <!-- Rating Summary -->
+            <div class="pdp-rating-summary">
+                <div class="pdp-rating-big">
+                    <span class="pdp-rating-score">4.8</span>
+                    <div class="pdp-rating-stars-big">
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star-half-stroke"></i>
+                    </div>
+                    <span class="pdp-rating-count">Based on 124 reviews</span>
+                </div>
+                <div class="pdp-rating-bars">
+                    <div class="pdp-bar-row">
+                        <span class="pdp-bar-label">5 ★</span>
+                        <div class="pdp-bar-track">
+                            <div class="pdp-bar-fill" style="--fill-width: 78%;"></div>
+                        </div>
+                        <span class="pdp-bar-count">97</span>
+                    </div>
+                    <div class="pdp-bar-row">
+                        <span class="pdp-bar-label">4 ★</span>
+                        <div class="pdp-bar-track">
+                            <div class="pdp-bar-fill" style="--fill-width: 14%;"></div>
+                        </div>
+                        <span class="pdp-bar-count">17</span>
+                    </div>
+                    <div class="pdp-bar-row">
+                        <span class="pdp-bar-label">3 ★</span>
+                        <div class="pdp-bar-track">
+                            <div class="pdp-bar-fill" style="--fill-width: 5%;"></div>
+                        </div>
+                        <span class="pdp-bar-count">6</span>
+                    </div>
+                    <div class="pdp-bar-row">
+                        <span class="pdp-bar-label">2 ★</span>
+                        <div class="pdp-bar-track">
+                            <div class="pdp-bar-fill" style="--fill-width: 2%;"></div>
+                        </div>
+                        <span class="pdp-bar-count">3</span>
+                    </div>
+                    <div class="pdp-bar-row">
+                        <span class="pdp-bar-label">1 ★</span>
+                        <div class="pdp-bar-track">
+                            <div class="pdp-bar-fill" style="--fill-width: 1%;"></div>
+                        </div>
+                        <span class="pdp-bar-count">1</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Review Cards -->
+            <div class="pdp-reviews-grid">
+
+                <div class="pdp-review-card">
+                    <div class="pdp-review-top">
+                        <div class="pdp-reviewer-avatar">P</div>
+                        <div class="pdp-reviewer-info">
+                            <h4>Priya S.</h4>
+                            <span>Mumbai, India</span>
+                        </div>
+                        <div class="pdp-review-stars">
+                            <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                        </div>
+                    </div>
+                    <div class="pdp-review-badge-row">
+                        <span class="pdp-verified-badge"><i class="fa-solid fa-circle-check"></i> Verified
+                            Purchase</span>
+                        <span class="pdp-review-date">March 12, 2026</span>
+                    </div>
+                    <p class="pdp-review-text">I can genuinely feel the energy shift when I wear this bracelet. The
+                        quality is outstanding — the beads are smooth, evenly sized, and the elastic cord is very
+                        sturdy. I've been wearing it daily for 3 weeks. Absolutely worth every rupee.</p>
+                    <div class="pdp-review-helpful">
+                        <span>Helpful?</span>
+                        <button class="pdp-helpful-btn"><i class="fa-regular fa-thumbs-up"></i> Yes (14)</button>
+                    </div>
+                </div>
+
+                <div class="pdp-review-card">
+                    <div class="pdp-review-top">
+                        <div class="pdp-reviewer-avatar">R</div>
+                        <div class="pdp-reviewer-info">
+                            <h4>Rahul M.</h4>
+                            <span>Delhi, India</span>
+                        </div>
+                        <div class="pdp-review-stars">
+                            <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                        </div>
+                    </div>
+                    <div class="pdp-review-badge-row">
+                        <span class="pdp-verified-badge"><i class="fa-solid fa-circle-check"></i> Verified
+                            Purchase</span>
+                        <span class="pdp-review-date">February 28, 2026</span>
+                    </div>
+                    <p class="pdp-review-text">Gifted this to my wife and she absolutely loves it. The packaging was
+                        stunning — came in a beautiful gift box that felt premium. The Tiger's Eye has a gorgeous
+                        shimmer in sunlight. Will definitely order again for our anniversary.</p>
+                    <div class="pdp-review-helpful">
+                        <span>Helpful?</span>
+                        <button class="pdp-helpful-btn"><i class="fa-regular fa-thumbs-up"></i> Yes (9)</button>
+                    </div>
+                </div>
+
+                <div class="pdp-review-card">
+                    <div class="pdp-review-top">
+                        <div class="pdp-reviewer-avatar">A</div>
+                        <div class="pdp-reviewer-info">
+                            <h4>Aarti K.</h4>
+                            <span>Pune, India</span>
+                        </div>
+                        <div class="pdp-review-stars">
+                            <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                            <i class="fa-regular fa-star"></i>
+                        </div>
+                    </div>
+                    <div class="pdp-review-badge-row">
+                        <span class="pdp-verified-badge"><i class="fa-solid fa-circle-check"></i> Verified
+                            Purchase</span>
+                        <span class="pdp-review-date">January 15, 2026</span>
+                    </div>
+                    <p class="pdp-review-text">Lovely bracelet, very well made. My only note would be I wish it came
+                        with more info about the stone's properties. Otherwise it's beautiful, fits perfectly in size M,
+                        and the colour is even richer in person than the photos show.</p>
+                    <div class="pdp-review-helpful">
+                        <span>Helpful?</span>
+                        <button class="pdp-helpful-btn"><i class="fa-regular fa-thumbs-up"></i> Yes (6)</button>
+                    </div>
+                </div>
+
+            </div>
+
+            <button class="pdp-load-more-btn" id="pdpLoadMoreReviews">
+                Load More Reviews <i class="fa-solid fa-chevron-down"></i>
+            </button>
+        </div>
+    </section>
+
+    <!-- ========== RELATED PRODUCTS ========== -->
+    <section class="pdp-related-section">
+        <div class="pdp-related-container">
+            <h2 class="pdp-section-title">You May Also Love</h2>
+            <p class="pdp-section-subtitle">Curated crystals with a similar energy vibration</p>
+            <div class="pdp-related-grid" id="pdpRelatedGrid">
+                <!-- Injected by JS -->
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== FLOATING BACK TO TOP ========== -->
+    <button id="backToTop" class="back-to-top-btn">
+        <i class="fa-solid fa-arrow-up"></i>
+    </button>
+
+    <!-- ========== FOOTER (Copied from shop.html) ========== -->
+    <footer class="main-footer" id="footer">
+        <div class="footer-grid">
+            <div class="footer-brand">
+                <h3>Aura & Earth</h3>
+                <p>Spreading positive vibrations through authentic healing crystals since 2026.</p>
+            </div>
+            <div class="footer-links">
+                <h4>Quick Links</h4>
+                <a href="index.html">Home</a>
+                <a href="shop.html">All Products</a>
+                <a href="cart-checkout.html">View Cart</a>
+            </div>
+            <div class="footer-links">
+                <h4>Support</h4>
+                <a href="policies.html#shipping">Shipping Policy</a>
+                <a href="policies.html#terms">Terms & Conditions</a>
+                <a href="contact.html">Contact Us</a>
+            </div>
+            <div class="footer-social">
+                <h4>Follow Us</h4>
+                <div class="social-icons">
+                    <a href="https://www.instagram.com/auraandearth" target="_blank" rel="noopener noreferrer"
+                        aria-label="Follow Aura & Earth on Instagram"><i class="fa-brands fa-instagram"></i></a>
+                    <a href="https://www.facebook.com/auraandearth" target="_blank" rel="noopener noreferrer"
+                        aria-label="Follow Aura & Earth on Facebook"><i class="fa-brands fa-facebook"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 Aura & Earth Jewelry. Premium Healing Stones.</p>
+        </div>
+    </footer>
+    <a href="https://wa.me/919350614431?text=Hi%2C%20I%20have%20a%20question%20about%20Aura%20%26%20Earth!"
+        class="whatsapp-float" target="_blank" rel="noopener noreferrer" aria-label="Chat with us on WhatsApp">
+        <i class="fa-brands fa-whatsapp whatsapp-float-icon"></i>
+        <span class="whatsapp-float-label">Need help?</span>
+    </a>
+
+    <!-- ========== MOBILE STICKY ADD-TO-BAG BAR ========== -->
+    <!-- ========== STICKY ADD-TO-BAG BAR ========== -->
+    <div class="pdp-sticky-bar" id="pdpMobileStickyBar" aria-hidden="true">
+        <div class="pdp-sticky-inner">
+            <div class="pdp-sticky-info">
+                <span class="pdp-sticky-name" id="pdpStickyName">Loading…</span>
+                <span class="pdp-sticky-price" id="pdpStickyPrice"></span>
+            </div>
+            <div class="pdp-sticky-actions">
+                <button class="pdp-sticky-cart-btn" id="pdpMobileStickyCartBtn">
+                    <i class="fa-solid fa-bag-shopping"></i> Add to Bag
+                </button>
+                <button class="pdp-sticky-buy-btn" id="pdpStickyBuyNow">
+                    Buy Now
+                </button>
+            </div>
+        </div>
+    </div>
+    <!-- ============================================================
+     THE AURA CIRCLE — VIP Loyalty Drawer
+     Paste just before </body> in shop.html AND product-detail.html
+     ============================================================ -->
+
+    <!-- Floating Trigger Button -->
+    <button class="aura-circle-trigger" id="auraTrigger" aria-label="Open Aura Circle VIP Loyalty">
+        <span class="aura-circle-trigger__icon">✦</span>
+        <span class="aura-circle-trigger__label">VIP</span>
+    </button>
+
+    <!-- Backdrop -->
+    <div class="aura-circle-backdrop" id="auraBackdrop"></div>
+
+    <!-- Side Drawer -->
+    <aside class="aura-circle-drawer" id="auraDrawer" aria-hidden="true" role="dialog"
+        aria-label="Aura Circle VIP Loyalty Program">
+
+        <!-- Header -->
+        <div class="acd-header">
+            <div class="acd-header__title-group">
+                <span class="acd-header__eyebrow">Your Journey</span>
+                <h2 class="acd-header__title">The Aura Circle</h2>
+            </div>
+            <button class="acd-close" id="auraClose" aria-label="Close drawer">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+        </div>
+
+        <!-- Current Tier Badge -->
+        <div class="acd-tier">
+            <div class="acd-tier__icon">🔮</div>
+            <div class="acd-tier__info">
+                <span class="acd-tier__label">Current Level</span>
+                <span class="acd-tier__name">The Seeker</span>
+            </div>
+            <div class="acd-tier__pts">
+                <span class="acd-tier__pts-num" id="auraPoints">340</span>
+                <span class="acd-tier__pts-unit">pts</span>
+            </div>
+        </div>
+
+        <!-- Progress to Next Tier -->
+        <div class="acd-progress">
+            <div class="acd-progress__labels">
+                <span>The Seeker</span>
+                <span class="acd-progress__next">The Alchemist ✦</span>
+            </div>
+            <div class="acd-progress__track">
+                <div class="acd-progress__fill" id="auraProgressFill" style="width: 0%"></div>
+            </div>
+            <p class="acd-progress__caption" id="auraProgressCaption">160 pts to unlock The Alchemist</p>
+        </div>
+
+        <!-- Divider -->
+        <div class="acd-divider">
+            <span>Earn Points</span>
+        </div>
+
+        <!-- Actions List -->
+        <ul class="acd-actions" id="auraActionsList">
+            <li class="acd-action" data-pts="50" data-id="ig-follow">
+                <div class="acd-action__icon-wrap">
+                    <i class="fa-brands fa-instagram"></i>
+                </div>
+                <div class="acd-action__body">
+                    <span class="acd-action__name">Follow us on Instagram</span>
+                    <span class="acd-action__desc">Join our crystal community</span>
+                </div>
+                <button class="acd-action__btn" aria-label="Earn 50 points for following on Instagram">
+                    +50 pts
+                </button>
+            </li>
+
+            <li class="acd-action" data-pts="200" data-id="refer-friend">
+                <div class="acd-action__icon-wrap">
+                    <i class="fa-solid fa-user-plus"></i>
+                </div>
+                <div class="acd-action__body">
+                    <span class="acd-action__name">Refer a Friend</span>
+                    <span class="acd-action__desc">Share your aura, earn rewards</span>
+                </div>
+                <button class="acd-action__btn" aria-label="Earn 200 points for referring a friend">
+                    +200 pts
+                </button>
+            </li>
+
+            <li class="acd-action" data-pts="75" data-id="write-review">
+                <div class="acd-action__icon-wrap">
+                    <i class="fa-solid fa-star"></i>
+                </div>
+                <div class="acd-action__body">
+                    <span class="acd-action__name">Write a Review</span>
+                    <span class="acd-action__desc">Share your crystal journey</span>
+                </div>
+                <button class="acd-action__btn" aria-label="Earn 75 points for writing a review">
+                    +75 pts
+                </button>
+            </li>
+
+            <li class="acd-action" data-pts="100" data-id="birthday">
+                <div class="acd-action__icon-wrap">
+                    <i class="fa-solid fa-cake-candles"></i>
+                </div>
+                <div class="acd-action__body">
+                    <span class="acd-action__name">Add Your Birthday</span>
+                    <span class="acd-action__desc">Receive a lunar-cycle gift</span>
+                </div>
+                <button class="acd-action__btn" aria-label="Earn 100 points for adding your birthday">
+                    +100 pts
+                </button>
+            </li>
+        </ul>
+
+        <!-- Tier Benefits Teaser -->
+        <div class="acd-unlock-teaser">
+            <p class="acd-unlock-teaser__text">
+                ✦ Unlock <strong>The Alchemist</strong> for free shipping, early access & a crystal mystery gift.
+            </p>
+        </div>
+
+    </aside>
+    <!-- ============================================================ -->
+
+    <script type="module" src="js/main.js"></script>
+    <!-- <script type="module" src="js/navbar.js"></script> -->
+    <!-- ═══ AURA PULSE — isolated, no dependency on main.js ═══ -->
+    <script>
+        (function () {
+            'use strict';
+
+            // The cart icon link in the navbar
+            const cartLink = document.querySelector('a[href="cart-checkout.html"]');
+            if (!cartLink) return;
+
+            const PULSE_CLASS = 'aura-pulse';
+            const PULSE_DURATION_MS = 1200;
+            let pulseTimer = null;
+
+            function triggerPulse() {
+                // Clear any mid-animation reset so rapid adds re-trigger cleanly
+                if (pulseTimer) {
+                    clearTimeout(pulseTimer);
+                    cartLink.classList.remove(PULSE_CLASS);
+                    // Force a reflow so removing+re-adding the class restarts the animation
+                    void cartLink.offsetWidth;
+                }
+                cartLink.classList.add(PULSE_CLASS);
+                pulseTimer = setTimeout(function () {
+                    cartLink.classList.remove(PULSE_CLASS);
+                    pulseTimer = null;
+                }, PULSE_DURATION_MS);
+            }
+
+            // Listen for any click that hits a .btn-floating-cart or .btn-wishlist
+            // element with onclick="addToCart(...)" — event delegation on document
+            document.addEventListener('click', function (e) {
+                // btn-floating-cart covers the shop/home product cards
+                if (e.target.closest('.btn-floating-cart')) {
+                    triggerPulse();
+                    return;
+                }
+                // pdpAddToCartBtn covers the product detail page CTA
+                if (e.target.closest('#pdpAddToCartBtn, #pdpMobileStickyCartBtn')) {
+                    triggerPulse();
+                    return;
+                }
+                // wishlist page "Add to Bag" covers wishlist → cart adds
+                if (e.target.closest('.wishlist-card-add-btn, .wishlist-card-quick-add')) {
+                    triggerPulse();
+                    return;
+                }
+                // Orders page reorder button 
+                if (e.target.closest('.order-reorder-btn')) {
+                    triggerPulse();
+                }
+            });
+        })();
+    </script>
+    <!-- ════════════════════════════════════════════════════════ -->
+</body>
+
+</html>

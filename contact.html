@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us | Aura & Earth</title>
+    <link rel="stylesheet" href="css/global.css">
+    <link rel="stylesheet" href="css/contact.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+</head>
+
+<body>
+
+    <!-- ========== NAVBAR ========== -->
+    <nav class="navbar" id="mainNav">
+        <a href="index.html" class="nav-logo">Aura & Earth</a> 
+        <div class="nav-center">
+            <a href="index.html" class="nav-link">Home</a>
+            <div class="dropdown">
+                <a href="#" class="nav-link dropbtn">Categories <i class="fa-solid fa-chevron-down"></i></a>
+                <div class="dropdown-content">
+                    <a href="shop.html?filter=protection"><i class="fa-solid fa-shield-halved"></i> Protection</a>
+                    <a href="shop.html?filter=peace"><i class="fa-solid fa-feather-pointed"></i> Inner Peace</a>
+                    <a href="shop.html?filter=love"><i class="fa-solid fa-heart"></i> Love & Harmony</a>
+                    <a href="shop.html?filter=energy"><i class="fa-solid fa-bolt-lightning"></i> Energy</a>
+                    <a href="shop.html?filter=luck"><i class="fa-solid fa-clover"></i> Luck</a>
+                </div>
+            </div>
+            <a href="shop.html" class="nav-link">Products</a>
+            <a href="#footer" class="nav-link">Contact</a>
+        </div>
+        <div class="nav-right">
+            <div class="search-box-container">
+                <input type="text" class="search-input" id="mainSearch" placeholder="Search crystals..."
+                    autocomplete="off">
+                <button class="search-btn"><i class="fa-solid fa-magnifying-glass"></i></button>
+                <div id="search-results-dropdown" class="search-results"></div>
+            </div>
+            <div class="nav-icons">
+                <button id="theme-toggle" class="icon-btn"><i class="fa-solid fa-moon"></i></button>
+                <a href="wishlist.html" class="icon-link">
+                    <i class="fa-solid fa-heart"></i>
+                    <span class="count">0</span>
+                </a>
+                <a href="cart-checkout.html" class="icon-link">
+                    <i class="fa-solid fa-bag-shopping"></i>
+                    <span class="count">0</span>
+                </a>
+                <button class="hamburger"><i class="fa-solid fa-bars"></i></button>
+            </div>
+        </div>
+    </nav>
+
+    <div class="mobile-menu">
+        <a href="index.html">Home</a>
+        <button class="mobile-dropbtn">Categories <i class="fa-solid fa-chevron-down"></i></button>
+        <div class="mobile-dropdown-content">
+            <a href="shop.html?filter=protection">Protection</a>
+            <a href="shop.html?filter=peace">Inner Peace</a>
+            <a href="shop.html?filter=love">Love & Harmony</a>
+            <a href="shop.html?filter=energy">Energy</a>
+            <a href="shop.html?filter=luck">Luck</a>
+        </div>
+        <a href="shop.html">Products</a>
+        <a href="#footer">Contact</a>
+    </div>
+
+    <!-- ========== PAGE HEADER ========== -->
+    <div class="contact-page-header reveal">
+        <div class="contact-page-header-inner">
+            <div class="contact-header-meta">
+                <span class="contact-header-eyebrow">
+                    <i class="fa-solid fa-gem"></i> Reach Out
+                </span>
+                <h1 class="contact-page-title">Contact Us</h1>
+                <p class="contact-page-subtitle">We'd love to hear from you — questions, custom orders, or just a kind
+                    word.</p>
+            </div>
+        </div>
+        <div class="contact-header-divider">
+            <div class="contact-divider-line"></div>
+            <i class="fa-solid fa-gem contact-divider-gem"></i>
+            <div class="contact-divider-line"></div>
+        </div>
+    </div>
+
+    <!-- ========== MAIN CONTACT AREA ========== -->
+    <main class="contact-main">
+        <div class="contact-container">
+
+            <!-- ── Left: Contact Info ── -->
+            <aside class="contact-info-col">
+                <div class="contact-info-card">
+                    <h2 class="contact-info-title">Get in Touch</h2>
+                    <p class="contact-info-intro">Our team typically responds within a few hours. Reach us through any
+                        of the channels below.</p>
+
+                    <ul class="contact-info-list">
+                        <li class="contact-info-item">
+                            <div class="contact-info-icon-wrap contact-icon-whatsapp">
+                                <i class="fa-brands fa-whatsapp"></i>
+                            </div>
+                            <div class="contact-info-text">
+                                <span class="contact-info-label">WhatsApp</span>
+                                <a href="https://wa.me/919350614431" target="_blank" rel="noopener"
+                                    class="contact-info-value">+91 93506 14431</a>
+                                <span class="contact-info-note">Chat with us directly</span>
+                            </div>
+                        </li>
+                        <li class="contact-info-item">
+                            <div class="contact-info-icon-wrap contact-icon-email">
+                                <i class="fa-solid fa-envelope"></i>
+                            </div>
+                            <div class="contact-info-text">
+                                <span class="contact-info-label">Email</span>
+                                <a href="mailto:hello@auraandearth.in"
+                                    class="contact-info-value">hello@auraandearth.in</a>
+                                <span class="contact-info-note">We reply within 24 hours</span>
+                            </div>
+                        </li>
+                        <li class="contact-info-item">
+                            <div class="contact-info-icon-wrap contact-icon-address">
+                                <i class="fa-solid fa-location-dot"></i>
+                            </div>
+                            <div class="contact-info-text">
+                                <span class="contact-info-label">Studio</span>
+                                <span class="contact-info-value">Aura & Earth Studio</span>
+                                <span class="contact-info-note">Sector 18, Noida, Uttar Pradesh — 201301</span>
+                            </div>
+                        </li>
+                        <li class="contact-info-item">
+                            <div class="contact-info-icon-wrap contact-icon-hours">
+                                <i class="fa-regular fa-clock"></i>
+                            </div>
+                            <div class="contact-info-text">
+                                <span class="contact-info-label">Business Hours</span>
+                                <span class="contact-info-value">Mon – Sat: 10 AM – 7 PM</span>
+                                <span class="contact-info-note">Sunday: 12 PM – 5 PM (IST)</span>
+                            </div>
+                        </li>
+                    </ul>
+
+                    <div class="contact-social-row">
+                        <a href="#" class="contact-social-btn" aria-label="Instagram">
+                            <i class="fa-brands fa-instagram"></i>
+                        </a>
+                        <a href="#" class="contact-social-btn" aria-label="Facebook">
+                            <i class="fa-brands fa-facebook-f"></i>
+                        </a>
+                    </div>
+                </div>
+            </aside>
+
+            <!-- ── Right: Contact Form ── -->
+            <section class="contact-form-col">
+                <div class="contact-form-card">
+                    <h2 class="contact-form-title">Send a Message</h2>
+                    <p class="contact-form-subtitle">Fill in the form below and we'll connect with you on WhatsApp.</p>
+
+                    <form id="contactForm" class="contact-form" novalidate>
+                        <div class="contact-field-group">
+                            <label class="contact-label" for="contactName">Your Name <span
+                                    class="contact-required">*</span></label>
+                            <input type="text" id="contactName" class="contact-input" placeholder="e.g. Priya Sharma"
+                                autocomplete="name" required>
+                            <span class="contact-field-error" id="errorContactName"></span>
+                        </div>
+
+                        <div class="contact-field-group">
+                            <label class="contact-label" for="contactPhone">WhatsApp Number <span
+                                    class="contact-required">*</span></label>
+                            <input type="tel" id="contactPhone" class="contact-input" placeholder="e.g. 9876543210"
+                                autocomplete="tel" required>
+                            <span class="contact-field-error" id="errorContactPhone"></span>
+                        </div>
+
+                        <div class="contact-field-group">
+                            <label class="contact-label" for="contactSubject">Subject <span
+                                    class="contact-required">*</span></label>
+                            <div class="contact-select-wrap">
+                                <select id="contactSubject" class="contact-input contact-select" required>
+                                    <option value="" disabled selected>Select a topic…</option>
+                                    <option value="Order Enquiry">Order Enquiry</option>
+                                    <option value="Custom Order">Custom Order</option>
+                                    <option value="Product Question">Product Question</option>
+                                    <option value="Shipping & Delivery">Shipping & Delivery</option>
+                                    <option value="Return / Exchange">Return / Exchange</option>
+                                    <option value="Wholesale">Wholesale</option>
+                                    <option value="Other">Other</option>
+                                </select>
+                                <i class="fa-solid fa-chevron-down contact-select-arrow"></i>
+                            </div>
+                            <span class="contact-field-error" id="errorContactSubject"></span>
+                        </div>
+
+                        <div class="contact-field-group">
+                            <label class="contact-label" for="contactMessage">Message <span
+                                    class="contact-required">*</span></label>
+                            <textarea id="contactMessage" class="contact-input contact-textarea"
+                                placeholder="Tell us how we can help you…" rows="5" required></textarea>
+                            <span class="contact-field-error" id="errorContactMessage"></span>
+                        </div>
+
+                        <button type="submit" class="contact-submit-btn" id="contactSubmitBtn">
+                            <i class="fa-brands fa-whatsapp"></i>
+                            Send via WhatsApp
+                        </button>
+                    </form>
+                </div>
+            </section>
+
+        </div>
+    </main>
+
+    <!-- ========== FOOTER ========== -->
+    <footer class="main-footer" id="footer">
+        <div class="footer-grid">
+            <div class="footer-brand">
+                <h3>Aura & Earth</h3>
+                <p>Spreading positive vibrations through authentic healing crystals since 2026.</p>
+            </div>
+            <div class="footer-links">
+                <h4>Quick Links</h4>
+                <a href="index.html">Home</a>
+                <a href="shop.html">All Products</a>
+                <a href="cart-checkout.html">View Cart</a>
+            </div>
+            <div class="footer-links">
+                <h4>Support</h4>
+                <a href="policies.html#shipping">Shipping Policy</a>
+                <a href="policies.html#terms">Terms & Conditions</a>
+                <a href="contact.html">Contact Us</a>
+            </div>
+            <div class="footer-social">
+                <h4>Follow Us</h4>
+                <div class="social-icons">
+                    <a href="#"><i class="fa-brands fa-instagram"></i></a>
+                    <a href="#"><i class="fa-brands fa-facebook"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 Aura & Earth Jewelry. Premium Healing Stones.</p>
+        </div>
+    </footer>
+
+    <button id="backToTop" class="back-to-top-btn">
+        <i class="fa-solid fa-arrow-up"></i>
+    </button>
+    <a href="https://wa.me/919350614431?text=Hi%2C%20I%20have%20a%20question%20about%20Aura%20%26%20Earth!"
+        class="whatsapp-float" target="_blank" rel="noopener noreferrer" aria-label="Chat with us on WhatsApp">
+        <i class="fa-brands fa-whatsapp whatsapp-float-icon"></i>
+        <span class="whatsapp-float-label">Need help?</span>
+    </a>
+
+<script type="module" src="js/main.js"></script>
+<!-- <script type="module" src="js/navbar.js"></script> -->
+</body>
+
+</html>

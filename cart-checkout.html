@@ -1,0 +1,668 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cart & Checkout | Aura & Earth</title>
+    <link rel="stylesheet" href="css/global.css">
+    <link rel="stylesheet" href="css/cart.css">
+    <!-- Flash Sale: inline overrides for salePrice display in cart rows -->
+    <style>
+        .cart-sale-badge {
+            position: absolute;
+            top: 8px;
+            left: 8px;
+            background: #e74c3c;
+            color: #fff;
+            font-size: 0.6rem;
+            font-weight: 700;
+            letter-spacing: 0.07em;
+            padding: 2px 7px;
+            border-radius: 3px;
+            text-transform: uppercase;
+            z-index: 2;
+        }
+
+        .cart-item-img-wrap {
+            position: relative;
+        }
+
+        .cart-price-orig {
+            text-decoration: line-through;
+            color: #aaa;
+            font-size: 0.85em;
+            margin-right: 3px;
+        }
+
+        .cart-price-sale {
+            color: #e74c3c;
+            font-weight: 700;
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+</head>
+
+<body>
+
+    <!-- ========== NAVBAR ========== -->
+    <nav class="navbar" id="mainNav">
+        <a href="index.html" class="nav-logo">Aura & Earth</a>
+        <div class="nav-center">
+            <a href="index.html" class="nav-link">Home</a>
+            <div class="dropdown">
+                <a href="#" class="nav-link dropbtn">Categories <i class="fa-solid fa-chevron-down"></i></a>
+                <div class="dropdown-content">
+                    <a href="shop.html?filter=protection"><i class="fa-solid fa-shield-halved"></i> Protection</a>
+                    <a href="shop.html?filter=peace"><i class="fa-solid fa-feather-pointed"></i> Inner Peace</a>
+                    <a href="shop.html?filter=love"><i class="fa-solid fa-heart"></i> Love & Harmony</a>
+                    <a href="shop.html?filter=energy"><i class="fa-solid fa-bolt-lightning"></i> Energy</a>
+                    <a href="shop.html?filter=luck"><i class="fa-solid fa-clover"></i> Luck</a>
+                </div>
+            </div>
+            <a href="shop.html" class="nav-link">Products</a>
+            <a href="contact.html" class="nav-link">Contact</a>
+        </div>
+        <div class="nav-right">
+            <div class="search-box-container">
+                <input type="text" class="search-input" id="mainSearch" placeholder="Search crystals..."
+                    autocomplete="off">
+                <button class="search-btn"><i class="fa-solid fa-magnifying-glass"></i></button>
+                <div id="search-results-dropdown" class="search-results"></div>
+            </div>
+            <div class="nav-icons">
+                <button id="theme-toggle" class="icon-btn"><i class="fa-solid fa-moon"></i></button>
+                <a href="wishlist.html" class="icon-link">
+                    <i class="fa-regular fa-heart"></i>
+                    <span class="count">0</span>
+                </a>
+                <a href="cart-checkout.html" class="icon-link">
+                    <i class="fa-solid fa-bag-shopping"></i>
+                    <span class="count">0</span>
+                </a>
+                <button class="hamburger"><i class="fa-solid fa-bars"></i></button>
+            </div>
+        </div>
+    </nav>
+
+    <div class="mobile-menu">
+        <a href="index.html">Home</a>
+        <button class="mobile-dropbtn">Categories <i class="fa-solid fa-chevron-down"></i></button>
+        <div class="mobile-dropdown-content">
+            <a href="shop.html?filter=protection">Protection</a>
+            <a href="shop.html?filter=peace">Inner Peace</a>
+            <a href="shop.html?filter=love">Love & Harmony</a>
+            <a href="shop.html?filter=energy">Energy</a>
+            <a href="shop.html?filter=luck">Luck</a>
+        </div>
+        <a href="shop.html">Products</a>
+        <a href="contact.html">Contact</a>
+    </div>
+
+    <!-- ========== PAGE HEADER ========== -->
+    <div class="cart-page-header reveal">
+        <div class="cart-page-header-inner">
+            <a href="shop.html" class="cart-back-link">
+                <i class="fa-solid fa-arrow-left"></i> Continue Shopping
+            </a>
+            <div class="cart-page-title-wrap">
+                <h1 class="cart-page-title">Your Sacred Bag</h1>
+                <p class="cart-page-subtitle">Review your crystals and complete your order</p>
+            </div>
+            <div class="cart-progress">
+                <!-- Step 1: Bag — clickable from Step 2 to go back (JS wires this) -->
+                <div class="cart-progress-step active" id="progressStep1">
+                    <div class="cart-progress-icon"><i class="fa-solid fa-bag-shopping"></i></div>
+                    <span>Bag</span>
+                </div>
+                <div class="cart-progress-line"></div>
+                <!-- Step 2: Checkout — activated by JS when Proceed is clicked -->
+                <div class="cart-progress-step" id="progressStep2">
+                    <div class="cart-progress-icon"><i class="fa-solid fa-qrcode"></i></div>
+                    <span>Checkout</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- =====================================================================
+         MAIN LAYOUT — 2-Column Grid
+         ┌─────────────────────────┬──────────────────┐
+         │  LEFT: .checkout-col   │  RIGHT: .cart-col │
+         │  (dynamic, 1fr)        │  (sticky, 420px)  │
+         │                        │                   │
+         │  #step1-cart  ←default │  Promo Code card  │
+         │  #step2-checkout ←JS   │  Order Summary    │
+         │                        │  #mainCheckoutBtn │
+         └─────────────────────────┴──────────────────┘
+         ===================================================================== -->
+    <main class="cart-main">
+        <div class="cart-layout">
+
+            <!-- =============================================================
+                 LEFT COLUMN: .checkout-col
+                 Houses both step1 and step2. Only one is visible at a time.
+                 JS (initStepController) toggles display between them.
+                 ============================================================= -->
+            <div class="checkout-col">
+
+                <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+                     STEP 1 — Cart Items + Pincode Check
+                     Visible on page load. Hidden when user clicks "Proceed".
+                     - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+                <div id="step1-cart">
+
+                    <!-- Cart Items Card -->
+                    <div class="cart-card">
+                        <div class="cart-card-header">
+                            <div>
+                                <i class="fa-solid fa-bag-shopping"></i>
+                                <h2>Your Items</h2>
+                            </div>
+                            <span class="cart-item-count" id="cartItemCount">0 items</span>
+                        </div>
+                        <!-- Items injected by JS (renderCartItems) -->
+                        <div class="cart-items-list" id="cartItemsList">
+                            <div class="cart-empty-state" id="cartEmptyState">
+                                <div class="cart-empty-icon"><i class="fa-solid fa-bag-shopping"></i></div>
+                                <h3>Your bag is empty</h3>
+                                <p>Discover our healing crystal collection and find your perfect piece.</p>
+                                <a href="shop.html" class="cart-shop-now-btn">Explore Collection</a>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- /Cart Items Card -->
+
+                    <!-- Pincode Delivery Check Card -->
+                    <div class="cart-card cart-utility-card" id="cartUtilityCard">
+                        <div class="cart-utility-section">
+                            <div class="cart-card-header" style="border:none;padding-bottom:0;">
+                                <div>
+                                    <i class="fa-solid fa-location-dot"></i>
+                                    <h2>Check Delivery</h2>
+                                </div>
+                            </div>
+                            <div class="cart-pincode-row">
+                                <div class="cart-coupon-input-wrap">
+                                    <input type="text" id="pincodeInput" class="cart-coupon-input"
+                                        placeholder="Enter 6-digit PIN code" inputmode="numeric" maxlength="6"
+                                        autocomplete="postal-code">
+                                </div>
+                                <button class="cart-coupon-apply-btn" id="pincodeCheckBtn">Check</button>
+                            </div>
+                            <div class="cart-pincode-feedback" id="pincodeFeedback"></div>
+                        </div>
+                    </div>
+                    <!-- /Pincode Card -->
+
+                </div>
+                <!-- /step1-cart -->
+
+
+                <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+                     STEP 2 — Shipping Form + Payment
+                     Hidden on page load. JS shows this on "Proceed to Checkout".
+                     - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+                <div id="step2-checkout" style="display:none;">
+
+                    <!-- Back button -->
+                    <button id="backToCartBtn" class="step-back-btn">
+                        <i class="fa-solid fa-arrow-left"></i> Back to Cart
+                    </button>
+
+                    <!-- Shipping Details Card -->
+                    <div class="checkout-card">
+                        <div class="checkout-card-header">
+                            <div>
+                                <i class="fa-solid fa-location-dot"></i>
+                                <h2>Shipping Details</h2>
+                            </div>
+                        </div>
+
+                        <form class="checkout-form" id="checkoutForm" novalidate autocomplete="on">
+
+                            <div class="checkout-form-row">
+                                <div class="checkout-field">
+                                    <label class="checkout-label" for="customerName">Full Name</label>
+                                    <div class="checkout-input-wrap">
+                                        <i class="fa-solid fa-user checkout-input-icon"></i>
+                                        <input type="text" id="customerName" class="checkout-input"
+                                            placeholder="Your full name" autocomplete="name" required>
+                                    </div>
+                                    <span class="checkout-error" id="errorName"></span>
+                                </div>
+                                <div class="checkout-field">
+                                    <label class="checkout-label" for="customerPhone">Phone Number</label>
+                                    <div class="checkout-input-wrap">
+                                        <i class="fa-solid fa-phone checkout-input-icon"></i>
+                                        <input type="tel" id="customerPhone" class="checkout-input"
+                                            placeholder="+91 98765 43210" autocomplete="tel" required>
+                                    </div>
+                                    <span class="checkout-error" id="errorPhone"></span>
+                                </div>
+                            </div>
+
+                            <div class="checkout-field">
+                                <label class="checkout-label" for="customerEmail">Email Address</label>
+                                <div class="checkout-input-wrap">
+                                    <i class="fa-solid fa-envelope checkout-input-icon"></i>
+                                    <input type="email" id="customerEmail" class="checkout-input"
+                                        placeholder="you@example.com" autocomplete="email" required>
+                                </div>
+                                <span class="checkout-error" id="errorEmail"></span>
+                            </div>
+
+                            <div class="checkout-field">
+                                <label class="checkout-label" for="customerAddress">Full Shipping Address</label>
+                                <div class="checkout-input-wrap checkout-textarea-wrap">
+                                    <i class="fa-solid fa-map-pin checkout-input-icon checkout-textarea-icon"></i>
+                                    <textarea id="customerAddress" class="checkout-input checkout-textarea"
+                                        placeholder="Flat/House No., Street, Area, City, State, PIN Code" rows="3"
+                                        autocomplete="street-address" required></textarea>
+                                </div>
+                                <span class="checkout-error" id="errorAddress"></span>
+                            </div>
+
+                            <div class="checkout-field">
+                                <label class="checkout-label" for="orderNotes">Order Notes <span
+                                        class="checkout-optional">(Optional)</span></label>
+                                <div class="checkout-input-wrap checkout-textarea-wrap">
+                                    <i class="fa-solid fa-note-sticky checkout-input-icon checkout-textarea-icon"></i>
+                                    <textarea id="orderNotes" class="checkout-input checkout-textarea"
+                                        placeholder="Special instructions, gift message, preferred delivery time..."
+                                        rows="2"></textarea>
+                                </div>
+                            </div>
+
+                            <!-- Payment Method — COD + UPI Toggle -->
+                            <div class="payment-section" id="paymentSection">
+
+                                <div class="payment-section-header">
+                                    <i class="fa-solid fa-wallet"></i>
+                                    <h3>Payment Method</h3>
+                                </div>
+
+                                <div class="payment-toggle-row" role="radiogroup" aria-label="Select payment method">
+
+                                    <label class="payment-toggle-pill" id="pillCOD">
+                                        <input type="radio" name="paymentMethod" id="paymentCOD" value="COD" checked>
+                                        <span class="pill-icon"><i class="fa-solid fa-money-bill-wave"></i></span>
+                                        <span class="pill-body">
+                                            <span class="pill-title">Cash on Delivery</span>
+                                            <span class="pill-sub">Pay when your order arrives</span>
+                                        </span>
+                                        <span class="pill-check"><i class="fa-solid fa-circle-check"></i></span>
+                                    </label>
+
+                                    <label class="payment-toggle-pill" id="pillUPI">
+                                        <input type="radio" name="paymentMethod" id="paymentUPI" value="UPI">
+                                        <span class="pill-icon"><i class="fa-solid fa-qrcode"></i></span>
+                                        <span class="pill-body">
+                                            <span class="pill-title">Pay via UPI</span>
+                                            <span class="pill-sub">GPay · PhonePe · Paytm · Any UPI</span>
+                                        </span>
+                                        <span class="pill-check"><i class="fa-solid fa-circle-check"></i></span>
+                                    </label>
+
+                                </div>
+
+                                <!-- COD Info Panel -->
+                                <div class="cod-info-panel" id="codInfoPanel">
+                                    <i class="fa-solid fa-shield-halved"></i>
+                                    <div>
+                                        <strong>Zero risk, full trust.</strong>
+                                        <p>Inspect your crystals before you pay. COD available across
+                                            India.</p>
+                                    </div>
+                                </div>
+
+                                <!-- UPI Panel — JS toggles display via initPaymentToggle() -->
+                                <div class="upi-payment-section" id="upiSection" style="display:none;">
+
+                                    <div class="upi-step">
+                                        <div class="upi-step-badge">1</div>
+                                        <p class="upi-step-label">Scan &amp; pay with any UPI app</p>
+                                    </div>
+
+                                    <div class="upi-qr-wrapper">
+                                        <img id="upiQrImage" src="" alt="UPI Payment QR Code" class="upi-qr-img"
+                                            loading="eager">
+                                        <div class="upi-qr-loading" id="upiQrLoading">
+                                            <i class="fa-solid fa-spinner fa-spin"></i>
+                                        </div>
+                                        <!-- <div class="upi-amount-pill" id="upiAmountPill">
+                                            <i class="fa-solid fa-indian-rupee-sign"></i>
+                                            <span id="upiAmountLabel">0</span>
+                                        </div> -->
+                                    </div>
+
+                                    <div class="upi-app-row">
+                                        <span class="upi-app-hint">Pay using</span>
+                                        <span class="upi-app-pill">GPay</span>
+                                        <span class="upi-app-pill">PhonePe</span>
+                                        <span class="upi-app-pill">Paytm</span>
+                                        <span class="upi-app-pill">Any UPI</span>
+                                    </div>
+
+                                    <div class="upi-step" style="margin-top:24px;">
+                                        <div class="upi-step-badge">2</div>
+                                        <p class="upi-step-label">After paying, enter your Transaction ID
+                                            (UTR)</p>
+                                    </div>
+
+                                    <div class="checkout-field" style="margin-top:10px;">
+                                        <label class="checkout-label" for="utrNumber">
+                                            UTR / Transaction ID
+                                            <span class="checkout-optional">(12-digit number from your UPI
+                                                app)</span>
+                                        </label>
+                                        <div class="checkout-input-wrap">
+                                            <i class="fa-solid fa-fingerprint checkout-input-icon"></i>
+                                            <input type="text" id="utrNumber" class="checkout-input"
+                                                placeholder="e.g. 123456789012" inputmode="numeric" maxlength="22"
+                                                autocomplete="off">
+                                        </div>
+                                        <span class="checkout-error" id="errorUtr"></span>
+                                    </div>
+
+                                </div>
+                                <!-- /upiSection -->
+
+                                <!-- Place Order — wired by initPlaceOrderButton() in main.js -->
+                                <button class="upi-place-order-btn" id="placeOrderBtn" type="button">
+                                    <i class="fa-solid fa-circle-check"></i>
+                                    Place Order
+                                </button>
+
+                                <p class="upi-note" id="paymentNote">
+                                    <i class="fa-solid fa-circle-info"></i>
+                                    Pay cash to the delivery agent when your order arrives. No advance
+                                    needed.
+                                </p>
+
+                            </div>
+                            <!-- /paymentSection -->
+
+                        </form>
+                        <!-- /checkoutForm -->
+
+                    </div>
+                    <!-- /checkout-card (Shipping Details) -->
+
+                    <!-- Trust Strip -->
+                    <div class="checkout-trust-strip">
+                        <div class="checkout-trust-item">
+                            <i class="fa-solid fa-shield-halved"></i>
+                            <div>
+                                <strong>Safe &amp; Secure</strong>
+                                <span>No payment info stored</span>
+                            </div>
+                        </div>
+                        <div class="checkout-trust-item">
+                            <i class="fa-solid fa-gem"></i>
+                            <div>
+                                <strong>Authentic Crystals</strong>
+                                <span>100% ethically sourced</span>
+                            </div>
+                        </div>
+                        <div class="checkout-trust-item">
+                            <i class="fa-solid fa-rotate-left"></i>
+                            <div>
+                                <strong>Easy Returns</strong>
+                                <span>30-day hassle-free policy</span>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <!-- /step2-checkout -->
+
+            </div>
+            <!-- /checkout-col (LEFT COLUMN) -->
+
+
+            <!-- =============================================================
+                 RIGHT COLUMN: .cart-col
+                 Always visible. Sticky on desktop.
+                 Contains: Promo Code card, Order Summary card, main CTA.
+                 ============================================================= -->
+            <div class="cart-col">
+
+                <!-- Promo Code Card -->
+                <div class="cart-card cart-utility-card">
+                    <div class="cart-utility-section">
+                        <div class="cart-card-header" style="border:none;padding-bottom:0;">
+                            <div>
+                                <i class="fa-solid fa-tag"></i>
+                                <h2>Promo Code</h2>
+                            </div>
+                        </div>
+                        <div class="cart-coupon-row">
+                            <div class="cart-coupon-input-wrap">
+                                <input type="text" id="couponInput" class="cart-coupon-input"
+                                    placeholder="Enter coupon code" autocomplete="off" maxlength="20">
+                            </div>
+                            <button class="cart-coupon-apply-btn" id="couponApplyBtn">Apply</button>
+                        </div>
+                        <div class="cart-coupon-feedback" id="couponFeedback"></div>
+                        <div class="cart-coupon-hints">
+                            <span>Try: </span>
+                        </div>
+                    </div>
+                </div>
+                <!-- /Promo Code Card -->
+
+                <!-- Order Summary Card -->
+                <div class="cart-card cart-summary-card" id="cartSummaryCard">
+                    <div class="cart-card-header">
+                        <div>
+                            <i class="fa-solid fa-receipt"></i>
+                            <h2>Order Summary</h2>
+                        </div>
+                    </div>
+                    <div class="cart-summary-lines">
+                        <div class="cart-summary-line">
+                            <span>Subtotal</span>
+                            <span id="summarySubtotal">₹0</span>
+                        </div>
+                        <div class="cart-summary-line cart-summary-discount" id="summaryDiscountRow">
+                            <span>
+                                Discount
+                                <span class="cart-coupon-applied-badge" id="appliedCouponBadge"></span>
+                            </span>
+                            <span id="summaryDiscount" class="cart-discount-value">-₹0</span>
+                        </div>
+                        <div class="cart-summary-line">
+                            <span>
+                                Shipping
+                                <span class="cart-shipping-note" id="shippingNote">Free on ₹2999+</span>
+                            </span>
+                            <span id="summaryShipping">₹79</span>
+                        </div>
+                        <!-- Free Shipping Progress Bar — updated by recalculateTotals() in main.js -->
+                        <div class="cart-shipping-progress-wrap" id="shippingProgressWrap" style="display:none;">
+                            <div class="cart-shipping-progress-label">
+                                <i class="fa-solid fa-truck-fast" style="color:var(--accent,#6e9472);"></i>
+                                <span id="shippingProgressLabel">Add <span class="progress-amount"
+                                        id="shippingProgressAmount"></span> for free shipping</span>
+                            </div>
+                            <div class="cart-shipping-progress-track">
+                                <div class="cart-shipping-progress-fill" id="shippingProgressFill" style="width:0%;">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- /cart-summary-lines -->
+
+                    <div class="cart-summary-divider"></div>
+
+                    <div class="cart-summary-total">
+                        <span>Total</span>
+                        <span id="summaryTotal">₹0</span>
+                    </div>
+                    <div class="cart-summary-gst">Inclusive of all taxes</div>
+
+                    <!-- Main CTA — wired by initStepController() in main.js.
+                         Step 1: "Proceed to Checkout" → switches to step 2.
+                         Step 2: "Place Order" → proxies to #placeOrderBtn click. -->
+                    <button class="step-proceed-btn" id="mainCheckoutBtn" type="button">
+                        <i class="fa-solid fa-arrow-right"></i>
+                        Proceed to Checkout
+                    </button>
+
+                </div>
+                <!-- /Order Summary Card -->
+
+            </div>
+            <!-- /cart-col (RIGHT COLUMN) -->
+
+        </div>
+        <!-- /cart-layout -->
+    </main>
+
+    <!-- ══════════════════════════════════════════════════════════
+         ORDER SUCCESS MODAL
+         Hidden by default. JS adds class .visible to show it.
+         ══════════════════════════════════════════════════════════ -->
+    <div class="order-success-overlay" id="orderSuccessOverlay" role="dialog" aria-modal="true"
+        aria-labelledby="successTitle" aria-hidden="true">
+        <div class="order-success-modal">
+
+            <div class="success-icon-wrap">
+                <div class="success-pulse-ring"></div>
+                <div class="success-icon">
+                    <i class="fa-solid fa-gem"></i>
+                </div>
+            </div>
+
+            <h2 class="success-title" id="successTitle">Order Confirmed! ✨</h2>
+            <p class="success-subtitle">
+                Your sacred crystals are on their way.<br>
+                We'll verify your payment and update you shortly.
+            </p>
+
+            <div class="success-detail-card" id="successDetailCard">
+                <div class="success-detail-row">
+                    <span class="success-detail-label">Order ID</span>
+                    <span class="success-detail-value" id="successOrderId">—</span>
+                </div>
+                <div class="success-detail-row">
+                    <span class="success-detail-label">Amount Paid</span>
+                    <span class="success-detail-value" id="successAmount">—</span>
+                </div>
+                <div class="success-detail-row">
+                    <span class="success-detail-label">UTR Number</span>
+                    <span class="success-detail-value" id="successUtr">—</span>
+                </div>
+                <div class="success-detail-row">
+                    <span class="success-detail-label">Status</span>
+                    <span class="success-detail-value success-status-pill">Payment Verification
+                        Pending</span>
+                </div>
+                <div class="success-detail-row">
+                    <span class="success-detail-label">Payment</span>
+                    <span class="success-detail-value" id="successPaymentMethod">—</span>
+                </div>
+            </div>
+
+            <a href="myorder.html" class="success-cta-btn">
+                <i class="fa-solid fa-box-open"></i>
+                View My Orders
+            </a>
+            <a href="shop.html" class="success-secondary-link">Continue Shopping →</a>
+        </div>
+    </div>
+
+    <!-- ========== FOOTER ========== -->
+    <footer class="main-footer" id="footer">
+        <div class="footer-grid">
+            <div class="footer-brand">
+                <h3>Aura & Earth</h3>
+                <p>Spreading positive vibrations through authentic healing crystals since 2026.</p>
+            </div>
+            <div class="footer-links">
+                <h4>Quick Links</h4>
+                <a href="index.html">Home</a>
+                <a href="shop.html">All Products</a>
+                <a href="cart-checkout.html">View Cart</a>
+            </div>
+            <div class="footer-links">
+                <h4>Support</h4>
+                <a href="policies.html#shipping">Shipping Policy</a>
+                <a href="policies.html#terms">Terms & Conditions</a>
+                <a href="contact.html">Contact Us</a>
+            </div>
+            <div class="footer-social">
+                <h4>Follow Us</h4>
+                <div class="social-icons">
+                    <a href="#"><i class="fa-brands fa-instagram"></i></a>
+                    <a href="#"><i class="fa-brands fa-facebook"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 Aura & Earth Jewelry. Premium Healing Stones.</p>
+        </div>
+    </footer>
+
+    <!-- Floating Back to Top -->
+    <button id="backToTop" class="back-to-top-btn">
+        <i class="fa-solid fa-arrow-up"></i>
+    </button>
+
+    <!-- WhatsApp Help float (customer support only) -->
+    <a href="https://wa.me/919350614431?text=Hi%2C%20I%20have%20a%20question%20about%20Aura%20%26%20Earth!"
+        class="whatsapp-float" target="_blank" rel="noopener noreferrer" aria-label="Chat with us on WhatsApp">
+        <i class="fa-brands fa-whatsapp whatsapp-float-icon"></i>
+        <span class="whatsapp-float-label">Need help?</span>
+    </a>
+
+    <!-- Mobile Sticky Bar -->
+    <div class="cart-page-overlay"></div>
+    <div class="cart-page-wrap">
+
+        <div class="cart-container">
+            <h2>Your Bag</h2>
+            <p>0</p>
+            <p>Your bag is empty.</p>
+            <div class="cart-mobile-sticky-bar" id="cartMobileStickyBar" aria-hidden="true">
+                <div class="cart-sticky-summary" id="cartStickyTotalDisplay">
+                    <span class="cart-sticky-label">Total</span>
+                    <span class="cart-sticky-amount" id="cartStickyTotal">₹0</span>
+                </div>
+                <button class="cart-sticky-place-btn" id="cartMobilePlaceOrderBtn">
+                    <i class="fa-solid fa-circle-check"></i> Confirm Order
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script type="module" src="js/main.js"></script>
+    <!-- <script type="module" src="js/navbar.js"></script> -->
+
+    <!-- Aura Pulse — isolated, no dependency on main.js -->
+    <script>
+        (function () {
+            'use strict';
+            const cartLink = document.querySelector('a[href="cart-checkout.html"]');
+            if (!cartLink) return;
+            const PULSE_CLASS = 'aura-pulse';
+            const PULSE_DURATION_MS = 1200;
+            let pulseTimer = null;
+            function triggerPulse() {
+                if (pulseTimer) { clearTimeout(pulseTimer); cartLink.classList.remove(PULSE_CLASS); void cartLink.offsetWidth; }
+                cartLink.classList.add(PULSE_CLASS);
+                pulseTimer = setTimeout(function () { cartLink.classList.remove(PULSE_CLASS); pulseTimer = null; }, PULSE_DURATION_MS);
+            }
+            document.addEventListener('click', function (e) {
+                if (e.target.closest('.btn-floating-cart')) { triggerPulse(); return; }
+                if (e.target.closest('#pdpAddToCartBtn, #pdpMobileStickyCartBtn')) { triggerPulse(); return; }
+                if (e.target.closest('.wishlist-card-add-btn, .wishlist-card-quick-add')) { triggerPulse(); return; }
+                if (e.target.closest('.order-reorder-btn')) { triggerPulse(); }
+            });
+        })();
+    </script>
+
+</body>
+
+</html>

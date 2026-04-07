@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Panel | Aura & Earth</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Montserrat:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <link rel="stylesheet" href="css/admin.css">
+</head>
+
+<body>
+
+    <!-- ══════════════════════════════════════════════
+         LOGIN CARD
+         Shown by default; admin.js redirects to
+         dashboard.html once auth succeeds.
+    ══════════════════════════════════════════════ -->
+    <div id="loginOverlay" class="login-overlay">
+        <div class="login-card">
+            <div class="login-brand">
+                <span class="login-logo-mark">✦</span>
+                <h1>Aura &amp; Earth</h1>
+                <p>Admin Portal</p>
+            </div>
+
+            <form id="loginForm" autocomplete="on" novalidate>
+                <div class="field-group">
+                    <label for="adminEmail">Email</label>
+                    <input type="email" id="adminEmail" placeholder="admin@auraandearth.com" autocomplete="email"
+                        required>
+                </div>
+
+                <div class="field-group">
+                    <label for="adminPassword">Password</label>
+                    <div class="password-wrap">
+                        <input type="password" id="adminPassword" placeholder="••••••••" autocomplete="current-password"
+                            required>
+                        <button type="button" id="togglePwd" tabindex="-1" aria-label="Toggle password visibility">
+                            <i class="fa-solid fa-eye"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <div id="loginError" class="login-error" hidden></div>
+
+                <button type="submit" id="loginBtn" class="btn-primary-admin">
+                    <span>Sign In</span>
+                    <i class="fa-solid fa-arrow-right"></i>
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!--
+        ⚠️  type="module" is REQUIRED — it enables ES module imports
+            in firebase.js and admin.js (the import/export syntax).
+            Without it you'll get "Cannot use import statement" errors.
+    -->
+    <script type="module" src="js/admin.js"></script>
+
+</body>
+
+</html>
