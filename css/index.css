@@ -4579,3 +4579,205 @@ body.dark-theme .product-card:hover .product-image-box::before {
 .ds-loading-text {
     transition: opacity 0.28s ease;
 }
+
+/* ============================================================
+   PASTE THIS AT THE BOTTOM OF css/index.css
+   Covers the sections that have no mobile CSS yet:
+   • Destiny Sync form (ds-field-row, ds-card padding)
+   • Aura Kit section already has breakpoints — skipped
+   • Quiz section already has a 520px breakpoint — skipped
+   • Moon phase section already has breakpoints — skipped
+   • Hero / product grid / ritual already have breakpoints
+   
+   MAIN GAPS FILLED HERE:
+   1. .product-grid min card size — prevents 1 oversized card
+   2. .intentions-grid — wraps to 2-col on narrow phones
+   3. Destiny Sync card — stacks the 2-col field row
+   4. Touch-device: always show shop-card-actions
+   ============================================================ */
+
+
+/* ── PRODUCT GRID — fix minmax() floor on narrow phones ───── */
+/* Your current rule: repeat(auto-fill, minmax(260px, 1fr))
+   On a 375px phone this never fits 2 cols (375-32px = 343px).
+   The result is a single card that fills the viewport width.
+   Solution: override to explicit 2-col at phone sizes.       */
+@media (max-width: 600px) {
+
+    .product-grid {
+        /* Force 2 columns on phones — cards are ~155px each */
+        grid-template-columns: repeat(2, 1fr);
+        gap: 14px;
+    }
+}
+
+@media (max-width: 360px) {
+
+    .product-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 10px;
+    }
+}
+
+
+/* ── INTENTIONS GRID — 3 per row on small screens ─────────── */
+@media (max-width: 480px) {
+
+    .intentions-grid {
+        /* From the 'flex-wrap: wrap' parent; force 3 per row
+           so 6 icons show as 2 neat rows of 3               */
+        gap: 14px 18px;
+        padding: 0 12px;
+    }
+
+    .intent-card {
+        /* Each card ~ (viewport - padding - 2 gaps) / 3     */
+        flex: 0 0 calc((100% - 36px) / 3);
+        min-width: 72px;
+    }
+
+    .icon-box {
+        width: 56px;
+        height: 56px;
+        font-size: 1.25rem;
+    }
+
+    .intent-card span {
+        font-size: 0.65rem;
+        letter-spacing: 0.5px;
+    }
+}
+
+@media (max-width: 360px) {
+
+    .intent-card {
+        flex: 0 0 calc((100% - 24px) / 3);
+        min-width: 64px;
+    }
+
+    .icon-box {
+        width: 50px;
+        height: 50px;
+        font-size: 1.1rem;
+    }
+}
+
+
+/* ── DESTINY SYNC FORM — missing phone breakpoint ─────────── */
+/* Your existing breakpoint: @media (max-width: 560px)
+   only stacks .ds-field-row. Below we add padding + title fixes
+   that are completely absent in the current file.             */
+@media (max-width: 560px) {
+
+    .destiny-sync-section {
+        padding: 72px 16px 80px;
+    }
+
+    .ds-title {
+        font-size: clamp(2rem, 8vw, 2.8rem);
+    }
+
+    .ds-subtitle {
+        font-size: 0.88rem;
+        margin-bottom: 32px;
+    }
+}
+
+@media (max-width: 400px) {
+
+    .destiny-sync-section {
+        padding: 56px 12px 64px;
+    }
+
+    .ds-card {
+        padding: 28px 16px;
+        border-radius: 16px;
+    }
+
+    .ds-title {
+        font-size: 1.85rem;
+    }
+
+    .ds-field input {
+        padding: 11px 12px;
+        font-size: 0.85rem;
+    }
+
+    .ds-submit-btn {
+        font-size: 1rem;
+        padding: 14px 20px;
+    }
+}
+
+
+/* ── SHOP CARD ACTIONS — always visible on touch devices ───── */
+/* On mobile, :hover never fires. The CSS in index.css uses
+   @media (hover: none) to show .shop-card-actions, but the
+   rule is inside index.css — confirm it exists. If not, this
+   block guarantees it:                                        */
+@media (hover: none) {
+
+    .shop-card-actions {
+        max-height: 60px;
+        opacity: 1;
+        transform: translateY(0);
+        padding: 10px 4px 4px;
+    }
+
+    /* Also ensure btn-floating-cart is visible on touch */
+    .btn-floating-cart {
+        opacity: 1;
+        transform: translateX(-50%) translateY(0);
+    }
+}
+
+
+/* ── BESTSELLERS SECTION HEADER — minor phone polish ───────── */
+@media (max-width: 480px) {
+
+    .sexy-header {
+        margin-bottom: 32px;
+    }
+
+    .sub-text {
+        font-size: 0.75rem;
+        letter-spacing: 3px;
+    }
+
+    /* Decorative lines shrink */
+    .decorative-line::before,
+    .decorative-line::after {
+        width: 36px;
+    }
+}
+
+
+/* ── RITUAL SECTION — section header on tiny screens ───────── */
+@media (max-width: 480px) {
+
+    .luxe-title {
+        font-size: 1.6rem;
+        letter-spacing: 2px;
+    }
+
+    .luxe-subtitle {
+        font-size: 1rem;
+    }
+
+    .section-header-luxe {
+        margin-bottom: 36px;
+    }
+
+    /* Ritual steps already stack at 992px; just tighten padding */
+    .ritual-step {
+        padding: 20px 16px;
+    }
+
+    .ritual-step h3 {
+        font-size: 1.05rem;
+    }
+
+    .ritual-step p {
+        font-size: 0.82rem;
+    }
+}
