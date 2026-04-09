@@ -1828,3 +1828,161 @@ body {
         font-size: 1.2rem;
     }
 }
+
+/* ============================================================
+   PASTE THIS AT THE BOTTOM OF css/global.css
+   Mobile fixes for: Navbar, Hamburger, Mobile Menu, Footer
+   Breakpoints used: 992px (tablet), 768px (phone landscape),
+                     480px (phone portrait)
+   ============================================================ */
+
+
+/* ── NAVBAR — ensure hamburger is always tappable ─────────── */
+@media (max-width: 992px) {
+
+    /* Already hides .nav-center and shows .hamburger in your
+       existing code, but we need to make sure the icon-links
+       (cart + wishlist) keep enough spacing on smaller screens. */
+
+    .nav-right {
+        gap: 14px;
+    }
+
+    /* Make sure the count badge doesn't clip */
+    .icon-link {
+        padding: 4px;
+    }
+
+    /* Hamburger tap target — 44×44px minimum for accessibility */
+    .hamburger {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 44px;
+        height: 44px;
+        font-size: 1.4rem;
+        cursor: pointer;
+        /* Shift the button so its visual icon still aligns right */
+        margin-right: -10px;
+    }
+}
+
+
+/* ── MOBILE MENU DRAWER — fill width, legible links ───────── */
+@media (max-width: 992px) {
+
+    .mobile-menu {
+        /* Ensure the drawer is truly full-width */
+        left: 0;
+        right: 0;
+        width: 100%;
+        /* Stack links with clear separator lines */
+        padding: 0 5% 16px;
+        /* Add a subtle drop-shadow so the drawer lifts over content */
+        box-shadow: 0 12px 32px rgba(0, 0, 0, 0.12);
+    }
+
+    .mobile-menu a,
+    .mobile-dropbtn {
+        /* Larger tap targets — 48px minimum height */
+        padding: 16px 0;
+        font-size: 0.95rem;
+        letter-spacing: 0.5px;
+    }
+
+    .mobile-dropdown-content a {
+        padding: 12px 0;
+        font-size: 0.88rem;
+        color: #666;
+        border-bottom: 1px solid #f0f0f0;
+        display: block;
+    }
+
+    .mobile-dropdown-content a:last-child {
+        border-bottom: none;
+    }
+}
+
+
+/* ── NAVBAR LOGO — scale down on very small phones ─────────── */
+@media (max-width: 380px) {
+
+    .nav-logo {
+        font-size: 1.45rem;
+    }
+
+    /* Tighten icon spacing so logo + icons fit in 100vw */
+    .nav-right {
+        gap: 10px;
+    }
+
+    .icon-link,
+    .icon-btn {
+        font-size: 1.1rem;
+    }
+
+    /* Navbar padding: match the tighter 4% set in global */
+    .navbar {
+        padding: 0 4%;
+    }
+}
+
+
+/* ── FOOTER — already has 1-col at 480px, but needs polish ─── */
+@media (max-width: 768px) {
+
+    .main-footer {
+        padding: 60px 6% 36px;
+    }
+
+    /* 2-column on tablet — already set, but enforce gap */
+    .footer-grid {
+        grid-template-columns: 1fr 1fr;
+        gap: 32px;
+    }
+
+    .footer-brand h3 {
+        font-size: 1.55rem;
+    }
+}
+
+@media (max-width: 480px) {
+
+    .main-footer {
+        padding: 48px 5% 28px;
+    }
+
+    /* Already 1-col below 480 in your code, these sharpen it */
+    .footer-grid {
+        grid-template-columns: 1fr;
+        gap: 28px;
+        text-align: center;
+    }
+
+    .footer-links a {
+        font-size: 0.85rem;
+    }
+
+    .footer-bottom {
+        margin-top: 28px;
+        font-size: 0.78rem;
+        line-height: 1.6;
+    }
+}
+
+
+/* ── SEARCH BOX — prevent overflow in nav on small screens ─── */
+@media (max-width: 480px) {
+
+    /* Search is hidden at 992px via your existing rule, but
+       if it ever shows at smaller sizes ensure it never clips */
+    .search-box-container:hover,
+    .search-box-container:focus-within {
+        width: min(220px, calc(100vw - 140px));
+    }
+
+    .search-results {
+        width: min(280px, calc(100vw - 24px));
+        right: -10px;
+    }
+}
